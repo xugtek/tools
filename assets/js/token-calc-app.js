@@ -159,21 +159,9 @@ function updateEstimateHints() {
     : '';
 }
 
-function ratioToSlider(ratio, sliderMax, ratioMax, exponent) {
-  const value = Math.min(Math.max(0, Number(ratio) || 0), ratioMax);
-  if (value === 0) return 0;
-  return Math.round(sliderMax * Math.pow(value / ratioMax, 1 / exponent));
-}
-
-function sliderToRatio(position, sliderMax, ratioMax, exponent) {
-  const pos = Math.min(Math.max(0, Number(position) || 0), sliderMax);
-  if (pos === 0) return 0;
-  return Math.round(ratioMax * Math.pow(pos / sliderMax, exponent));
-}
-
-function bindSliderPair(numberEl, rangeEl, { sliderMax, ratioMax, exponent = 1 } = {}) {
+function bindSliderPair(numberEl, rangeEl) {
   rangeEl.addEventListener('input', () => {
-    numberEl.value = String(sliderToRatio(rangeEl.value, sliderMax, ratioMax, exponent));
+    numberEl.value = rangeEl.value;
     renderCosts();
     updateEstimateVisibility();
     updateEstimateHints();
@@ -182,17 +170,13 @@ function bindSliderPair(numberEl, rangeEl, { sliderMax, ratioMax, exponent = 1 }
   numberEl.addEventListener('input', () => {
     let value = Number(numberEl.value);
     if (!Number.isFinite(value) || value < 0) value = 0;
-    if (value > ratioMax) value = ratioMax;
-    rangeEl.value = String(ratioToSlider(value, sliderMax, ratioMax, exponent));
+    const max = Number(rangeEl.max);
+    if (value > max) value = max;
+    rangeEl.value = value;
     renderCosts();
     updateEstimateVisibility();
     updateEstimateHints();
   });
-}
-
-function syncSlidersFromInputs() {
-  elements.cacheRateRange.value = String(ratioToSlider(elements.cacheRate.value, 100, 100, 1));
-  elements.outputRatioRange.value = String(ratioToSlider(elements.outputRatio.value, 1000, 1000, 3));
 }
 
 function renderCosts() {
@@ -279,18 +263,8 @@ function bindEvents() {
     });
   });
 
-  bindSliderPair(elements.cacheRate, elements.cacheRateRange, {
-    sliderMax: 100,
-    ratioMax: 100,
-    exponent: 1
-  });
-  bindSliderPair(elements.outputRatio, elements.outputRatioRange, {
-    sliderMax: 1000,
-    ratioMax: 1000,
-    exponent: 3
-  });
-
-  syncSlidersFromInputs();
+  bindSliderPair(elements.cacheRate, elements.cacheRateRange);
+  bindSliderPair(elements.outputRatio, elements.outputRatioRange);
 }
 
 async function loadModels() {
