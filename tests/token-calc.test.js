@@ -74,10 +74,10 @@ test('estimateDailyUsage estimates cache and output from total input', () => {
   });
 });
 
-test('estimateDailyUsage accepts fractional rates', () => {
+test('estimateDailyUsage accepts percentage rates', () => {
   const result = estimateDailyUsage(1000, {
-    cacheHitRate: 0.25,
-    outputRatio: 0.1
+    cacheHitRate: 25,
+    outputRatio: 10
   });
 
   assert.deepEqual(result, {
@@ -85,6 +85,20 @@ test('estimateDailyUsage accepts fractional rates', () => {
     cachedInput: 250,
     output: 100
   });
+});
+
+test('estimateDailyUsage treats 1% as 1%, not 100%', () => {
+  const onePercent = estimateDailyUsage(1, {
+    cacheHitRate: 30,
+    outputRatio: 1
+  });
+  const fivePercent = estimateDailyUsage(1, {
+    cacheHitRate: 30,
+    outputRatio: 5
+  });
+
+  assert.equal(onePercent.output, 0.01);
+  assert.equal(fivePercent.output, 0.05);
 });
 
 test('convertCurrency converts both directions', () => {
@@ -98,9 +112,11 @@ test('formatMoney adds currency symbol', () => {
   assert.equal(formatMoney(99.9, 'USD'), '$99.90');
 });
 
-test('normalizeRate treats >1 as percentage', () => {
+test('normalizeRate treats input as percentage', () => {
   assert.equal(normalizeRate(30), 0.3);
-  assert.equal(normalizeRate(0.3), 0.3);
+  assert.equal(normalizeRate(1), 0.01);
+  assert.equal(normalizeRate(0.3), 0.003);
+  assert.equal(normalizeRate(1000), 10);
 });
 
 test('toNonNegativeNumber ignores invalid values', () => {

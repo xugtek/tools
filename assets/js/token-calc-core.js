@@ -7,8 +7,7 @@ export function toNonNegativeNumber(value) {
 export function normalizeRate(value) {
   const n = Number(value);
   if (!Number.isFinite(n)) return 0;
-  if (n > 1) return n / 100;
-  return Math.min(1, Math.max(0, n));
+  return Math.max(0, n / 100);
 }
 
 /**
@@ -16,8 +15,8 @@ export function normalizeRate(value) {
  * All amounts are in M tokens (1 M = 1,000,000 tokens).
  * @param {number|string} inputTokens Total daily input tokens in M tokens.
  * @param {object} options
- * @param {number} options.cacheHitRate Fraction between 0 and 1 (or percentage number).
- * @param {number} options.outputRatio Fraction between 0 and 1 (or percentage number).
+ * @param {number} options.cacheHitRate Percentage number between 0 and 100.
+ * @param {number} options.outputRatio Percentage number between 0 and 100 (or higher for large outputs).
  */
 export function estimateDailyUsage(inputTokens, { cacheHitRate = 0.3, outputRatio = 0.2 } = {}) {
   const input = toNonNegativeNumber(inputTokens);
