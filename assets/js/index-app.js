@@ -6,8 +6,8 @@ function setDocumentLanguage() {
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', getLang() === 'en'
-      ? 'XugTek Tools: lightweight, fast and practical online tools.'
-      : 'XugTek 工具站：轻量、快速、实用的在线工具集合。');
+      ? 'xugtek: lightweight, fast and practical online tools.'
+      : 'xugtek：轻量、快速、实用的在线工具集合。');
   }
 }
 

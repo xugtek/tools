@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Token费用计算器 - XugTek 工具站</title>
+  <title>Token费用计算器 - xugtek</title>
   <meta name="description" content="估算每日和每月 Token API 费用，支持人民币/美元双货币、缓存命中与用量估算。">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <div class="container">
     <header class="site-header">
-      <a class="brand" href="index.html" data-i18n="toolTitle">Token费用计算器</a>
+      <a class="brand" href="index.html" data-i18n="siteName">xugtek</a>
       <div class="header-actions">
         <button type="button" class="icon-button" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">🌓</button>
         <button type="button" class="icon-button" data-i18n-switch>EN</button>
@@ -78,13 +78,13 @@
             <p class="hint" id="output-estimate-hint"></p>
           </div>
         </div>
-        <p class="hint" data-i18n="estimatedHint">缓存和输出都留空时自动估算；只填其中一项时，另一项按 0 计算</p>
+        <p class="hint" data-i18n="estimatedHint">缓存或输出为空/0 时，按对应比例自动估算；输入非 0 实际值后使用实际值。</p>
       </section>
 
       <section class="card" id="estimate-section" aria-labelledby="estimate-section-title" hidden>
         <h2 id="estimate-section-title" class="section-title" data-i18n="estimateSection">自动估算设置</h2>
         <div class="form-grid">
-          <div class="form-group">
+          <div class="form-group" id="cache-estimate-control">
             <label for="cache-rate" data-i18n="cacheHitRateLabel">缓存命中率</label>
             <div class="range-row">
               <input id="cache-rate-range" class="range-slider" type="range" min="0" max="100" step="1" value="30">
@@ -92,7 +92,7 @@
               <span>%</span>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" id="output-estimate-control">
             <label for="output-ratio" data-i18n="outputRatioLabel">输出 / 输入比例</label>
             <div class="range-row">
               <input id="output-ratio-range" class="range-slider" type="range" min="0" max="1000" step="1" value="20">
@@ -132,6 +132,22 @@
           <li>
             <span data-i18n="outputCostLabel">输出</span>
             <span><span id="breakdown-output-cny">¥0.00</span> / <span id="breakdown-output-usd">$0.00</span></span>
+          </li>
+        </ul>
+
+        <h3 class="section-title" style="margin-top:20px" data-i18n="usageBreakdownLabel">用量明细</h3>
+        <ul class="breakdown-list">
+          <li>
+            <span data-i18n="normalInputLabel">普通输入</span>
+            <span id="usage-normal">0 M</span>
+          </li>
+          <li>
+            <span data-i18n="cachedInputLabel">缓存命中</span>
+            <span id="usage-cached">0 M</span>
+          </li>
+          <li>
+            <span data-i18n="outputLabel">输出</span>
+            <span id="usage-output">0 M</span>
           </li>
         </ul>
       </section>

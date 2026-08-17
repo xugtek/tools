@@ -2,7 +2,7 @@ const STORAGE_KEY = 'xugtek-lang';
 
 const translations = {
   'zh-CN': {
-    siteName: 'XugTek 工具站',
+    siteName: 'xugtek',
     toolTitle: 'Token费用计算器',
     navTools: '工具',
     themeToggle: '切换主题',
@@ -38,7 +38,11 @@ const translations = {
     normalInputCostLabel: '普通输入',
     cachedInputCostLabel: '缓存输入',
     outputCostLabel: '输出',
-    estimatedHint: '缓存和输出都留空时自动估算；只填其中一项时，另一项按 0 计算',
+    normalInputLabel: '普通输入',
+    cachedInputLabel: '缓存命中',
+    outputLabel: '输出',
+    usageBreakdownLabel: '用量明细',
+    estimatedHint: '缓存或输出为空/0 时，按对应比例自动估算；输入非 0 实际值后使用实际值。',
     cacheEstimateHint: '缓存为空，按 {rate}% 命中率估算',
     outputEstimateHint: '输出为空，按 {ratio}% 输出比例估算',
     invalidInput: '请输入有效的 Token 数量',
@@ -46,7 +50,7 @@ const translations = {
     modelSourceNote: '价格仅供参考，请以官方最新价格为准。'
   },
   en: {
-    siteName: 'XugTek Tools',
+    siteName: 'xugtek',
     toolTitle: 'Token Cost Calculator',
     navTools: 'Tools',
     themeToggle: 'Toggle theme',
@@ -82,7 +86,11 @@ const translations = {
     normalInputCostLabel: 'Normal input',
     cachedInputCostLabel: 'Cached input',
     outputCostLabel: 'Output',
-    estimatedHint: 'Auto-estimate only when both cache and output are empty; if only one is filled, the other is treated as 0',
+    normalInputLabel: 'Normal input',
+    cachedInputLabel: 'Cached input',
+    outputLabel: 'Output',
+    usageBreakdownLabel: 'Usage breakdown',
+    estimatedHint: 'When cache or output is empty/0, it is estimated using its ratio; enter a non-zero value to use the actual value.',
     cacheEstimateHint: 'Cache empty: estimated at {rate}% hit rate',
     outputEstimateHint: 'Output empty: estimated at {ratio}% output ratio',
     invalidInput: 'Please enter valid token counts',

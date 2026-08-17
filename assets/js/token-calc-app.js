@@ -3,6 +3,7 @@ import {
   convertCurrency,
   estimateDailyUsage,
   formatMoney,
+  formatTokens,
   toNonNegativeNumber
 } from './token-calc-core.js';
 import { getLang, t } from './i18n.js';
@@ -26,8 +27,13 @@ const elements = {
   outputRatioRange: document.getElementById('output-ratio-range'),
   exchangeRate: document.getElementById('exchange-rate'),
   estimateSection: document.getElementById('estimate-section'),
+  cacheEstimateControl: document.getElementById('cache-estimate-control'),
+  outputEstimateControl: document.getElementById('output-estimate-control'),
   cacheEstimateHint: document.getElementById('cache-estimate-hint'),
   outputEstimateHint: document.getElementById('output-estimate-hint'),
+  usageNormal: document.getElementById('usage-normal'),
+  usageCached: document.getElementById('usage-cached'),
+  usageOutput: document.getElementById('usage-output'),
   resultDailyCny: document.getElementById('result-daily-cny'),
   resultDailyUsd: document.getElementById('result-daily-usd'),
   resultMonthlyCny: document.getElementById('result-monthly-cny'),
@@ -44,6 +50,13 @@ let models = [];
 
 function locale() {
   return getLang() === 'en' ? 'en-US' : 'zh-CN';
+}
+
+function isBlankOrZero(value) {
+  const trimmed = String(value ?? '').trim();
+  if (trimmed === '') return true;
+  const n = Number(trimmed);
+  return Number.isFinite(n) && n === 0;
 }
 
 function setDocumentLanguage() {
@@ -115,24 +128,26 @@ function getEstimatedUsage() {
     cacheHitRate: elements.cacheRate.value,
     outputRatio: elements.outputRatio.value
   });
-  const bothEmpty = cachedRaw === '' && outputRaw === '';
 
   return {
     input: estimate.input,
-    cachedInput: cachedRaw === '' ? (bothEmpty ? estimate.cachedInput : 0) : toNonNegativeNumber(cachedRaw),
-    output: outputRaw === '' ? (bothEmpty ? estimate.output : 0) : toNonNegativeNumber(outputRaw)
+    cachedInput: isBlankOrZero(cachedRaw) ? estimate.cachedInput : toNonNegativeNumber(cachedRaw),
+    output: isBlankOrZero(outputRaw) ? estimate.output : toNonNegativeNumber(outputRaw)
   };
 }
 
 function updateEstimateVisibility() {
-  const cachedEmpty = elements.dailyCached.value.trim() === '';
-  const outputEmpty = elements.dailyOutput.value.trim() === '';
-  elements.estimateSection.hidden = !(cachedEmpty && outputEmpty);
+  const cacheNeedsEstimate = isBlankOrZero(elements.dailyCached.value);
+  const outputNeedsEstimate = isBlankOrZero(elements.dailyOutput.value);
+
+  elements.cacheEstimateControl.hidden = !cacheNeedsEstimate;
+  elements.outputEstimateControl.hidden = !outputNeedsEstimate;
+  elements.estimateSection.hidden = !cacheNeedsEstimate && !outputNeedsEstimate;
 }
 
 function updateEstimateHints() {
-  const cacheEmpty = elements.dailyCached.value.trim() === '';
-  const outputEmpty = elements.dailyOutput.value.trim() === '';
+  const cacheEmpty = isBlankOrZero(elements.dailyCached.value);
+  const outputEmpty = isBlankOrZero(elements.dailyOutput.value);
   const cacheRate = Number(elements.cacheRate.value) || 0;
   const outputRatio = Number(elements.outputRatio.value) || 0;
 
@@ -182,6 +197,9 @@ function renderCosts() {
     elements.breakdownCachedUsd.textContent = zeroUsd;
     elements.breakdownOutputCny.textContent = zero;
     elements.breakdownOutputUsd.textContent = zeroUsd;
+    elements.usageNormal.textContent = '0 M';
+    elements.usageCached.textContent = '0 M';
+    elements.usageOutput.textContent = '0 M';
     return;
   }
 
@@ -209,6 +227,9 @@ function renderCosts() {
   elements.breakdownCachedUsd.textContent = formatMoney(cachedUsd, 'USD', locale());
   elements.breakdownOutputCny.textContent = formatMoney(outputCny, 'CNY', locale());
   elements.breakdownOutputUsd.textContent = formatMoney(outputUsd, 'USD', locale());
+  elements.usageNormal.textContent = `${formatTokens(cost.normalInput, locale())} M`;
+  elements.usageCached.textContent = `${formatTokens(cost.cachedInput, locale())} M`;
+  elements.usageOutput.textContent = `${formatTokens(cost.output, locale())} M`;
 }
 
 function bindEvents() {
