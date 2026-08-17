@@ -5,21 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Token费用计算器 - xugtek</title>
   <meta name="description" content="估算每日和每月 Token API 费用，支持人民币/美元双货币、缓存命中与用量估算。">
+  <link rel="icon" href="assets/icons/brand.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <header class="site-header">
-      <a class="brand" href="index.html" data-i18n="siteName">xugtek</a>
-      <div class="header-actions">
-        <button type="button" class="icon-button" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">🌓</button>
+  <nav class="nav" aria-label="Tools">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" role="img" aria-label="xugtek"></span>
+        <span data-i18n="siteName">xugtek</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" data-i18n="backHome">返回首页</a>
+        <button type="button" class="icon-button" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
         <button type="button" class="icon-button" data-i18n-switch>EN</button>
       </div>
-    </header>
+    </div>
+  </nav>
 
-    <main>
-      <h1 data-i18n="pageTitle">Token费用计算器</h1>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 data-i18n="pageTitle">Token费用计算器</h1>
+      </div>
+    </section>
 
+    <div class="container">
       <section class="card" aria-labelledby="model-section-title">
         <h2 id="model-section-title" class="section-title" data-i18n="modelLabel">模型</h2>
         <div class="form-grid">
@@ -151,8 +165,17 @@
           </li>
         </ul>
       </section>
-    </main>
-  </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> xugtek</span>
+      <div class="links">
+        <a href="index.html" data-i18n="backHome">返回首页</a>
+      </div>
+    </div>
+  </footer>
 
   <script type="module" src="assets/js/token-calc-app.js"></script>
 </body>
