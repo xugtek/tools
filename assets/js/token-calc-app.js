@@ -45,6 +45,7 @@ const elements = {
 };
 
 let models = [];
+let activePriceCurrency = elements.currencySelect.value;
 
 function locale() {
   return getLang() === 'en' ? 'en-US' : 'zh-CN';
@@ -85,11 +86,40 @@ function fillModelSelect() {
   elements.modelSelect.replaceChildren(fragment);
 }
 
+function getModelPriceInCurrency(model, currency, rate) {
+  if (currency === model.currency) {
+    return {
+      input: model.input,
+      cachedInput: model.cachedInput ?? model.input,
+      output: model.output
+    };
+  }
+
+  if (currency === 'USD' && model.pricesUsd) {
+    return {
+      input: model.pricesUsd.input,
+      cachedInput: model.pricesUsd.cachedInput ?? model.pricesUsd.input,
+      output: model.pricesUsd.output
+    };
+  }
+
+  return {
+    input: convertCurrency(model.input, model.currency, currency, rate),
+    cachedInput: convertCurrency(model.cachedInput ?? model.input, model.currency, currency, rate),
+    output: convertCurrency(model.output, model.currency, currency, rate)
+  };
+}
+
 function applyModelToForm(model) {
-  elements.priceInput.value = model.input;
-  elements.priceCached.value = model.cachedInput ?? model.input;
-  elements.priceOutput.value = model.output;
-  elements.currencySelect.value = model.currency;
+  const currency = elements.currencySelect.value;
+  const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
+  const prices = getModelPriceInCurrency(model, currency, rate);
+
+  elements.priceInput.value = prices.input;
+  elements.priceCached.value = prices.cachedInput;
+  elements.priceOutput.value = prices.output;
+  elements.currencySelect.value = currency;
+  activePriceCurrency = currency;
 }
 
 function getCurrentModel() {
@@ -263,6 +293,24 @@ function bindEvents() {
   elements.modelSelect.addEventListener('change', () => {
     const model = models.find((item) => item.id === elements.modelSelect.value);
     if (model) applyModelToForm(model);
+    renderCosts();
+  });
+
+  elements.currencySelect.addEventListener('change', () => {
+    const newCurrency = elements.currencySelect.value;
+    const oldCurrency = activePriceCurrency;
+    const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
+    const model = models.find((item) => item.id === elements.modelSelect.value);
+
+    if (model) {
+      applyModelToForm(model);
+    } else if (oldCurrency !== newCurrency) {
+      elements.priceInput.value = convertCurrency(elements.priceInput.value, oldCurrency, newCurrency, rate);
+      elements.priceCached.value = convertCurrency(elements.priceCached.value, oldCurrency, newCurrency, rate);
+      elements.priceOutput.value = convertCurrency(elements.priceOutput.value, oldCurrency, newCurrency, rate);
+      activePriceCurrency = newCurrency;
+    }
+
     renderCosts();
   });
 
