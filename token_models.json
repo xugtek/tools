@@ -1,87 +1,78 @@
 {
   "updated": "2026-08-17",
-  "note": "Initial sample prices. Please verify and edit before production use.",
+  "note": "Prices collected from public sources on 2026-08-17. DeepSeek peak/off-peak are separate entries. Verify before production use.",
   "models": [
     {
-      "id": "gpt-4o",
-      "name": "GPT-4o",
-      "provider": "OpenAI",
-      "currency": "USD",
-      "input": 2.5,
-      "cachedInput": 1.25,
-      "output": 10
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "provider": "Moonshot",
+      "currency": "CNY",
+      "input": 20,
+      "cachedInput": 2,
+      "output": 100
     },
     {
-      "id": "gpt-4o-mini",
-      "name": "GPT-4o mini",
-      "provider": "OpenAI",
-      "currency": "USD",
-      "input": 0.15,
-      "cachedInput": 0.075,
-      "output": 0.6
-    },
-    {
-      "id": "claude-3-5-sonnet",
-      "name": "Claude 3.5 Sonnet",
-      "provider": "Anthropic",
-      "currency": "USD",
-      "input": 3,
-      "cachedInput": 0.3,
-      "output": 15
-    },
-    {
-      "id": "claude-3-5-haiku",
-      "name": "Claude 3.5 Haiku",
-      "provider": "Anthropic",
-      "currency": "USD",
-      "input": 0.8,
-      "cachedInput": 0.08,
-      "output": 4
-    },
-    {
-      "id": "claude-3-opus",
-      "name": "Claude 3 Opus",
-      "provider": "Anthropic",
-      "currency": "USD",
-      "input": 15,
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "provider": "Alibaba",
+      "currency": "CNY",
+      "input": 12,
       "cachedInput": 1.5,
-      "output": 75
+      "output": 36
     },
     {
-      "id": "deepseek-chat",
-      "name": "DeepSeek Chat",
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "provider": "Zhipu",
+      "currency": "CNY",
+      "input": 8,
+      "cachedInput": 2,
+      "output": 28
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "provider": "Zhipu",
+      "currency": "CNY",
+      "input": 8,
+      "cachedInput": 2,
+      "output": 28
+    },
+    {
+      "id": "deepseek-v4-flash-peak",
+      "name": "DeepSeek V4 Flash（高峰）",
       "provider": "DeepSeek",
       "currency": "CNY",
-      "input": 2,
-      "cachedInput": 0.5,
-      "output": 8
+      "input": 3,
+      "cachedInput": 0.1,
+      "output": 9
     },
     {
-      "id": "deepseek-reasoner",
-      "name": "DeepSeek Reasoner",
+      "id": "deepseek-v4-flash-offpeak",
+      "name": "DeepSeek V4 Flash（空闲）",
       "provider": "DeepSeek",
       "currency": "CNY",
-      "input": 4,
-      "cachedInput": 1,
-      "output": 16
+      "input": 1.5,
+      "cachedInput": 0.05,
+      "output": 4.5
     },
     {
-      "id": "gemini-1-5-pro",
-      "name": "Gemini 1.5 Pro",
-      "provider": "Google",
-      "currency": "USD",
-      "input": 1.25,
-      "cachedInput": 0.3125,
-      "output": 5
+      "id": "deepseek-v4-pro-peak",
+      "name": "DeepSeek V4 Pro（高峰）",
+      "provider": "DeepSeek",
+      "currency": "CNY",
+      "input": 9,
+      "cachedInput": 0.3,
+      "output": 27
     },
     {
-      "id": "gemini-1-5-flash",
-      "name": "Gemini 1.5 Flash",
-      "provider": "Google",
-      "currency": "USD",
-      "input": 0.075,
-      "cachedInput": 0.01875,
-      "output": 0.3
+      "id": "deepseek-v4-pro-offpeak",
+      "name": "DeepSeek V4 Pro（空闲）",
+      "provider": "DeepSeek",
+      "currency": "CNY",
+      "input": 4.5,
+      "cachedInput": 0.15,
+      "output": 13.5
     }
   ]
 }
