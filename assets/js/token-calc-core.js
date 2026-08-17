@@ -18,7 +18,7 @@ export function normalizeRate(value) {
  * @param {number} options.cacheHitRate Percentage number between 0 and 100.
  * @param {number} options.outputRatio Percentage number between 0 and 100 (or higher for large outputs).
  */
-export function estimateDailyUsage(inputTokens, { cacheHitRate = 0.3, outputRatio = 0.2 } = {}) {
+export function estimateDailyUsage(inputTokens, { cacheHitRate = 90, outputRatio = 5 } = {}) {
   const input = toNonNegativeNumber(inputTokens);
   const cacheRate = normalizeRate(cacheHitRate);
   const outRate = normalizeRate(outputRatio);

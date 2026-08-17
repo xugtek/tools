@@ -87,6 +87,12 @@ test('estimateDailyUsage accepts percentage rates', () => {
   });
 });
 
+test('estimateDailyUsage defaults to AI coding estimates', () => {
+  const result = estimateDailyUsage(1);
+  assert.equal(result.cachedInput, 0.9);
+  assert.equal(result.output, 0.05);
+});
+
 test('estimateDailyUsage treats 1% as 1%, not 100%', () => {
   const onePercent = estimateDailyUsage(1, {
     cacheHitRate: 30,
