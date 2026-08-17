@@ -3,16 +3,17 @@ const STORAGE_KEY = 'xugtek-lang';
 const translations = {
   'zh-CN': {
     siteName: 'XugTek 工具站',
+    toolTitle: 'Token费用计算器',
     navTools: '工具',
     themeToggle: '切换主题',
     langSwitch: 'EN',
     heroTitle: '实用在线工具',
-    heroSubtitle: '轻量、快速、关注 SEO 与隐私的在线工具集合',
-    tokenToolName: 'Token 用量费用计算器',
+    heroSubtitle: '轻量、快速、实用的在线工具集合',
+    tokenToolName: 'Token费用计算器',
     tokenToolDesc: '估算每日/每月 Token 费用，比较人民币与美元价格',
     comingSoon: '更多工具即将上线',
     openTool: '打开工具',
-    pageTitle: 'Token 用量费用计算器',
+    pageTitle: 'Token费用计算器',
     backHome: '返回首页',
     modelLabel: '模型',
     modelCustom: '自定义模型',
@@ -38,22 +39,25 @@ const translations = {
     cachedInputCostLabel: '缓存输入',
     outputCostLabel: '输出',
     estimatedHint: '缓存和输出都留空时自动估算；只填其中一项时，另一项按 0 计算',
+    cacheEstimateHint: '缓存为空，按 {rate}% 命中率估算',
+    outputEstimateHint: '输出为空，按 {ratio}% 输出比例估算',
     invalidInput: '请输入有效的 Token 数量',
     customModelName: '自定义模型',
-    modelSourceNote: '价格来自 token_models.json，可编辑；显示结果仅供参考。'
+    modelSourceNote: '价格仅供参考，请以官方最新价格为准。'
   },
   en: {
     siteName: 'XugTek Tools',
+    toolTitle: 'Token Cost Calculator',
     navTools: 'Tools',
     themeToggle: 'Toggle theme',
     langSwitch: '中文',
     heroTitle: 'Useful Online Tools',
-    heroSubtitle: 'Lightweight, fast, SEO-friendly and privacy-conscious online tools',
-    tokenToolName: 'Token Usage Cost Calculator',
+    heroSubtitle: 'Lightweight, fast and practical online tools',
+    tokenToolName: 'Token Cost Calculator',
     tokenToolDesc: 'Estimate daily and monthly token costs, compare CNY and USD pricing',
     comingSoon: 'More tools coming soon',
     openTool: 'Open tool',
-    pageTitle: 'Token Usage Cost Calculator',
+    pageTitle: 'Token Cost Calculator',
     backHome: 'Back to home',
     modelLabel: 'Model',
     modelCustom: 'Custom model',
@@ -79,9 +83,11 @@ const translations = {
     cachedInputCostLabel: 'Cached input',
     outputCostLabel: 'Output',
     estimatedHint: 'Auto-estimate only when both cache and output are empty; if only one is filled, the other is treated as 0',
+    cacheEstimateHint: 'Cache empty: estimated at {rate}% hit rate',
+    outputEstimateHint: 'Output empty: estimated at {ratio}% output ratio',
     invalidInput: 'Please enter valid token counts',
     customModelName: 'Custom model',
-    modelSourceNote: 'Prices are loaded from token_models.json and can be edited; results are for reference only.'
+    modelSourceNote: 'Prices are for reference only; always check the latest official pricing.'
   }
 };
 

@@ -21,9 +21,13 @@ const elements = {
   dailyCached: document.getElementById('daily-cached'),
   dailyOutput: document.getElementById('daily-output'),
   cacheRate: document.getElementById('cache-rate'),
+  cacheRateRange: document.getElementById('cache-rate-range'),
   outputRatio: document.getElementById('output-ratio'),
+  outputRatioRange: document.getElementById('output-ratio-range'),
   exchangeRate: document.getElementById('exchange-rate'),
   estimateSection: document.getElementById('estimate-section'),
+  cacheEstimateHint: document.getElementById('cache-estimate-hint'),
+  outputEstimateHint: document.getElementById('output-estimate-hint'),
   resultDailyCny: document.getElementById('result-daily-cny'),
   resultDailyUsd: document.getElementById('result-daily-usd'),
   resultMonthlyCny: document.getElementById('result-monthly-cny'),
@@ -126,6 +130,40 @@ function updateEstimateVisibility() {
   elements.estimateSection.hidden = !(cachedEmpty && outputEmpty);
 }
 
+function updateEstimateHints() {
+  const cacheEmpty = elements.dailyCached.value.trim() === '';
+  const outputEmpty = elements.dailyOutput.value.trim() === '';
+  const cacheRate = Number(elements.cacheRate.value) || 0;
+  const outputRatio = Number(elements.outputRatio.value) || 0;
+
+  elements.cacheEstimateHint.textContent = cacheEmpty
+    ? t('cacheEstimateHint', { rate: cacheRate })
+    : '';
+  elements.outputEstimateHint.textContent = outputEmpty
+    ? t('outputEstimateHint', { ratio: outputRatio })
+    : '';
+}
+
+function bindSliderPair(numberEl, rangeEl) {
+  rangeEl.addEventListener('input', () => {
+    numberEl.value = rangeEl.value;
+    renderCosts();
+    updateEstimateVisibility();
+    updateEstimateHints();
+  });
+
+  numberEl.addEventListener('input', () => {
+    let value = Number(numberEl.value);
+    if (!Number.isFinite(value) || value < 0) value = 0;
+    const max = Number(rangeEl.max);
+    if (value > max) value = max;
+    rangeEl.value = value;
+    renderCosts();
+    updateEstimateVisibility();
+    updateEstimateHints();
+  });
+}
+
 function renderCosts() {
   const model = getCurrentModel();
   const usage = getEstimatedUsage();
@@ -195,12 +233,17 @@ function bindEvents() {
     el.addEventListener('input', () => {
       renderCosts();
       updateEstimateVisibility();
+      updateEstimateHints();
     });
     el.addEventListener('change', () => {
       renderCosts();
       updateEstimateVisibility();
+      updateEstimateHints();
     });
   });
+
+  bindSliderPair(elements.cacheRate, elements.cacheRateRange);
+  bindSliderPair(elements.outputRatio, elements.outputRatioRange);
 }
 
 async function loadModels() {
@@ -210,7 +253,7 @@ async function loadModels() {
     const data = await response.json();
     models = Array.isArray(data.models) ? data.models : [];
   } catch (error) {
-    console.error('Failed to load token_models.json', error);
+    console.error('Failed to load model prices', error);
     models = [];
   }
 
@@ -221,6 +264,7 @@ async function loadModels() {
   }
   renderCosts();
   updateEstimateVisibility();
+  updateEstimateHints();
 }
 
 function init() {
@@ -235,6 +279,7 @@ function init() {
     elements.modelSelect.value = previousSelection;
     renderCosts();
     updateEstimateVisibility();
+    updateEstimateHints();
   });
 
   loadModels();

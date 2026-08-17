@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Token 用量费用计算器 - XugTek 工具站</title>
+  <title>Token费用计算器 - XugTek 工具站</title>
   <meta name="description" content="估算每日和每月 Token API 费用，支持人民币/美元双货币、缓存命中与用量估算。">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <div class="container">
     <header class="site-header">
-      <a class="brand" href="index.html" data-i18n="siteName">XugTek 工具站</a>
+      <a class="brand" href="index.html" data-i18n="toolTitle">Token费用计算器</a>
       <div class="header-actions">
         <button type="button" class="icon-button" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">🌓</button>
         <button type="button" class="icon-button" data-i18n-switch>EN</button>
@@ -18,7 +18,7 @@
     </header>
 
     <main>
-      <h1 data-i18n="pageTitle">Token 用量费用计算器</h1>
+      <h1 data-i18n="pageTitle">Token费用计算器</h1>
 
       <section class="card" aria-labelledby="model-section-title">
         <h2 id="model-section-title" class="section-title" data-i18n="modelLabel">模型</h2>
@@ -57,7 +57,7 @@
             <input id="exchange-rate" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" value="7.2">
           </div>
         </div>
-        <p class="note" data-i18n="modelSourceNote">价格来自 token_models.json，可编辑；显示结果仅供参考。</p>
+        <p class="note" data-i18n="modelSourceNote">价格仅供参考，请以官方最新价格为准。</p>
       </section>
 
       <section class="card" aria-labelledby="usage-section-title">
@@ -70,10 +70,12 @@
           <div class="form-group">
             <label for="daily-cached" data-i18n="dailyCachedLabel">其中缓存命中（M Tokens，可留空）</label>
             <input id="daily-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.3">
+            <p class="hint" id="cache-estimate-hint"></p>
           </div>
           <div class="form-group">
             <label for="daily-output" data-i18n="dailyOutputLabel">每日输出（M Tokens，可留空）</label>
             <input id="daily-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.2">
+            <p class="hint" id="output-estimate-hint"></p>
           </div>
         </div>
         <p class="hint" data-i18n="estimatedHint">缓存和输出都留空时自动估算；只填其中一项时，另一项按 0 计算</p>
@@ -84,15 +86,17 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="cache-rate" data-i18n="cacheHitRateLabel">缓存命中率</label>
-            <div style="display:flex;align-items:center;gap:8px">
-              <input id="cache-rate" class="form-control" type="number" min="0" max="100" step="1" inputmode="numeric" value="30">
+            <div class="range-row">
+              <input id="cache-rate-range" class="range-slider" type="range" min="0" max="100" step="1" value="30">
+              <input id="cache-rate" class="form-control range-value" type="number" min="0" max="100" step="1" inputmode="numeric" value="30">
               <span>%</span>
             </div>
           </div>
           <div class="form-group">
             <label for="output-ratio" data-i18n="outputRatioLabel">输出 / 输入比例</label>
-            <div style="display:flex;align-items:center;gap:8px">
-              <input id="output-ratio" class="form-control" type="number" min="0" max="1000" step="1" inputmode="numeric" value="20">
+            <div class="range-row">
+              <input id="output-ratio-range" class="range-slider" type="range" min="0" max="1000" step="1" value="20">
+              <input id="output-ratio" class="form-control range-value" type="number" min="0" max="1000" step="1" inputmode="numeric" value="20">
               <span>%</span>
             </div>
           </div>
