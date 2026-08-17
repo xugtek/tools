@@ -179,6 +179,32 @@ function bindSliderPair(numberEl, rangeEl) {
   });
 }
 
+function getUsdCosts(cost, usage, model, rate) {
+  if (model.pricesUsd) {
+    const usdCost = calculateMonthlyCost(usage, {
+      input: model.pricesUsd.input,
+      cachedInput: model.pricesUsd.cachedInput,
+      output: model.pricesUsd.output
+    }, { days: DAYS_PER_MONTH });
+
+    return {
+      daily: usdCost.dailyCost,
+      monthly: usdCost.monthlyCost,
+      normal: usdCost.inputCost,
+      cached: usdCost.cachedCost,
+      output: usdCost.outputCost
+    };
+  }
+
+  return {
+    daily: convertCurrency(cost.dailyCost, model.currency, 'USD', rate),
+    monthly: convertCurrency(cost.monthlyCost, model.currency, 'USD', rate),
+    normal: convertCurrency(cost.inputCost, model.currency, 'USD', rate),
+    cached: convertCurrency(cost.cachedCost, model.currency, 'USD', rate),
+    output: convertCurrency(cost.outputCost, model.currency, 'USD', rate)
+  };
+}
+
 function renderCosts() {
   const model = getCurrentModel();
   const usage = getEstimatedUsage();
@@ -204,18 +230,19 @@ function renderCosts() {
   }
 
   const cost = calculateMonthlyCost(usage, model, { days: DAYS_PER_MONTH });
+  const usdCosts = getUsdCosts(cost, usage, model, rate);
 
   const dailyCny = convertCurrency(cost.dailyCost, model.currency, 'CNY', rate);
-  const dailyUsd = convertCurrency(cost.dailyCost, model.currency, 'USD', rate);
+  const dailyUsd = usdCosts.daily;
   const monthlyCny = convertCurrency(cost.monthlyCost, model.currency, 'CNY', rate);
-  const monthlyUsd = convertCurrency(cost.monthlyCost, model.currency, 'USD', rate);
+  const monthlyUsd = usdCosts.monthly;
 
   const normalCny = convertCurrency(cost.inputCost, model.currency, 'CNY', rate);
-  const normalUsd = convertCurrency(cost.inputCost, model.currency, 'USD', rate);
+  const normalUsd = usdCosts.normal;
   const cachedCny = convertCurrency(cost.cachedCost, model.currency, 'CNY', rate);
-  const cachedUsd = convertCurrency(cost.cachedCost, model.currency, 'USD', rate);
+  const cachedUsd = usdCosts.cached;
   const outputCny = convertCurrency(cost.outputCost, model.currency, 'CNY', rate);
-  const outputUsd = convertCurrency(cost.outputCost, model.currency, 'USD', rate);
+  const outputUsd = usdCosts.output;
 
   elements.resultDailyCny.textContent = formatMoney(dailyCny, 'CNY', locale());
   elements.resultDailyUsd.textContent = formatMoney(dailyUsd, 'USD', locale());
