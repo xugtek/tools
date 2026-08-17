@@ -18,15 +18,15 @@ test('calculateMonthlyCost computes daily and monthly costs', () => {
   };
 
   const result = calculateMonthlyCost(
-    { input: 1_000_000, cachedInput: 300_000, output: 200_000 },
+    { input: 1, cachedInput: 0.3, output: 0.2 },
     model,
     { days: 30 }
   );
 
-  assert.equal(result.totalInput, 1_000_000);
-  assert.equal(result.normalInput, 700_000);
-  assert.equal(result.cachedInput, 300_000);
-  assert.equal(result.output, 200_000);
+  assert.equal(result.totalInput, 1);
+  assert.equal(result.normalInput, 0.7);
+  assert.equal(result.cachedInput, 0.3);
+  assert.equal(result.output, 0.2);
   assert.ok(Math.abs(result.inputCost - 1.75) < 1e-9);
   assert.ok(Math.abs(result.cachedCost - 0.375) < 1e-9);
   assert.ok(Math.abs(result.outputCost - 2) < 1e-9);
@@ -37,12 +37,12 @@ test('calculateMonthlyCost computes daily and monthly costs', () => {
 test('calculateMonthlyCost handles empty cached input as zero', () => {
   const model = { input: 2, cachedInput: 1, output: 8 };
   const result = calculateMonthlyCost(
-    { input: 1_000_000, cachedInput: '', output: '' },
+    { input: 1, cachedInput: '', output: '' },
     model,
     { days: 30 }
   );
 
-  assert.equal(result.normalInput, 1_000_000);
+  assert.equal(result.normalInput, 1);
   assert.equal(result.cachedInput, 0);
   assert.equal(result.output, 0);
   assert.ok(Math.abs(result.monthlyCost - 60) < 1e-9);
@@ -58,19 +58,19 @@ test('calculateMonthlyCost clamps cached input to total input', () => {
 
   assert.equal(result.cachedInput, 100);
   assert.equal(result.normalInput, 0);
-  assert.ok(Math.abs(result.dailyCost - (100 / 1_000_000) * 0.5) < 1e-12);
+  assert.ok(Math.abs(result.dailyCost - 50) < 1e-12);
 });
 
 test('estimateDailyUsage estimates cache and output from total input', () => {
-  const result = estimateDailyUsage(1_000_000, {
+  const result = estimateDailyUsage(1, {
     cacheHitRate: 30,
     outputRatio: 20
   });
 
   assert.deepEqual(result, {
-    input: 1_000_000,
-    cachedInput: 300_000,
-    output: 200_000
+    input: 1,
+    cachedInput: 0.3,
+    output: 0.2
   });
 });
 

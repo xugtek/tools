@@ -3,7 +3,6 @@ import {
   convertCurrency,
   estimateDailyUsage,
   formatMoney,
-  formatTokens,
   toNonNegativeNumber
 } from './token-calc-core.js';
 import { getLang, t } from './i18n.js';
@@ -24,6 +23,7 @@ const elements = {
   cacheRate: document.getElementById('cache-rate'),
   outputRatio: document.getElementById('output-ratio'),
   exchangeRate: document.getElementById('exchange-rate'),
+  estimateSection: document.getElementById('estimate-section'),
   resultDailyCny: document.getElementById('result-daily-cny'),
   resultDailyUsd: document.getElementById('result-daily-usd'),
   resultMonthlyCny: document.getElementById('result-monthly-cny'),
@@ -111,12 +111,19 @@ function getEstimatedUsage() {
     cacheHitRate: elements.cacheRate.value,
     outputRatio: elements.outputRatio.value
   });
+  const bothEmpty = cachedRaw === '' && outputRaw === '';
 
   return {
     input: estimate.input,
-    cachedInput: cachedRaw === '' ? estimate.cachedInput : toNonNegativeNumber(cachedRaw),
-    output: outputRaw === '' ? estimate.output : toNonNegativeNumber(outputRaw)
+    cachedInput: cachedRaw === '' ? (bothEmpty ? estimate.cachedInput : 0) : toNonNegativeNumber(cachedRaw),
+    output: outputRaw === '' ? (bothEmpty ? estimate.output : 0) : toNonNegativeNumber(outputRaw)
   };
+}
+
+function updateEstimateVisibility() {
+  const cachedEmpty = elements.dailyCached.value.trim() === '';
+  const outputEmpty = elements.dailyOutput.value.trim() === '';
+  elements.estimateSection.hidden = !(cachedEmpty && outputEmpty);
 }
 
 function renderCosts() {
@@ -185,8 +192,14 @@ function bindEvents() {
     elements.outputRatio,
     elements.exchangeRate
   ].forEach((el) => {
-    el.addEventListener('input', renderCosts);
-    el.addEventListener('change', renderCosts);
+    el.addEventListener('input', () => {
+      renderCosts();
+      updateEstimateVisibility();
+    });
+    el.addEventListener('change', () => {
+      renderCosts();
+      updateEstimateVisibility();
+    });
   });
 }
 
@@ -207,6 +220,7 @@ async function loadModels() {
     applyModelToForm(models[0]);
   }
   renderCosts();
+  updateEstimateVisibility();
 }
 
 function init() {
@@ -220,6 +234,7 @@ function init() {
     fillModelSelect();
     elements.modelSelect.value = previousSelection;
     renderCosts();
+    updateEstimateVisibility();
   });
 
   loadModels();

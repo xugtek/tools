@@ -31,18 +31,18 @@
       </section>
 
       <section class="card" aria-labelledby="price-section-title">
-        <h2 id="price-section-title" class="section-title" data-i18n="priceSection">价格设置（每 1M Tokens）</h2>
+        <h2 id="price-section-title" class="section-title" data-i18n="priceSection">价格设置（每 M Tokens）</h2>
         <div class="form-grid">
           <div class="form-group">
-            <label for="price-input" data-i18n="inputPriceLabel">普通输入价</label>
+            <label for="price-input" data-i18n="inputPriceLabel">普通输入价（每 M Tokens）</label>
             <input id="price-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
-            <label for="price-cached" data-i18n="cachedInputPriceLabel">缓存输入价</label>
+            <label for="price-cached" data-i18n="cachedInputPriceLabel">缓存输入价（每 M Tokens）</label>
             <input id="price-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
-            <label for="price-output" data-i18n="outputPriceLabel">输出价</label>
+            <label for="price-output" data-i18n="outputPriceLabel">输出价（每 M Tokens）</label>
             <input id="price-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
@@ -52,6 +52,10 @@
               <option value="CNY">CNY</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="exchange-rate" data-i18n="exchangeRateLabel">汇率（1 USD = ? CNY）</label>
+            <input id="exchange-rate" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" value="7.2">
+          </div>
         </div>
         <p class="note" data-i18n="modelSourceNote">价格来自 token_models.json，可编辑；显示结果仅供参考。</p>
       </section>
@@ -60,22 +64,22 @@
         <h2 id="usage-section-title" class="section-title" data-i18n="usageSection">每日用量</h2>
         <div class="form-grid">
           <div class="form-group">
-            <label for="daily-input" data-i18n="dailyInputLabel">每日输入 Tokens（总）</label>
-            <input id="daily-input" class="form-control" type="number" min="0" step="1" inputmode="numeric" placeholder="1000000">
+            <label for="daily-input" data-i18n="dailyInputLabel">每日输入（M Tokens）</label>
+            <input id="daily-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="1.0">
           </div>
           <div class="form-group">
-            <label for="daily-cached" data-i18n="dailyCachedLabel">其中缓存命中 Tokens（可留空）</label>
-            <input id="daily-cached" class="form-control" type="number" min="0" step="1" inputmode="numeric" placeholder="300000">
+            <label for="daily-cached" data-i18n="dailyCachedLabel">其中缓存命中（M Tokens，可留空）</label>
+            <input id="daily-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.3">
           </div>
           <div class="form-group">
-            <label for="daily-output" data-i18n="dailyOutputLabel">每日输出 Tokens（可留空）</label>
-            <input id="daily-output" class="form-control" type="number" min="0" step="1" inputmode="numeric" placeholder="200000">
+            <label for="daily-output" data-i18n="dailyOutputLabel">每日输出（M Tokens，可留空）</label>
+            <input id="daily-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.2">
           </div>
         </div>
-        <p class="hint" data-i18n="estimatedHint">留空的缓存/输出将按估算比例自动计算</p>
+        <p class="hint" data-i18n="estimatedHint">缓存和输出都留空时自动估算；只填其中一项时，另一项按 0 计算</p>
       </section>
 
-      <section class="card" aria-labelledby="estimate-section-title">
+      <section class="card" id="estimate-section" aria-labelledby="estimate-section-title" hidden>
         <h2 id="estimate-section-title" class="section-title" data-i18n="estimateSection">自动估算设置</h2>
         <div class="form-grid">
           <div class="form-group">
@@ -91,10 +95,6 @@
               <input id="output-ratio" class="form-control" type="number" min="0" max="1000" step="1" inputmode="numeric" value="20">
               <span>%</span>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="exchange-rate" data-i18n="exchangeRateLabel">汇率（1 USD = ? CNY）</label>
-            <input id="exchange-rate" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" value="7.2">
           </div>
         </div>
         <p class="hint" data-i18n="monthDaysHint">按 30 天/月计算</p>
