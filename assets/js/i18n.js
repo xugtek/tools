@@ -153,6 +153,24 @@ function updateLangButton() {
   });
 }
 
+function updateLangMenu() {
+  document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((el) => {
+    const isCurrent = el.getAttribute('data-lang') === currentLang;
+    el.classList.toggle('current', isCurrent);
+    if (isCurrent) {
+      el.setAttribute('aria-current', 'true');
+    } else {
+      el.removeAttribute('aria-current');
+    }
+  });
+}
+
+function closeLangMenu() {
+  document.querySelectorAll('.lang-switch.open').forEach((el) => {
+    el.classList.remove('open');
+  });
+}
+
 export function setLang(lang) {
   if (!translations[lang]) return;
   currentLang = lang;
@@ -163,15 +181,37 @@ export function setLang(lang) {
     document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
     applyI18n();
     updateLangButton();
+    updateLangMenu();
     document.dispatchEvent(new CustomEvent('xugtek:langchange', { detail: { lang } }));
   }
 }
 
 export function initI18n() {
   setLang(detectLanguage());
+
   document.querySelectorAll('[data-i18n-switch]').forEach((el) => {
     el.addEventListener('click', () => {
       setLang(currentLang === 'zh-CN' ? 'en' : 'zh-CN');
     });
+  });
+
+  document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const wrapper = btn.closest('.lang-switch');
+      if (wrapper) wrapper.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      setLang(link.getAttribute('data-lang'));
+      closeLangMenu();
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.lang-switch')) closeLangMenu();
   });
 }

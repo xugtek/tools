@@ -156,7 +156,7 @@ section {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
 }
 
 .nav-links > a {
@@ -170,29 +170,103 @@ section {
   text-decoration: none;
 }
 
-.icon-button {
-  display: inline-flex;
+.lang-switch {
+  position: relative;
+}
+
+.lang-switch-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 10px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text-muted);
-  font-size: 13.5px;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  font-size: 14px;
+  line-height: 1;
 }
 
-.icon-button:hover {
+.lang-switch-btn:hover {
   color: var(--text);
   border-color: var(--text-faint);
 }
 
-.icon-button svg {
+.lang-switch-btn svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+}
+
+.lang-switch-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 160px;
+  padding: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  list-style: none;
+  display: none;
+  z-index: 60;
+}
+
+.lang-switch:focus-within .lang-switch-list,
+.lang-switch.open .lang-switch-list {
+  display: block;
+}
+
+.lang-switch-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.lang-switch-list a:hover {
+  background: var(--accent-soft);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.lang-switch-list a.current {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lang-switch-list a.current::after {
+  content: "✓";
+  font-weight: 700;
+}
+
+.theme-toggle {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+.theme-toggle svg {
   width: 14px;
   height: 14px;
 }
