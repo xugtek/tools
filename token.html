@@ -56,15 +56,15 @@
         <h2 id="price-section-title" class="section-title" data-i18n="priceSection">价格设置（每 M Tokens）</h2>
         <div class="form-grid">
           <div class="form-group">
-            <label for="price-input" data-i18n="inputPriceLabel">普通输入价（每 M Tokens）</label>
+            <label for="price-input" data-i18n="inputPriceLabel">普通输入价</label>
             <input id="price-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
-            <label for="price-cached" data-i18n="cachedInputPriceLabel">缓存输入价（每 M Tokens）</label>
+            <label for="price-cached" data-i18n="cachedInputPriceLabel">缓存输入价</label>
             <input id="price-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
-            <label for="price-output" data-i18n="outputPriceLabel">输出价（每 M Tokens）</label>
+            <label for="price-output" data-i18n="outputPriceLabel">输出价</label>
             <input id="price-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
@@ -83,24 +83,22 @@
       </section>
 
       <section class="card" aria-labelledby="usage-section-title">
-        <h2 id="usage-section-title" class="section-title" data-i18n="usageSection">每日用量</h2>
+        <h2 id="usage-section-title" class="section-title" data-i18n="usageSection">每日用量（M Tokens）</h2>
         <div class="form-grid">
           <div class="form-group">
-            <label for="daily-input" data-i18n="dailyInputLabel">每日输入（M Tokens）</label>
+            <label for="daily-input" data-i18n="dailyInputLabel">输入</label>
             <input id="daily-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="1.0">
           </div>
           <div class="form-group">
-            <label for="daily-cached" data-i18n="dailyCachedLabel">其中缓存命中（M Tokens，可留空）</label>
-            <input id="daily-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.3">
-            <p class="hint" id="cache-estimate-hint"></p>
+            <label for="daily-cached" data-i18n="dailyCachedLabel">缓存命中（可留空）</label>
+            <input id="daily-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
           <div class="form-group">
-            <label for="daily-output" data-i18n="dailyOutputLabel">每日输出（M Tokens，可留空）</label>
-            <input id="daily-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="0.2">
-            <p class="hint" id="output-estimate-hint"></p>
+            <label for="daily-output" data-i18n="dailyOutputLabel">输出</label>
+            <input id="daily-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
           </div>
         </div>
-        <p class="hint" data-i18n="estimatedHint">缓存或输出为空/0 时，按对应比例自动估算；输入非 0 实际值后使用实际值。</p>
+        <p class="hint" data-i18n="estimatedHint">留空或 0 时按比例自动估算</p>
       </section>
 
       <section class="card" id="estimate-section" aria-labelledby="estimate-section-title" hidden>

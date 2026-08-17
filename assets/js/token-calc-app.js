@@ -29,8 +29,6 @@ const elements = {
   estimateSection: document.getElementById('estimate-section'),
   cacheEstimateControl: document.getElementById('cache-estimate-control'),
   outputEstimateControl: document.getElementById('output-estimate-control'),
-  cacheEstimateHint: document.getElementById('cache-estimate-hint'),
-  outputEstimateHint: document.getElementById('output-estimate-hint'),
   usageNormal: document.getElementById('usage-normal'),
   usageCached: document.getElementById('usage-cached'),
   usageOutput: document.getElementById('usage-output'),
@@ -148,14 +146,16 @@ function updateEstimateVisibility() {
 function updateEstimateHints() {
   const cacheEmpty = isBlankOrZero(elements.dailyCached.value);
   const outputEmpty = isBlankOrZero(elements.dailyOutput.value);
-  const cacheRate = Number(elements.cacheRate.value) || 0;
-  const outputRatio = Number(elements.outputRatio.value) || 0;
+  const estimate = estimateDailyUsage(elements.dailyInput.value, {
+    cacheHitRate: elements.cacheRate.value,
+    outputRatio: elements.outputRatio.value
+  });
 
-  elements.cacheEstimateHint.textContent = cacheEmpty
-    ? t('cacheEstimateHint', { rate: cacheRate })
+  elements.dailyCached.placeholder = cacheEmpty
+    ? `≈ ${formatTokens(estimate.cachedInput, locale())} M`
     : '';
-  elements.outputEstimateHint.textContent = outputEmpty
-    ? t('outputEstimateHint', { ratio: outputRatio })
+  elements.dailyOutput.placeholder = outputEmpty
+    ? `≈ ${formatTokens(estimate.output, locale())} M`
     : '';
 }
 
