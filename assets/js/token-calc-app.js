@@ -86,27 +86,31 @@ function fillModelSelect() {
   elements.modelSelect.replaceChildren(fragment);
 }
 
+function getNativeCurrency() {
+  return getLang() === 'en' ? 'USD' : 'CNY';
+}
+
 function getModelPriceInCurrency(model, currency, rate) {
-  if (currency === model.currency) {
+  const prices = model.prices || {};
+
+  // Prefer the official price in the requested currency when available.
+  if (prices[currency]) {
     return {
-      input: model.input,
-      cachedInput: model.cachedInput ?? model.input,
-      output: model.output
+      input: prices[currency].input,
+      cachedInput: prices[currency].cachedInput ?? prices[currency].input,
+      output: prices[currency].output
     };
   }
 
-  if (currency === 'USD' && model.pricesUsd) {
-    return {
-      input: model.pricesUsd.input,
-      cachedInput: model.pricesUsd.cachedInput ?? model.pricesUsd.input,
-      output: model.pricesUsd.output
-    };
-  }
+  // Otherwise convert from the language-native currency if present, else any listed currency.
+  const native = getNativeCurrency();
+  const baseCurrency = prices[native] ? native : Object.keys(prices)[0];
+  const base = prices[baseCurrency] || { input: 0, cachedInput: 0, output: 0 };
 
   return {
-    input: convertCurrency(model.input, model.currency, currency, rate),
-    cachedInput: convertCurrency(model.cachedInput ?? model.input, model.currency, currency, rate),
-    output: convertCurrency(model.output, model.currency, currency, rate)
+    input: convertCurrency(base.input, baseCurrency, currency, rate),
+    cachedInput: convertCurrency(base.cachedInput ?? base.input, baseCurrency, currency, rate),
+    output: convertCurrency(base.output, baseCurrency, currency, rate)
   };
 }
 
@@ -210,11 +214,12 @@ function bindSliderPair(numberEl, rangeEl) {
 }
 
 function getUsdCosts(cost, usage, model, rate) {
-  if (model.pricesUsd) {
+  const usdPrices = (model.prices || {}).USD;
+  if (usdPrices) {
     const usdCost = calculateMonthlyCost(usage, {
-      input: model.pricesUsd.input,
-      cachedInput: model.pricesUsd.cachedInput,
-      output: model.pricesUsd.output
+      input: usdPrices.input,
+      cachedInput: usdPrices.cachedInput ?? usdPrices.input,
+      output: usdPrices.output
     }, { days: DAYS_PER_MONTH });
 
     return {
@@ -373,6 +378,8 @@ function init() {
     setDocumentLanguage();
     fillModelSelect();
     elements.modelSelect.value = previousSelection;
+    const model = models.find((item) => item.id === previousSelection);
+    if (model) applyModelToForm(model);
     renderCosts();
     updateEstimateVisibility();
     updateEstimateHints();

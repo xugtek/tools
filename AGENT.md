@@ -15,3 +15,9 @@
 - 每个工具要有自己的提交前缀，例如 `[token_calc]`。
 - JS 代码要有测试用例。
 - HTML 和 CSS 由用户验证。
+
+## Token 计算器数据约定（token_models.json）
+
+- 每个模型的定价存于 `prices` 对象，key 为币种（`CNY` / `USD`），value 为 `{ input, cachedInput, output }`（单位：每 M Tokens）。
+- 某币种若无官方定价（如 DeepSeek 仅 `CNY`），则缺失时按汇率从「语言原生币种」换算：中文界面原生币种为 `CNY`，英文界面为 `USD`。
+- 页面顶部保留 `updated` 与 `note` 元信息。
