@@ -585,6 +585,13 @@ select.form-control {
   gap: 2px;
 }
 
+.compare-card .compare-usage {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
 .compare-card .compare-value strong {
   color: var(--text);
   font-weight: 700;
@@ -743,7 +750,7 @@ footer {
   }
 
   .compare-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .nav-links {

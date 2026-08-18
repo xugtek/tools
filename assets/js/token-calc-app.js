@@ -278,6 +278,9 @@ function renderCosts() {
     const zeroUsd = '$0.00';
     lastResult = {
       modelName: model.name,
+      inputM: 0,
+      cachedInputM: 0,
+      outputM: 0,
       dailyCny: 0,
       dailyUsd: 0,
       monthlyCny: 0,
@@ -331,6 +334,9 @@ function renderCosts() {
 
   lastResult = {
     modelName: model.name,
+    inputM: cost.totalInput,
+    cachedInputM: cost.cachedInput,
+    outputM: cost.output,
     dailyCny,
     dailyUsd,
     monthlyCny,
@@ -396,6 +402,10 @@ function renderComparisons() {
     name.className = 'compare-name';
     name.textContent = entry.modelName || t('modelCustom');
 
+    const usage = document.createElement('div');
+    usage.className = 'compare-usage';
+    usage.textContent = `${t('compareInput')} ${formatTokens(entry.inputM, locale())} M ${t('compareCached')} ${formatTokens(entry.cachedInputM, locale())} M ${t('compareOutput')} ${formatTokens(entry.outputM, locale())} M`;
+
     const daily = document.createElement('div');
     daily.className = 'compare-value';
     daily.append(createValueLine(t('compareDaily'), entry.dailyCny, entry.dailyUsd));
@@ -411,7 +421,7 @@ function renderComparisons() {
     remove.setAttribute('aria-label', 'Remove');
     remove.title = t('clearAll');
 
-    card.append(name, daily, monthly, remove);
+    card.append(name, usage, daily, monthly, remove);
     fragment.appendChild(card);
   });
 

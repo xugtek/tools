@@ -136,6 +136,9 @@ test('toNonNegativeNumber ignores invalid values', () => {
 test('createComparisonSnapshot builds a complete snapshot', () => {
   const snapshot = createComparisonSnapshot({
     modelName: '  Kimi K3  ',
+    inputM: 10,
+    cachedInputM: 9,
+    outputM: 0.5,
     dailyCny: 12.34,
     dailyUsd: 1.71,
     monthlyCny: 370.2,
@@ -144,6 +147,9 @@ test('createComparisonSnapshot builds a complete snapshot', () => {
 
   assert.match(snapshot.id, /^cmp-/);
   assert.equal(snapshot.modelName, 'Kimi K3');
+  assert.equal(snapshot.inputM, 10);
+  assert.equal(snapshot.cachedInputM, 9);
+  assert.equal(snapshot.outputM, 0.5);
   assert.equal(snapshot.dailyCny, 12.34);
   assert.equal(snapshot.dailyUsd, 1.71);
   assert.equal(snapshot.monthlyCny, 370.2);
@@ -157,9 +163,12 @@ test('createComparisonSnapshot generates unique ids and sanitizes values', () =>
   assert.notEqual(a.id, b.id);
 
   const bad = createComparisonSnapshot({
-    modelName: '', dailyCny: -5, dailyUsd: 'x', monthlyCny: NaN, monthlyUsd: undefined
+    modelName: '', inputM: -3, cachedInputM: 'x', outputM: NaN, dailyCny: -5, dailyUsd: 'x', monthlyCny: NaN, monthlyUsd: undefined
   });
   assert.equal(bad.modelName, '');
+  assert.equal(bad.inputM, 0);
+  assert.equal(bad.cachedInputM, 0);
+  assert.equal(bad.outputM, 0);
   assert.equal(bad.dailyCny, 0);
   assert.equal(bad.dailyUsd, 0);
   assert.equal(bad.monthlyCny, 0);

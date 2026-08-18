@@ -51,7 +51,10 @@ const translations = {
     compareSection: '对比',
     clearAll: '全部清除',
     compareDaily: '每日',
-    compareMonthly: '每月'
+    compareMonthly: '每月',
+    compareInput: '输入',
+    compareCached: '缓存',
+    compareOutput: '输出'
   },
   en: {
     siteName: 'xugtek',
@@ -103,7 +106,10 @@ const translations = {
     compareSection: 'Comparison',
     clearAll: 'Clear all',
     compareDaily: 'Daily',
-    compareMonthly: 'Monthly'
+    compareMonthly: 'Monthly',
+    compareInput: 'Input',
+    compareCached: 'Cached',
+    compareOutput: 'Output'
   }
 };
 

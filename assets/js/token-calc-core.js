@@ -102,10 +102,13 @@ export function formatTokens(value, locale = 'zh-CN') {
  * Stores raw numeric values (not pre-formatted strings) so sorting and
  * re-rendering under a different locale work correctly.
  */
-export function createComparisonSnapshot({ modelName, dailyCny, dailyUsd, monthlyCny, monthlyUsd }) {
+export function createComparisonSnapshot({ modelName, inputM, cachedInputM, outputM, dailyCny, dailyUsd, monthlyCny, monthlyUsd }) {
   return {
     id: `cmp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     modelName: String(modelName || '').trim(),
+    inputM: toNonNegativeNumber(inputM),
+    cachedInputM: toNonNegativeNumber(cachedInputM),
+    outputM: toNonNegativeNumber(outputM),
     dailyCny: toNonNegativeNumber(dailyCny),
     dailyUsd: toNonNegativeNumber(dailyUsd),
     monthlyCny: toNonNegativeNumber(monthlyCny),
