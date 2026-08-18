@@ -1,6 +1,6 @@
 {
   "updated": "2026-08-18",
-  "note": "Prices collected from public sources on 2026-08-18. DeepSeek peak/off-peak are separate entries. Foreign model USD prices are official international list prices; Chinese model USD prices are their international (abroad) pricing. Each model lists prices per currency (CNY/USD) for input, cached input, and output; currencies without official prices fall back to exchange-rate conversion from the language-native currency. Verify before production use.",
+  "note": "Prices collected from public sources on 2026-08-18 and verified against OpenRouter list prices. DeepSeek peak/off-peak are separate entries. Foreign model USD prices are official international list prices; Chinese model USD prices are their international (abroad) pricing. Each model lists prices per currency (CNY/USD) for input, cached input, and output; currencies without official prices fall back to exchange-rate conversion from the language-native currency. Verify before production use.",
   "models": [
     {
       "id": "kimi-k3",
@@ -75,51 +75,51 @@
       }
     },
     {
-      "id": "gpt-5.2",
-      "name": "GPT-5.2",
+      "id": "gpt-5.6",
+      "name": "GPT-5.6",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 1.75, "cachedInput": 0.175, "output": 14 }
+        "USD": { "input": 2.5, "cachedInput": 0.25, "output": 15 }
       }
     },
     {
-      "id": "gpt-4o",
-      "name": "GPT-4o",
+      "id": "gpt-5",
+      "name": "GPT-5",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 2.5, "cachedInput": 1.25, "output": 10 }
+        "USD": { "input": 1.25, "cachedInput": 0.125, "output": 10 }
       }
     },
     {
-      "id": "claude-sonnet-4.6",
-      "name": "Claude Sonnet 4.6",
-      "provider": "Anthropic",
-      "prices": {
-        "USD": { "input": 3, "cachedInput": 0.3, "output": 15 }
-      }
-    },
-    {
-      "id": "claude-opus-4.8",
-      "name": "Claude Opus 4.8",
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
       "provider": "Anthropic",
       "prices": {
         "USD": { "input": 5, "cachedInput": 0.5, "output": 25 }
       }
     },
     {
-      "id": "gemini-2.5-pro",
-      "name": "Gemini 2.5 Pro",
-      "provider": "Google",
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "provider": "Anthropic",
       "prices": {
-        "USD": { "input": 1.25, "cachedInput": 0.125, "output": 10 }
+        "USD": { "input": 2, "cachedInput": 0.2, "output": 10 }
       }
     },
     {
-      "id": "gemini-2.5-flash",
-      "name": "Gemini 2.5 Flash",
+      "id": "gemini-3-pro",
+      "name": "Gemini 3 Pro",
       "provider": "Google",
       "prices": {
-        "USD": { "input": 0.3, "cachedInput": 0.03, "output": 2.5 }
+        "USD": { "input": 2, "cachedInput": 0.2, "output": 12 }
+      }
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "name": "Gemini 3.5 Flash",
+      "provider": "Google",
+      "prices": {
+        "USD": { "input": 1.5, "cachedInput": 0.15, "output": 9 }
       }
     },
     {
