@@ -127,45 +127,40 @@
         <div class="result-grid">
           <div class="result-item">
             <div class="label" data-i18n="dailyCostLabel">每日费用</div>
-            <div class="value" id="result-daily-cny">¥0.00</div>
-            <div class="sub-value" id="result-daily-usd">$0.00</div>
+            <div class="value">
+              <span id="result-daily-cny">¥0.00</span><span class="value-sep"> / </span><span id="result-daily-usd">$0.00</span>
+            </div>
           </div>
           <div class="result-item result-total">
             <div class="label" data-i18n="monthlyCostLabel">每月费用（30 天）</div>
-            <div class="value" id="result-monthly-cny">¥0.00</div>
-            <div class="sub-value" id="result-monthly-usd">$0.00</div>
+            <div class="value">
+              <span id="result-monthly-cny">¥0.00</span><span class="value-sep"> / </span><span id="result-monthly-usd">$0.00</span>
+            </div>
           </div>
         </div>
 
-        <h3 class="section-title" style="margin-top:20px" data-i18n="breakdownLabel">费用构成</h3>
-        <ul class="breakdown-list">
-          <li>
-            <span data-i18n="normalInputCostLabel">普通输入</span>
-            <span><span id="breakdown-normal-cny">¥0.00</span> / <span id="breakdown-normal-usd">$0.00</span></span>
-          </li>
-          <li>
-            <span data-i18n="cachedInputCostLabel">缓存输入</span>
-            <span><span id="breakdown-cached-cny">¥0.00</span> / <span id="breakdown-cached-usd">$0.00</span></span>
-          </li>
-          <li>
-            <span data-i18n="outputCostLabel">输出</span>
-            <span><span id="breakdown-output-cny">¥0.00</span> / <span id="breakdown-output-usd">$0.00</span></span>
-          </li>
-        </ul>
-
-        <h3 class="section-title" style="margin-top:20px" data-i18n="usageBreakdownLabel">用量明细</h3>
+        <h3 class="section-title" style="margin-top:20px" data-i18n="breakdownLabel">费用明细</h3>
         <ul class="breakdown-list">
           <li>
             <span data-i18n="normalInputLabel">普通输入</span>
-            <span id="usage-normal">0 M</span>
+            <span class="cost-breakdown">
+              <span class="usage" id="usage-normal">0 M</span>
+              <span class="cost" id="breakdown-normal-cny">¥0.00</span><span class="cost-sep"> / </span><span class="cost" id="breakdown-normal-usd">$0.00</span>
+            </span>
           </li>
           <li>
             <span data-i18n="cachedInputLabel">缓存命中</span>
-            <span id="usage-cached">0 M</span>
+            <span class="cost-breakdown">
+              <span class="usage" id="usage-cached">0 M</span>
+              <span class="cost" id="breakdown-cached-cny">¥0.00</span><span class="cost-sep"> / </span><span class="cost" id="breakdown-cached-usd">$0.00</span>
+            </span>
           </li>
           <li>
             <span data-i18n="outputLabel">输出</span>
-            <span id="usage-output">0 M</span>
+            <span class="cost-breakdown">
+              <span class="usage" id="usage-output">0 M</span>
+              <span class="cost" id="breakdown-output-cny">¥0.00</span><span class="cost-sep"> / </span><span class="cost" id="breakdown-output-usd">$0.00</span>
+            </span>
           </li>
         </ul>
       </section>

@@ -444,10 +444,9 @@ select.form-control {
   word-break: break-word;
 }
 
-.result-item .sub-value {
-  font-size: 13px;
+.result-item .value-sep {
   color: var(--text-muted);
-  margin-top: 2px;
+  font-weight: 600;
 }
 
 .result-total {
@@ -466,6 +465,7 @@ select.form-control {
 .breakdown-list li {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 16px;
   padding: 8px 0;
   border-bottom: 1px dashed var(--border);
@@ -474,6 +474,28 @@ select.form-control {
 
 .breakdown-list li:last-child {
   border-bottom: 0;
+}
+
+.breakdown-list .cost-breakdown {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.breakdown-list .usage {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.breakdown-list .cost {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.breakdown-list .cost-sep {
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 /* ---------- 工具导航页 ---------- */
