@@ -1,9 +1,11 @@
 import {
   calculateMonthlyCost,
   convertCurrency,
+  createComparisonSnapshot,
   estimateDailyUsage,
   formatMoney,
   formatTokens,
+  sortByMonthlyCost,
   toNonNegativeNumber
 } from './token-calc-core.js';
 import { getLang, t } from './i18n.js';
@@ -11,9 +13,11 @@ import { initSite } from './site.js';
 
 const DAYS_PER_MONTH = 30;
 const CUSTOM_MODEL_ID = '__custom__';
+const COMPARISONS_STORAGE_KEY = 'xugtek-token-comparisons';
 
 const elements = {
   modelSelect: document.getElementById('model-select'),
+  modelName: document.getElementById('model-name'),
   priceInput: document.getElementById('price-input'),
   priceCached: document.getElementById('price-cached'),
   priceOutput: document.getElementById('price-output'),
@@ -41,11 +45,17 @@ const elements = {
   breakdownCachedCny: document.getElementById('breakdown-cached-cny'),
   breakdownCachedUsd: document.getElementById('breakdown-cached-usd'),
   breakdownOutputCny: document.getElementById('breakdown-output-cny'),
-  breakdownOutputUsd: document.getElementById('breakdown-output-usd')
+  breakdownOutputUsd: document.getElementById('breakdown-output-usd'),
+  btnPinCompare: document.getElementById('btn-pin-compare'),
+  btnClearCompare: document.getElementById('btn-clear-compare'),
+  compareSection: document.getElementById('compare-section'),
+  compareGrid: document.getElementById('compare-grid')
 };
 
 let models = [];
 let activePriceCurrency = elements.currencySelect.value;
+let comparisons = loadComparisons();
+let lastResult = null;
 
 function locale() {
   return getLang() === 'en' ? 'en-US' : 'zh-CN';
@@ -145,10 +155,12 @@ function applyModelToForm(model) {
 function getCurrentModel() {
   const selectedId = elements.modelSelect.value;
   const model = models.find((item) => item.id === selectedId);
+  const name = elements.modelName.value.trim() || t('modelCustom');
 
   if (model) {
     return {
       ...model,
+      name,
       input: toNonNegativeNumber(elements.priceInput.value),
       cachedInput: toNonNegativeNumber(elements.priceCached.value),
       output: toNonNegativeNumber(elements.priceOutput.value),
@@ -158,7 +170,7 @@ function getCurrentModel() {
 
   return {
     id: CUSTOM_MODEL_ID,
-    name: t('modelCustom'),
+    name,
     provider: '',
     currency: elements.currencySelect.value,
     input: toNonNegativeNumber(elements.priceInput.value),
@@ -264,6 +276,14 @@ function renderCosts() {
   if (usage.input <= 0) {
     const zero = '¥0.00';
     const zeroUsd = '$0.00';
+    lastResult = {
+      modelName: model.name,
+      dailyCny: 0,
+      dailyUsd: 0,
+      monthlyCny: 0,
+      monthlyUsd: 0
+    };
+    elements.btnPinCompare.disabled = true;
     elements.resultDailyCny.textContent = zero;
     elements.resultDailyUsd.textContent = zeroUsd;
     elements.resultMonthlyCny.textContent = zero;
@@ -308,12 +328,121 @@ function renderCosts() {
   elements.usageNormal.textContent = `${formatTokens(cost.normalInput, locale())} M`;
   elements.usageCached.textContent = `${formatTokens(cost.cachedInput, locale())} M`;
   elements.usageOutput.textContent = `${formatTokens(cost.output, locale())} M`;
+
+  lastResult = {
+    modelName: model.name,
+    dailyCny,
+    dailyUsd,
+    monthlyCny,
+    monthlyUsd
+  };
+  elements.btnPinCompare.disabled = false;
+}
+
+function loadComparisons() {
+  try {
+    const raw = localStorage.getItem(COMPARISONS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error('Failed to load comparisons', error);
+    return [];
+  }
+}
+
+function saveComparisons() {
+  try {
+    localStorage.setItem(COMPARISONS_STORAGE_KEY, JSON.stringify(comparisons));
+  } catch (error) {
+    console.error('Failed to save comparisons', error);
+  }
+}
+
+function pinCurrentResult() {
+  if (!lastResult) return;
+  const snapshot = createComparisonSnapshot(lastResult);
+  comparisons = sortByMonthlyCost([...comparisons, snapshot]);
+  saveComparisons();
+  renderComparisons();
+}
+
+function removeComparison(id) {
+  comparisons = comparisons.filter((item) => item.id !== id);
+  saveComparisons();
+  renderComparisons();
+}
+
+function clearAllComparisons() {
+  if (comparisons.length === 0) return;
+  comparisons = [];
+  saveComparisons();
+  renderComparisons();
+}
+
+function renderComparisons() {
+  if (comparisons.length === 0) {
+    elements.compareSection.hidden = true;
+    elements.compareGrid.replaceChildren();
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  comparisons.forEach((entry) => {
+    const card = document.createElement('div');
+    card.className = 'compare-card';
+    card.dataset.id = entry.id;
+
+    const name = document.createElement('div');
+    name.className = 'compare-name';
+    name.textContent = entry.modelName || t('modelCustom');
+
+    const daily = document.createElement('div');
+    daily.className = 'compare-value';
+    daily.append(createValueLine(t('compareDaily'), entry.dailyCny, entry.dailyUsd));
+
+    const monthly = document.createElement('div');
+    monthly.className = 'compare-value';
+    monthly.append(createValueLine(t('compareMonthly'), entry.monthlyCny, entry.monthlyUsd));
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'compare-remove';
+    remove.textContent = '×';
+    remove.setAttribute('aria-label', 'Remove');
+    remove.title = t('clearAll');
+
+    card.append(name, daily, monthly, remove);
+    fragment.appendChild(card);
+  });
+
+  elements.compareGrid.replaceChildren(fragment);
+  elements.compareSection.hidden = false;
+}
+
+function createValueLine(label, cny, usd) {
+  const line = document.createElement('div');
+  const labelSpan = document.createElement('span');
+  labelSpan.textContent = `${label} `;
+  const value = document.createElement('strong');
+  value.textContent = formatMoney(cny, 'CNY', locale());
+  const sep = document.createElement('span');
+  sep.className = 'value-sep';
+  sep.textContent = ' / ';
+  const usdValue = document.createElement('strong');
+  usdValue.textContent = formatMoney(usd, 'USD', locale());
+  line.append(labelSpan, value, sep, usdValue);
+  return line;
 }
 
 function bindEvents() {
   elements.modelSelect.addEventListener('change', () => {
     const model = models.find((item) => item.id === elements.modelSelect.value);
-    if (model) applyModelToForm(model);
+    if (model) {
+      applyModelToForm(model);
+      elements.modelName.value = model.name;
+    } else {
+      elements.modelName.value = '';
+    }
     renderCosts();
   });
 
@@ -336,6 +465,7 @@ function bindEvents() {
   });
 
   [
+    elements.modelName,
     elements.priceInput,
     elements.priceCached,
     elements.priceOutput,
@@ -359,6 +489,16 @@ function bindEvents() {
     });
   });
 
+  elements.btnPinCompare.addEventListener('click', pinCurrentResult);
+  elements.btnClearCompare.addEventListener('click', clearAllComparisons);
+  elements.compareGrid.addEventListener('click', (event) => {
+    const removeBtn = event.target.closest('.compare-remove');
+    if (removeBtn) {
+      const card = removeBtn.closest('.compare-card');
+      if (card) removeComparison(card.dataset.id);
+    }
+  });
+
   bindSliderPair(elements.cacheRate, elements.cacheRateRange);
   bindSliderPair(elements.outputRatio, elements.outputRatioRange);
 }
@@ -378,6 +518,7 @@ async function loadModels() {
   if (models.length > 0) {
     elements.modelSelect.value = models[0].id;
     applyModelToForm(models[0]);
+    elements.modelName.value = models[0].name;
   }
   renderCosts();
   updateEstimateVisibility();
@@ -388,15 +529,20 @@ function init() {
   initSite();
   setDocumentLanguage();
   bindEvents();
+  elements.btnPinCompare.disabled = true;
+  renderComparisons();
 
   document.addEventListener('xugtek:langchange', () => {
     const previousSelection = elements.modelSelect.value;
+    const modelName = elements.modelName.value;
     setDocumentLanguage();
     fillModelSelect();
     elements.modelSelect.value = previousSelection;
     const model = models.find((item) => item.id === previousSelection);
     if (model) applyModelToForm(model);
+    elements.modelName.value = modelName;
     renderCosts();
+    renderComparisons();
     updateEstimateVisibility();
     updateEstimateHints();
   });

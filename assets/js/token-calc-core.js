@@ -96,3 +96,28 @@ export function formatMoney(amount, currency, locale = 'zh-CN') {
 export function formatTokens(value, locale = 'zh-CN') {
   return toNonNegativeNumber(value).toLocaleString(locale);
 }
+
+/**
+ * Create a comparison snapshot capturing the current calculation result.
+ * Stores raw numeric values (not pre-formatted strings) so sorting and
+ * re-rendering under a different locale work correctly.
+ */
+export function createComparisonSnapshot({ modelName, dailyCny, dailyUsd, monthlyCny, monthlyUsd }) {
+  return {
+    id: `cmp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    modelName: String(modelName || '').trim(),
+    dailyCny: toNonNegativeNumber(dailyCny),
+    dailyUsd: toNonNegativeNumber(dailyUsd),
+    monthlyCny: toNonNegativeNumber(monthlyCny),
+    monthlyUsd: toNonNegativeNumber(monthlyUsd),
+    createdAt: Date.now()
+  };
+}
+
+/**
+ * Return a new array sorted by monthly cost (CNY) ascending.
+ * The input array is not mutated.
+ */
+export function sortByMonthlyCost(items) {
+  return [...items].sort((a, b) => a.monthlyCny - b.monthlyCny);
+}

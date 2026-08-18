@@ -16,7 +16,10 @@ const translations = {
     pageTitle: 'Token费用计算器',
     backHome: '返回首页',
     modelLabel: '模型',
-    modelCustom: '自定义模型',
+    providerLabel: '提供商',
+    modelNameLabel: '模型',
+    modelNamePlaceholder: '输入模型名称',
+    modelCustom: '自定义',
     priceSection: '价格设置（每 M Tokens）',
     inputPriceLabel: '普通输入价',
     cachedInputPriceLabel: '缓存输入价',
@@ -43,7 +46,12 @@ const translations = {
     outputEstimateHint: '输出为空，按 {ratio}% 输出比例估算',
     invalidInput: '请输入有效的 Token 数量',
     customModelName: '自定义模型',
-    modelSourceNote: '价格仅供参考，请以官方最新价格为准。'
+    modelSourceNote: '价格仅供参考，请以官方最新价格为准。',
+    pinToCompare: '加入对比',
+    compareSection: '对比',
+    clearAll: '全部清除',
+    compareDaily: '每日',
+    compareMonthly: '每月'
   },
   en: {
     siteName: 'xugtek',
@@ -60,7 +68,10 @@ const translations = {
     pageTitle: 'Token Cost Calculator',
     backHome: 'Back to home',
     modelLabel: 'Model',
-    modelCustom: 'Custom model',
+    providerLabel: 'Provider',
+    modelNameLabel: 'Model',
+    modelNamePlaceholder: 'Enter model name',
+    modelCustom: 'Custom',
     priceSection: 'Pricing (per M tokens)',
     inputPriceLabel: 'Input price',
     cachedInputPriceLabel: 'Cached input price',
@@ -87,7 +98,12 @@ const translations = {
     outputEstimateHint: 'Output empty: estimated at {ratio}% output ratio',
     invalidInput: 'Please enter valid token counts',
     customModelName: 'Custom model',
-    modelSourceNote: 'Prices are for reference only; always check the latest official pricing.'
+    modelSourceNote: 'Prices are for reference only; always check the latest official pricing.',
+    pinToCompare: 'Add to compare',
+    compareSection: 'Comparison',
+    clearAll: 'Clear all',
+    compareDaily: 'Daily',
+    compareMonthly: 'Monthly'
   }
 };
 
@@ -161,6 +177,8 @@ function closeLangMenu() {
   document.querySelectorAll('.lang-switch.open').forEach((el) => {
     el.classList.remove('open');
   });
+  const active = document.activeElement;
+  if (active && active.closest && active.closest('.lang-switch')) active.blur();
 }
 
 export function setLang(lang) {
