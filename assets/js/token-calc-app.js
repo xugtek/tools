@@ -58,6 +58,22 @@ function isBlankOrZero(value) {
   return Number.isFinite(n) && n === 0;
 }
 
+/**
+ * Round a converted unit price to a sensible precision based on its magnitude.
+ * Larger values need fewer decimals; tiny values keep more so they stay useful.
+ */
+function roundAdaptive(value) {
+  const v = toNonNegativeNumber(value);
+  if (v === 0) return 0;
+  let digits;
+  if (v >= 100) digits = 0;
+  else if (v >= 10) digits = 1;
+  else if (v >= 1) digits = 2;
+  else if (v >= 0.1) digits = 3;
+  else digits = 4;
+  return Number(v.toFixed(digits));
+}
+
 function setDocumentLanguage() {
   document.title = `${t('pageTitle')} - ${t('siteName')}`;
   const meta = document.querySelector('meta[name="description"]');
@@ -108,9 +124,9 @@ function getModelPriceInCurrency(model, currency, rate) {
   const base = prices[baseCurrency] || { input: 0, cachedInput: 0, output: 0 };
 
   return {
-    input: convertCurrency(base.input, baseCurrency, currency, rate),
-    cachedInput: convertCurrency(base.cachedInput ?? base.input, baseCurrency, currency, rate),
-    output: convertCurrency(base.output, baseCurrency, currency, rate)
+    input: roundAdaptive(convertCurrency(base.input, baseCurrency, currency, rate)),
+    cachedInput: roundAdaptive(convertCurrency(base.cachedInput ?? base.input, baseCurrency, currency, rate)),
+    output: roundAdaptive(convertCurrency(base.output, baseCurrency, currency, rate))
   };
 }
 
@@ -310,9 +326,9 @@ function bindEvents() {
     if (model) {
       applyModelToForm(model);
     } else if (oldCurrency !== newCurrency) {
-      elements.priceInput.value = convertCurrency(elements.priceInput.value, oldCurrency, newCurrency, rate);
-      elements.priceCached.value = convertCurrency(elements.priceCached.value, oldCurrency, newCurrency, rate);
-      elements.priceOutput.value = convertCurrency(elements.priceOutput.value, oldCurrency, newCurrency, rate);
+      elements.priceInput.value = roundAdaptive(convertCurrency(elements.priceInput.value, oldCurrency, newCurrency, rate));
+      elements.priceCached.value = roundAdaptive(convertCurrency(elements.priceCached.value, oldCurrency, newCurrency, rate));
+      elements.priceOutput.value = roundAdaptive(convertCurrency(elements.priceOutput.value, oldCurrency, newCurrency, rate));
       activePriceCurrency = newCurrency;
     }
 
