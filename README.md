@@ -91,12 +91,12 @@ npm test
 
 1. 在 GitHub 创建公开仓库，并将代码推送至 `main` 分支
 2. 在仓库 Settings → Pages 中选择 `Deploy from a branch`，分支选 `main`，目录选 `/（root）`
-3. 如使用自定义域名 `tool.xugtek.com`，在仓库 Settings → Pages 中填写 Custom domain，并在 DNS 添加对应记录
+3. 如使用自定义域名 `tools.xugtek.com`，在仓库 Settings → Pages 中填写 Custom domain，并在 DNS 添加对应记录
 
 部署后建议：
 
 - 在 GitHub Pages 设置中开启 HTTPS
-- 根据实际域名更新 `sitemap.xml`、canonical 与 hreflang 中的 URL（当前为 `https://tool.xugtek.com`）
+- 根据实际域名更新 `sitemap.xml`、canonical 与 hreflang 中的 URL（当前为 `https://tools.xugtek.com`）
 
 ## SEO / GEO
 
