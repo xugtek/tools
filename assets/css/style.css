@@ -367,17 +367,6 @@ html[data-theme="dark"] .icon-sun {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-input[type='number'] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 select.form-control {
   cursor: pointer;
 }

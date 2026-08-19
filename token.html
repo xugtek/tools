@@ -65,15 +65,15 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="price-input" data-i18n="inputPriceLabel">普通输入价</label>
-            <input id="price-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
+            <input id="price-input" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
           <div class="form-group">
             <label for="price-cached" data-i18n="cachedInputPriceLabel">缓存输入价</label>
-            <input id="price-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
+            <input id="price-cached" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
           <div class="form-group">
             <label for="price-output" data-i18n="outputPriceLabel">输出价</label>
-            <input id="price-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
+            <input id="price-output" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
           <div class="form-group">
             <label for="currency-select" data-i18n="currencyLabel">计价币种</label>
@@ -84,7 +84,7 @@
           </div>
           <div class="form-group">
             <label for="exchange-rate" data-i18n="exchangeRateLabel">汇率（1 USD = ? CNY）</label>
-            <input id="exchange-rate" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" value="7.2">
+            <input id="exchange-rate" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" value="7.2">
           </div>
         </div>
         <p class="note" data-i18n="modelSourceNote">价格仅供参考，请以官方最新价格为准。</p>
@@ -95,15 +95,15 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="daily-input" data-i18n="dailyInputLabel">输入</label>
-            <input id="daily-input" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="1.0">
+            <input id="daily-input" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" placeholder="1.0">
           </div>
           <div class="form-group">
             <label for="daily-cached" data-i18n="dailyCachedLabel">缓存命中</label>
-            <input id="daily-cached" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
+            <input id="daily-cached" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
           <div class="form-group">
             <label for="daily-output" data-i18n="dailyOutputLabel">输出</label>
-            <input id="daily-output" class="form-control" type="number" min="0" step="0.0001" inputmode="decimal">
+            <input id="daily-output" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
         </div>
       </section>
@@ -115,7 +115,7 @@
             <label for="cache-rate" data-i18n="cacheHitRateLabel">缓存命中率</label>
             <div class="range-row">
               <input id="cache-rate-range" class="range-slider" type="range" min="0" max="100" step="1" value="90">
-              <input id="cache-rate" class="form-control range-value" type="number" min="0" max="100" step="1" inputmode="numeric" value="90">
+              <input id="cache-rate" class="form-control range-value" type="text" inputmode="numeric" pattern="[0-9]*" value="90">
               <span>%</span>
             </div>
           </div>
@@ -123,7 +123,7 @@
             <label for="output-ratio" data-i18n="outputRatioLabel">输出 / 输入比例</label>
             <div class="range-row">
               <input id="output-ratio-range" class="range-slider" type="range" min="0" max="100" step="1" value="5">
-              <input id="output-ratio" class="form-control range-value" type="number" min="0" max="1000" step="1" inputmode="numeric" value="5">
+              <input id="output-ratio" class="form-control range-value" type="text" inputmode="numeric" pattern="[0-9]*" value="5">
               <span>%</span>
             </div>
           </div>

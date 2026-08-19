@@ -511,6 +511,23 @@ function bindEvents() {
 
   bindSliderPair(elements.cacheRate, elements.cacheRateRange);
   bindSliderPair(elements.outputRatio, elements.outputRatioRange);
+
+document.querySelectorAll('input[type="text"][inputmode]').forEach((input) => {
+    input.addEventListener('input', () => {
+      let normalized = input.value.replace(/[^\d.]/g, '');
+      const firstDot = normalized.indexOf('.');
+      if (firstDot !== -1) {
+        normalized = normalized.slice(0, firstDot + 1) + normalized.slice(firstDot + 1).replace(/\./g, '');
+      }
+      if (normalized.startsWith('.')) normalized = `0${normalized}`;
+      if (input.value !== normalized) {
+        input.value = normalized;
+        renderCosts();
+        updateEstimateVisibility();
+        updateEstimateHints();
+      }
+    });
+  });
 }
 
 async function loadModels() {
