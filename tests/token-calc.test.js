@@ -4,9 +4,11 @@ import assert from 'node:assert/strict';
 import {
   calculateMonthlyCost,
   convertCurrency,
+  createComparisonSnapshot,
   estimateDailyUsage,
   formatMoney,
   normalizeRate,
+  sortByMonthlyCost,
   toNonNegativeNumber
 } from '../assets/js/token-calc-core.js';
 
@@ -129,4 +131,58 @@ test('toNonNegativeNumber ignores invalid values', () => {
   assert.equal(toNonNegativeNumber('abc'), 0);
   assert.equal(toNonNegativeNumber(-5), 0);
   assert.equal(toNonNegativeNumber('12'), 12);
+});
+
+test('createComparisonSnapshot builds a complete snapshot', () => {
+  const snapshot = createComparisonSnapshot({
+    modelName: '  Kimi K3  ',
+    inputM: 10,
+    cachedInputM: 9,
+    outputM: 0.5,
+    dailyCny: 12.34,
+    dailyUsd: 1.71,
+    monthlyCny: 370.2,
+    monthlyUsd: 51.3
+  });
+
+  assert.match(snapshot.id, /^cmp-/);
+  assert.equal(snapshot.modelName, 'Kimi K3');
+  assert.equal(snapshot.inputM, 10);
+  assert.equal(snapshot.cachedInputM, 9);
+  assert.equal(snapshot.outputM, 0.5);
+  assert.equal(snapshot.dailyCny, 12.34);
+  assert.equal(snapshot.dailyUsd, 1.71);
+  assert.equal(snapshot.monthlyCny, 370.2);
+  assert.equal(snapshot.monthlyUsd, 51.3);
+  assert.equal(typeof snapshot.createdAt, 'number');
+});
+
+test('createComparisonSnapshot generates unique ids and sanitizes values', () => {
+  const a = createComparisonSnapshot({ modelName: 'A', monthlyCny: 1 });
+  const b = createComparisonSnapshot({ modelName: 'B', monthlyCny: 1 });
+  assert.notEqual(a.id, b.id);
+
+  const bad = createComparisonSnapshot({
+    modelName: '', inputM: -3, cachedInputM: 'x', outputM: NaN, dailyCny: -5, dailyUsd: 'x', monthlyCny: NaN, monthlyUsd: undefined
+  });
+  assert.equal(bad.modelName, '');
+  assert.equal(bad.inputM, 0);
+  assert.equal(bad.cachedInputM, 0);
+  assert.equal(bad.outputM, 0);
+  assert.equal(bad.dailyCny, 0);
+  assert.equal(bad.dailyUsd, 0);
+  assert.equal(bad.monthlyCny, 0);
+  assert.equal(bad.monthlyUsd, 0);
+});
+
+test('sortByMonthlyCost sorts ascending and returns a new array', () => {
+  const items = [
+    { monthlyCny: 300 },
+    { monthlyCny: 100 },
+    { monthlyCny: 200 }
+  ];
+
+  const sorted = sortByMonthlyCost(items);
+  assert.deepEqual(sorted.map((i) => i.monthlyCny), [100, 200, 300]);
+  assert.deepEqual(items.map((i) => i.monthlyCny), [300, 100, 200]);
 });

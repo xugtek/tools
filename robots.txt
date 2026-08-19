@@ -31,4 +31,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://tool.xugtek.com/sitemap.xml
+Sitemap: https://tools.xugtek.com/sitemap.xml

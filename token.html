@@ -6,10 +6,10 @@
   <title>Token费用计算器 - xugtek</title>
   <meta name="description" content="估算每日和每月 Token API 费用，支持人民币/美元双货币、缓存命中与用量估算。">
   <link rel="icon" href="assets/icons/brand.svg" type="image/svg+xml">
-  <link rel="canonical" href="https://tool.xugtek.com/token.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://tool.xugtek.com/token.html">
-  <link rel="alternate" hreflang="en" href="https://tool.xugtek.com/token.html">
-  <link rel="alternate" hreflang="x-default" href="https://tool.xugtek.com/token.html">
+  <link rel="canonical" href="https://tools.xugtek.com/token.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://tools.xugtek.com/token.html">
+  <link rel="alternate" hreflang="en" href="https://tools.xugtek.com/token.html">
+  <link rel="alternate" hreflang="x-default" href="https://tools.xugtek.com/token.html">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -50,8 +50,12 @@
         <h2 id="model-section-title" class="section-title" data-i18n="modelLabel">模型</h2>
         <div class="form-grid">
           <div class="form-group">
-            <label for="model-select" data-i18n="modelLabel">模型</label>
+            <label for="model-select" data-i18n="providerLabel">提供商</label>
             <select id="model-select" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label for="model-name" data-i18n="modelNameLabel">模型</label>
+            <input id="model-name" class="form-control" type="text" maxlength="50" data-i18n-placeholder="modelNamePlaceholder">
           </div>
         </div>
       </section>
@@ -135,7 +139,7 @@
               <span id="result-daily-cny">¥0.00</span><span class="value-sep"> / </span><span id="result-daily-usd">$0.00</span>
             </div>
           </div>
-          <div class="result-item result-total">
+          <div class="result-item">
             <div class="label" data-i18n="monthlyCostLabel">每月费用（30 天）</div>
             <div class="value">
               <span id="result-monthly-cny">¥0.00</span><span class="value-sep"> / </span><span id="result-monthly-usd">$0.00</span>
@@ -163,6 +167,18 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="result-actions">
+          <button type="button" id="btn-pin-compare" class="btn btn-secondary" data-i18n="pinToCompare">固定到对比</button>
+        </div>
+      </section>
+
+      <section class="card" id="compare-section" hidden aria-labelledby="compare-title">
+        <div class="compare-header">
+          <h2 id="compare-title" class="section-title" data-i18n="compareSection">对比</h2>
+          <button type="button" id="btn-clear-compare" class="btn btn-ghost" data-i18n="clearAll">全部清除</button>
+        </div>
+        <div class="compare-grid" id="compare-grid"></div>
       </section>
     </div>
   </main>
