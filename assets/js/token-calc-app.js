@@ -30,6 +30,7 @@ const elements = {
   outputRatio: document.getElementById('output-ratio'),
   outputRatioRange: document.getElementById('output-ratio-range'),
   exchangeRate: document.getElementById('exchange-rate'),
+  monthDays: document.getElementById('month-days'),
   estimateSection: document.getElementById('estimate-section'),
   cacheEstimateControl: document.getElementById('cache-estimate-control'),
   outputEstimateControl: document.getElementById('output-estimate-control'),
@@ -241,14 +242,21 @@ function bindSliderPair(numberEl, rangeEl) {
   });
 }
 
-function getUsdCosts(cost, usage, model, rate) {
+function getMonthDays() {
+  const raw = elements.monthDays.value.trim();
+  const parsed = Math.floor(Number(raw));
+  if (raw === '' || !Number.isFinite(parsed) || parsed < 1) return DAYS_PER_MONTH;
+  return Math.min(parsed, 31);
+}
+
+function getUsdCosts(cost, usage, model, rate, days) {
   const usdPrices = (model.prices || {}).USD;
   if (usdPrices) {
     const usdCost = calculateMonthlyCost(usage, {
       input: usdPrices.input,
       cachedInput: usdPrices.cachedInput ?? usdPrices.input,
       output: usdPrices.output
-    }, { days: DAYS_PER_MONTH });
+    }, { days });
 
     return {
       daily: usdCost.dailyCost,
@@ -272,6 +280,7 @@ function renderCosts() {
   const model = getCurrentModel();
   const usage = getEstimatedUsage();
   const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
+  const days = getMonthDays();
 
   if (usage.input <= 0) {
     const zero = '¥0.00';
@@ -303,8 +312,8 @@ function renderCosts() {
     return;
   }
 
-  const cost = calculateMonthlyCost(usage, model, { days: DAYS_PER_MONTH });
-  const usdCosts = getUsdCosts(cost, usage, model, rate);
+  const cost = calculateMonthlyCost(usage, model, { days });
+  const usdCosts = getUsdCosts(cost, usage, model, rate, days);
 
   const dailyCny = convertCurrency(cost.dailyCost, model.currency, 'CNY', rate);
   const dailyUsd = usdCosts.daily;
@@ -485,7 +494,8 @@ function bindEvents() {
     elements.dailyOutput,
     elements.cacheRate,
     elements.outputRatio,
-    elements.exchangeRate
+    elements.exchangeRate,
+    elements.monthDays
   ].forEach((el) => {
     el.addEventListener('input', () => {
       renderCosts();
@@ -507,6 +517,12 @@ function bindEvents() {
       const card = removeBtn.closest('.compare-card');
       if (card) removeComparison(card.dataset.id);
     }
+  });
+
+  document.addEventListener('xugtek:langchange', () => {
+    renderCosts();
+    updateEstimateVisibility();
+    updateEstimateHints();
   });
 
   bindSliderPair(elements.cacheRate, elements.cacheRateRange);

@@ -344,6 +344,25 @@ html[data-theme="dark"] .icon-sun {
   gap: 6px;
 }
 
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+#price-section .form-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.form-group-month {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  max-width: 314px;
+}
+
+#estimate-section .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+}
+
 .form-group label {
   font-size: 13px;
   color: var(--text-muted);
@@ -740,6 +759,14 @@ footer {
 
   .compare-grid {
     grid-template-columns: 1fr;
+  }
+
+  #estimate-section .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #estimate-section .form-group-month {
+    max-width: none;
   }
 
   .nav-links {
