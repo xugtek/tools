@@ -8,7 +8,9 @@ import {
   estimateDailyUsage,
   formatMoney,
   normalizeRate,
+  seedPriceDrafts,
   sortByMonthlyCost,
+  switchPriceDraft,
   toNonNegativeNumber
 } from '../assets/js/token-calc-core.js';
 
@@ -173,6 +175,65 @@ test('createComparisonSnapshot generates unique ids and sanitizes values', () =>
   assert.equal(bad.dailyUsd, 0);
   assert.equal(bad.monthlyCny, 0);
   assert.equal(bad.monthlyUsd, 0);
+});
+
+test('seedPriceDrafts keeps official CNY and USD prices independent', () => {
+  const drafts = seedPriceDrafts({
+    CNY: { input: 20, cachedInput: 2, output: 100 },
+    USD: { input: 3, cachedInput: 0.3, output: 15 }
+  }, 7.2);
+
+  assert.deepEqual(drafts.CNY, { input: 20, cachedInput: 2, output: 100 });
+  assert.deepEqual(drafts.USD, { input: 3, cachedInput: 0.3, output: 15 });
+});
+
+test('seedPriceDrafts converts only the missing currency', () => {
+  const drafts = seedPriceDrafts({
+    CNY: { input: 72, cachedInput: 7.2, output: 144 }
+  }, 7.2);
+
+  assert.deepEqual(drafts.CNY, { input: 72, cachedInput: 7.2, output: 144 });
+  assert.deepEqual(drafts.USD, { input: 10, cachedInput: 1, output: 20 });
+});
+
+test('switchPriceDraft restores the original currency instead of converting back', () => {
+  const seeded = seedPriceDrafts({
+    CNY: { input: 20, cachedInput: 2, output: 100 },
+    USD: { input: 3, cachedInput: 0.3, output: 15 }
+  }, 7.2);
+
+  const afterCnyEdit = switchPriceDraft(
+    seeded,
+    'CNY',
+    'USD',
+    { input: 50, cachedInput: 5, output: 200 },
+    7.2
+  );
+  assert.deepEqual(afterCnyEdit.prices, { input: 3, cachedInput: 0.3, output: 15 });
+  assert.deepEqual(afterCnyEdit.drafts.CNY, { input: 50, cachedInput: 5, output: 200 });
+
+  const backToCny = switchPriceDraft(
+    afterCnyEdit.drafts,
+    'USD',
+    'CNY',
+    { input: 9, cachedInput: 0.9, output: 45 },
+    7.2
+  );
+  assert.deepEqual(backToCny.prices, { input: 50, cachedInput: 5, output: 200 });
+  assert.deepEqual(backToCny.drafts.USD, { input: 9, cachedInput: 0.9, output: 45 });
+});
+
+test('switchPriceDraft converts only when the target currency has no draft', () => {
+  const switched = switchPriceDraft(
+    { CNY: null, USD: null },
+    'CNY',
+    'USD',
+    { input: 72, cachedInput: 7.2, output: 144 },
+    7.2
+  );
+
+  assert.deepEqual(switched.drafts.CNY, { input: 72, cachedInput: 7.2, output: 144 });
+  assert.deepEqual(switched.prices, { input: 10, cachedInput: 1, output: 20 });
 });
 
 test('sortByMonthlyCost sorts ascending and returns a new array', () => {

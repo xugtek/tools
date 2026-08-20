@@ -1,11 +1,14 @@
 import {
   calculateMonthlyCost,
   convertCurrency,
+  convertPriceTriple,
   createComparisonSnapshot,
   estimateDailyUsage,
   formatMoney,
   formatTokens,
+  seedPriceDrafts,
   sortByMonthlyCost,
+  switchPriceDraft,
   toNonNegativeNumber
 } from './token-calc-core.js';
 import { getLang, t } from './i18n.js';
@@ -55,6 +58,7 @@ const elements = {
 
 let models = [];
 let activePriceCurrency = elements.currencySelect.value;
+let priceDrafts = { CNY: null, USD: null };
 let comparisons = loadComparisons();
 let lastResult = null;
 
@@ -69,20 +73,22 @@ function isBlankOrZero(value) {
   return Number.isFinite(n) && n === 0;
 }
 
-/**
- * Round a converted unit price to a sensible precision based on its magnitude.
- * Larger values need fewer decimals; tiny values keep more so they stay useful.
- */
-function roundAdaptive(value) {
-  const v = toNonNegativeNumber(value);
-  if (v === 0) return 0;
-  let digits;
-  if (v >= 100) digits = 0;
-  else if (v >= 10) digits = 1;
-  else if (v >= 1) digits = 2;
-  else if (v >= 0.1) digits = 3;
-  else digits = 4;
-  return Number(v.toFixed(digits));
+function readFormPrices() {
+  return {
+    input: elements.priceInput.value,
+    cachedInput: elements.priceCached.value,
+    output: elements.priceOutput.value
+  };
+}
+
+function writeFormPrices(prices) {
+  elements.priceInput.value = prices.input;
+  elements.priceCached.value = prices.cachedInput;
+  elements.priceOutput.value = prices.output;
+}
+
+function saveCurrentPriceDraft() {
+  priceDrafts[activePriceCurrency] = readFormPrices();
 }
 
 function setDocumentLanguage() {
@@ -120,7 +126,6 @@ function getNativeCurrency() {
 function getModelPriceInCurrency(model, currency, rate) {
   const prices = model.prices || {};
 
-  // Prefer the official price in the requested currency when available.
   if (prices[currency]) {
     return {
       input: prices[currency].input,
@@ -129,26 +134,23 @@ function getModelPriceInCurrency(model, currency, rate) {
     };
   }
 
-  // Otherwise convert from the language-native currency if present, else any listed currency.
   const native = getNativeCurrency();
   const baseCurrency = prices[native] ? native : Object.keys(prices)[0];
   const base = prices[baseCurrency] || { input: 0, cachedInput: 0, output: 0 };
 
-  return {
-    input: roundAdaptive(convertCurrency(base.input, baseCurrency, currency, rate)),
-    cachedInput: roundAdaptive(convertCurrency(base.cachedInput ?? base.input, baseCurrency, currency, rate)),
-    output: roundAdaptive(convertCurrency(base.output, baseCurrency, currency, rate))
-  };
+  return convertPriceTriple({
+    input: base.input,
+    cachedInput: base.cachedInput ?? base.input,
+    output: base.output
+  }, baseCurrency, currency, rate);
 }
 
 function applyModelToForm(model) {
   const currency = elements.currencySelect.value;
   const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
-  const prices = getModelPriceInCurrency(model, currency, rate);
-
-  elements.priceInput.value = prices.input;
-  elements.priceCached.value = prices.cachedInput;
-  elements.priceOutput.value = prices.output;
+  priceDrafts = seedPriceDrafts(model.prices, rate);
+  const prices = priceDrafts[currency] || getModelPriceInCurrency(model, currency, rate);
+  writeFormPrices(prices);
   elements.currencySelect.value = currency;
   activePriceCurrency = currency;
 }
@@ -460,6 +462,7 @@ function bindEvents() {
       applyModelToForm(model);
       elements.modelName.value = model.name;
     } else {
+      saveCurrentPriceDraft();
       elements.modelName.value = '';
     }
     renderCosts();
@@ -468,19 +471,21 @@ function bindEvents() {
   elements.currencySelect.addEventListener('change', () => {
     const newCurrency = elements.currencySelect.value;
     const oldCurrency = activePriceCurrency;
-    const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
-    const model = models.find((item) => item.id === elements.modelSelect.value);
-
-    if (model) {
-      applyModelToForm(model);
-    } else if (oldCurrency !== newCurrency) {
-      elements.priceInput.value = roundAdaptive(convertCurrency(elements.priceInput.value, oldCurrency, newCurrency, rate));
-      elements.priceCached.value = roundAdaptive(convertCurrency(elements.priceCached.value, oldCurrency, newCurrency, rate));
-      elements.priceOutput.value = roundAdaptive(convertCurrency(elements.priceOutput.value, oldCurrency, newCurrency, rate));
-      activePriceCurrency = newCurrency;
+    if (oldCurrency === newCurrency) {
+      renderCosts();
+      return;
     }
 
+    const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
+    const switched = switchPriceDraft(priceDrafts, oldCurrency, newCurrency, readFormPrices(), rate);
+    priceDrafts = switched.drafts;
+    writeFormPrices(switched.prices);
+    activePriceCurrency = newCurrency;
     renderCosts();
+  });
+
+  [elements.priceInput, elements.priceCached, elements.priceOutput].forEach((el) => {
+    el.addEventListener('input', saveCurrentPriceDraft);
   });
 
   [
@@ -538,6 +543,9 @@ document.querySelectorAll('input[type="text"][inputmode]').forEach((input) => {
       if (normalized.startsWith('.')) normalized = `0${normalized}`;
       if (input.value !== normalized) {
         input.value = normalized;
+        if (input === elements.priceInput || input === elements.priceCached || input === elements.priceOutput) {
+          saveCurrentPriceDraft();
+        }
         renderCosts();
         updateEstimateVisibility();
         updateEstimateHints();

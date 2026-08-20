@@ -84,6 +84,75 @@ export function convertCurrency(amount, fromCurrency, toCurrency, usdCnyRate = 7
   return value;
 }
 
+export function roundAdaptivePrice(value) {
+  const v = toNonNegativeNumber(value);
+  if (v === 0) return 0;
+  let digits;
+  if (v >= 100) digits = 0;
+  else if (v >= 10) digits = 1;
+  else if (v >= 1) digits = 2;
+  else if (v >= 0.1) digits = 3;
+  else digits = 4;
+  return Number(v.toFixed(digits));
+}
+
+function clonePriceTriple(prices) {
+  return {
+    input: prices.input,
+    cachedInput: prices.cachedInput,
+    output: prices.output
+  };
+}
+
+export function convertPriceTriple(prices, fromCurrency, toCurrency, usdCnyRate = 7.2) {
+  return {
+    input: roundAdaptivePrice(convertCurrency(prices.input, fromCurrency, toCurrency, usdCnyRate)),
+    cachedInput: roundAdaptivePrice(convertCurrency(prices.cachedInput, fromCurrency, toCurrency, usdCnyRate)),
+    output: roundAdaptivePrice(convertCurrency(prices.output, fromCurrency, toCurrency, usdCnyRate))
+  };
+}
+
+function officialPriceTriple(entry) {
+  if (!entry) return null;
+  return {
+    input: entry.input,
+    cachedInput: entry.cachedInput ?? entry.input,
+    output: entry.output
+  };
+}
+
+export function seedPriceDrafts(modelPrices, usdCnyRate = 7.2) {
+  const drafts = { CNY: officialPriceTriple(modelPrices?.CNY), USD: officialPriceTriple(modelPrices?.USD) };
+  const present = drafts.CNY ? 'CNY' : drafts.USD ? 'USD' : null;
+  if (present) {
+    for (const currency of ['CNY', 'USD']) {
+      if (!drafts[currency]) {
+        drafts[currency] = convertPriceTriple(drafts[present], present, currency, usdCnyRate);
+      }
+    }
+  }
+  return drafts;
+}
+
+export function switchPriceDraft(drafts, fromCurrency, toCurrency, currentPrices, usdCnyRate = 7.2) {
+  const next = {
+    CNY: drafts?.CNY ? clonePriceTriple(drafts.CNY) : null,
+    USD: drafts?.USD ? clonePriceTriple(drafts.USD) : null
+  };
+
+  if (fromCurrency && fromCurrency !== toCurrency) {
+    next[fromCurrency] = clonePriceTriple(currentPrices);
+  }
+
+  if (!next[toCurrency]) {
+    next[toCurrency] = fromCurrency === toCurrency
+      ? clonePriceTriple(currentPrices)
+      : convertPriceTriple(currentPrices, fromCurrency, toCurrency, usdCnyRate);
+  }
+
+  return { drafts: next, prices: next[toCurrency] };
+}
+
 export function formatMoney(amount, currency, locale = 'zh-CN') {
   const symbol = currency === 'CNY' ? '¥' : '$';
   const value = toNonNegativeNumber(amount);
