@@ -383,7 +383,6 @@ html[data-theme="dark"] .icon-sun {
 .form-control:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 select.form-control {
