@@ -1,58 +1,26 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light" data-static-lang="zh-CN">
+<html lang="en" data-theme="light" data-static-lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>xugtek - 实用在线工具 | 免费Token费用计算器</title>
-  <meta name="description" content="xugtek：轻量、快速、实用的在线工具集合，提供免费的 Token/API 费用计算器，支持 DeepSeek、Kimi、Qwen、GLM 等大模型价格估算。">
-  <link rel="icon" href="assets/icons/brand.svg" type="image/svg+xml">
-  <link rel="canonical" href="https://tools.xugtek.com/">
+  <title>xugtek – Useful Online Tools | Free Token Cost Calculator</title>
+  <meta name="description" content="xugtek: lightweight, fast and practical online tools, featuring a free token/API cost calculator covering DeepSeek, Kimi, Qwen and GLM pricing.">
+  <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://tools.xugtek.com/en/">
   <link rel="alternate" hreflang="zh-CN" href="https://tools.xugtek.com/">
   <link rel="alternate" hreflang="en" href="https://tools.xugtek.com/en/">
   <link rel="alternate" hreflang="x-default" href="https://tools.xugtek.com/en/">
-  <link rel="stylesheet" href="assets/css/style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://tools.xugtek.com/#website",
-      "url": "https://tools.xugtek.com/",
-      "name": "xugtek",
-      "description": "轻量、快速、实用的在线工具集合",
-      "inLanguage": "zh-CN",
-      "publisher": { "@id": "https://tools.xugtek.com/#organization" }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://tools.xugtek.com/#organization",
-      "name": "xugtek",
-      "url": "https://tools.xugtek.com/",
-      "logo": "https://tools.xugtek.com/assets/icons/brand.svg"
-    }
-  ]
-}
-</script>
-<script>
-  (function () {
-    try {
-      var t = localStorage.getItem('xugtek-theme');
-      var d = t || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', d);
-    } catch (e) {}
-  })();
-</script>
+  <link rel="stylesheet" href="../assets/css/style.css">
 <style>html.i18n-wait body { visibility: hidden; }</style>
 <script>
   (function () {
     try {
       var ALT = {
-        "en": {
-                "title": "xugtek – Useful Online Tools | Free Token Cost Calculator",
-                "description": "xugtek: lightweight, fast and practical online tools, featuring a free token/API cost calculator covering DeepSeek, Kimi, Qwen and GLM pricing."
+        "zh-CN": {
+          "title": "xugtek - 实用在线工具 | 免费Token费用计算器",
+          "description": "xugtek：轻量、快速、实用的在线工具集合，提供免费的 Token/API 费用计算器，支持 DeepSeek、Kimi、Qwen、GLM 等大模型价格估算。"
         }
-};
+      };
       var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
       var nav = navigator.language || navigator.userLanguage || '';
@@ -69,11 +37,20 @@
       }
     } catch (e) {}
   })();
+</script>
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('xugtek-theme');
+      var d = t || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', d);
+    } catch (e) {}
+  })();
 </script></head>
 <body>
   <nav class="nav" aria-label="Tools">
     <div class="nav-inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="./">
         <span class="brand-mark" role="img" aria-label="xugtek"></span>
         <span data-i18n="siteName">xugtek</span>
       </a>
@@ -83,11 +60,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </button>
           <ul class="lang-switch-list" role="listbox" aria-label="Language / 语言">
-            <li><a data-lang="zh-CN" class="current" href="./">简体中文</a></li>
-            <li><a data-lang="en" href="en/">English</a></li>
+            <li><a data-lang="zh-CN" href="../">简体中文</a></li>
+            <li><a data-lang="en" class="current" href="./">English</a></li>
           </ul>
         </div>
-        <button type="button" class="theme-toggle" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">
+        <button type="button" class="theme-toggle" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="Toggle theme" aria-label="Toggle theme">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </button>
@@ -98,21 +75,21 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1 data-i18n="heroTitle">实用在线工具</h1>
-        <p data-i18n="heroSubtitle">轻量、快速、实用的在线工具集合</p>
+        <h1 data-i18n="heroTitle">Useful Online Tools</h1>
+        <p data-i18n="heroSubtitle">Lightweight, fast and practical online tools</p>
       </div>
     </section>
 
     <section class="container" aria-label="Tools">
       <div class="tool-grid">
-        <a class="tool-card" href="token/">
-          <h3 data-i18n="tokenToolName">Token费用计算器</h3>
-          <p data-i18n="tokenToolDesc">估算每日/每月 Token 费用，比较人民币与美元价格</p>
-          <span class="hint" data-i18n="openTool">打开工具</span>
+        <a class="tool-card" href="../token/en.html">
+          <h3 data-i18n="tokenToolName">Token Cost Calculator</h3>
+          <p data-i18n="tokenToolDesc">Estimate daily and monthly token costs, compare CNY and USD pricing</p>
+          <span class="hint" data-i18n="openTool">Open tool</span>
         </a>
       </div>
 
-      <div class="coming-soon" data-i18n="comingSoon">更多工具即将上线</div>
+      <div class="coming-soon" data-i18n="comingSoon">More tools coming soon</div>
     </section>
   </main>
 
@@ -120,12 +97,12 @@
     <div class="footer-inner">
       <span>© <span id="year"></span> xugtek</span>
       <div class="links">
-        <a href="token/" data-i18n="tokenToolName">Token费用计算器</a>
+        <a href="../token/en.html" data-i18n="tokenToolName">Token Cost Calculator</a>
         <a href="mailto:dev@xugtek.com">dev@xugtek.com</a>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="assets/js/index-app.js"></script>
+  <script type="module" src="../assets/js/index-app.js"></script>
 </body>
 </html>

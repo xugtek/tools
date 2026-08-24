@@ -58,8 +58,10 @@
 };
       var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
-      var alt = saved && ALT[saved];
-      if (saved && pin && saved !== pin && alt) {
+      var nav = navigator.language || navigator.userLanguage || '';
+      var eff = (saved && ALT[saved]) ? saved : (/^zh/i.test(nav) ? 'zh-CN' : 'en');
+      var alt = ALT[eff];
+      if (pin && eff !== pin && alt) {
         document.title = alt.title;
         var meta = document.querySelector('meta[name="description"]');
         if (meta) meta.setAttribute('content', alt.description);

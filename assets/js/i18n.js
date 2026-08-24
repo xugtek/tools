@@ -118,10 +118,6 @@ const translations = {
 let currentLang = 'zh-CN';
 
 function detectLanguage() {
-  if (typeof document !== 'undefined') {
-    const staticLang = document.documentElement.getAttribute('data-static-lang');
-    if (staticLang && translations[staticLang]) return staticLang;
-  }
   if (typeof localStorage !== 'undefined') {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && translations[saved]) return saved;
@@ -129,6 +125,10 @@ function detectLanguage() {
   if (typeof navigator !== 'undefined') {
     const navLang = navigator.language || navigator.userLanguage || '';
     if (navLang.toLowerCase().startsWith('zh')) return 'zh-CN';
+  }
+  if (typeof document !== 'undefined') {
+    const staticLang = document.documentElement.getAttribute('data-static-lang');
+    if (staticLang && translations[staticLang]) return staticLang;
   }
   return 'en';
 }
@@ -212,26 +212,11 @@ export function setLang(lang) {
 export function initI18n() {
   setLang(detectLanguage());
 
-  document.querySelectorAll('[data-i18n-switch]').forEach((el) => {
-    el.addEventListener('click', () => {
-      setLang(currentLang === 'zh-CN' ? 'en' : 'zh-CN');
-    });
-  });
-
   document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
     btn.addEventListener('click', (event) => {
       event.stopPropagation();
       const wrapper = btn.closest('.lang-switch');
       if (wrapper) wrapper.classList.toggle('open');
-    });
-  });
-
-  document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      setLang(link.getAttribute('data-lang'));
-      closeLangMenu();
-      const href = link.getAttribute('href');
-      if (!href || href === '#') event.preventDefault();
     });
   });
 
