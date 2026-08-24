@@ -39,6 +39,21 @@
       document.documentElement.setAttribute('data-theme', d);
     } catch (e) {}
   })();
+</script>
+<style>html.i18n-wait body { visibility: hidden; }</style>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('xugtek-lang');
+      var pin = document.documentElement.getAttribute('data-static-lang');
+      if (saved && pin && saved !== pin) {
+        document.documentElement.classList.add('i18n-wait');
+        setTimeout(function () {
+          document.documentElement.classList.remove('i18n-wait');
+        }, 1500);
+      }
+    } catch (e) {}
+  })();
 </script></head>
 <body>
   <nav class="nav" aria-label="Tools">

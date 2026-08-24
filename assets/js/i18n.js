@@ -204,6 +204,7 @@ export function setLang(lang) {
     applyI18n();
     updateLangButton();
     updateLangMenu();
+    document.documentElement.classList.remove('i18n-wait');
     document.dispatchEvent(new CustomEvent('xugtek:langchange', { detail: { lang } }));
   }
 }
