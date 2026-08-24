@@ -196,9 +196,6 @@ function closeLangMenu() {
 export function setLang(lang) {
   if (!translations[lang]) return;
   currentLang = lang;
-  if (typeof localStorage !== 'undefined') {
-    localStorage.setItem(STORAGE_KEY, lang);
-  }
   if (typeof document !== 'undefined') {
     document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : 'en';
     applyI18n();
@@ -217,6 +214,17 @@ export function initI18n() {
       event.stopPropagation();
       const wrapper = btn.closest('.lang-switch');
       if (wrapper) wrapper.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const lang = link.getAttribute('data-lang');
+      if (lang && translations[lang] && typeof localStorage !== 'undefined') {
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+        } catch (e) {}
+      }
     });
   });
 
