@@ -21,12 +21,13 @@
           "description": "xugtek：轻量、快速、实用的在线工具集合，提供免费的 Token/API 费用计算器，支持 DeepSeek、Kimi、Qwen、GLM 等大模型价格估算。"
         }
       };
-      var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
       var nav = navigator.language || navigator.userLanguage || '';
-      var eff = (saved && ALT[saved]) ? saved : (/^zh/i.test(nav) ? 'zh-CN' : 'en');
+      var eff = /^zh/i.test(nav) ? 'zh-CN' : 'en';
       var alt = ALT[eff];
-      if (pin && eff !== pin && alt) {
+      var followed = false;
+      try { followed = !!sessionStorage.getItem('xugtek-lang-nav'); } catch (e) {}
+      if (!followed && pin && eff !== pin && alt) {
         document.title = alt.title;
         var meta = document.querySelector('meta[name="description"]');
         if (meta) meta.setAttribute('content', alt.description);

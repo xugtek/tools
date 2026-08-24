@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'xugtek-lang';
+const NAV_FLAG_KEY = 'xugtek-lang-nav';
 
 const translations = {
   'zh-CN': {
@@ -118,9 +118,13 @@ const translations = {
 let currentLang = 'zh-CN';
 
 function detectLanguage() {
-  if (typeof localStorage !== 'undefined') {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && translations[saved]) return saved;
+  let followed = false;
+  try {
+    followed = typeof sessionStorage !== 'undefined' && !!sessionStorage.getItem(NAV_FLAG_KEY);
+  } catch (e) {}
+  if (followed && typeof document !== 'undefined') {
+    const staticLang = document.documentElement.getAttribute('data-static-lang');
+    if (staticLang && translations[staticLang]) return staticLang;
   }
   if (typeof navigator !== 'undefined') {
     const navLang = navigator.language || navigator.userLanguage || '';
@@ -219,12 +223,9 @@ export function initI18n() {
 
   document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((link) => {
     link.addEventListener('click', () => {
-      const lang = link.getAttribute('data-lang');
-      if (lang && translations[lang] && typeof localStorage !== 'undefined') {
-        try {
-          localStorage.setItem(STORAGE_KEY, lang);
-        } catch (e) {}
-      }
+      try {
+        sessionStorage.setItem(NAV_FLAG_KEY, link.getAttribute('data-lang') || '1');
+      } catch (e) {}
     });
   });
 

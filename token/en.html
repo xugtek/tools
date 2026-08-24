@@ -56,12 +56,13 @@
                 "description": "免费在线 Token 费用计算器：内置 DeepSeek、Kimi、Qwen、GLM 等大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。"
         }
 };
-      var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
       var nav = navigator.language || navigator.userLanguage || '';
-      var eff = (saved && ALT[saved]) ? saved : (/^zh/i.test(nav) ? 'zh-CN' : 'en');
+      var eff = /^zh/i.test(nav) ? 'zh-CN' : 'en';
       var alt = ALT[eff];
-      if (pin && eff !== pin && alt) {
+      var followed = false;
+      try { followed = !!sessionStorage.getItem('xugtek-lang-nav'); } catch (e) {}
+      if (!followed && pin && eff !== pin && alt) {
         document.title = alt.title;
         var meta = document.querySelector('meta[name="description"]');
         if (meta) meta.setAttribute('content', alt.description);
