@@ -90,7 +90,7 @@ const translations = {
     cacheHitRateLabel: 'Cache hit rate',
     outputRatioLabel: 'Output / input ratio',
     monthDaysHint: 'Based on 30 days per month',
-    exchangeRateLabel: 'Exchange rate (1 USD = ? CNY)',
+    exchangeRateLabel: 'Exchange rate (USD → CNY)',
     resultSection: 'Cost result',
     dailyCostLabel: 'Daily cost',
     monthlyCostLabel: 'Monthly cost',

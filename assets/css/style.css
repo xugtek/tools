@@ -350,6 +350,7 @@ html[data-theme="dark"] .icon-sun {
 
 #price-section .form-grid {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
 }
 
 .form-group-month {
