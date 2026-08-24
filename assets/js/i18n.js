@@ -118,13 +118,13 @@ const translations = {
 let currentLang = 'zh-CN';
 
 function detectLanguage() {
-  if (typeof document !== 'undefined') {
-    const staticLang = document.documentElement.getAttribute('data-static-lang');
-    if (staticLang && translations[staticLang]) return staticLang;
-  }
   if (typeof localStorage !== 'undefined') {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && translations[saved]) return saved;
+  }
+  if (typeof document !== 'undefined') {
+    const staticLang = document.documentElement.getAttribute('data-static-lang');
+    if (staticLang && translations[staticLang]) return staticLang;
   }
   if (typeof navigator !== 'undefined') {
     const navLang = navigator.language || navigator.userLanguage || '';
