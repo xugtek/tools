@@ -118,6 +118,10 @@ const translations = {
 let currentLang = 'zh-CN';
 
 function detectLanguage() {
+  if (typeof document !== 'undefined') {
+    const staticLang = document.documentElement.getAttribute('data-static-lang');
+    if (staticLang && translations[staticLang]) return staticLang;
+  }
   if (typeof localStorage !== 'undefined') {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && translations[saved]) return saved;
@@ -223,9 +227,10 @@ export function initI18n() {
 
   document.querySelectorAll('.lang-switch-list a[data-lang]').forEach((link) => {
     link.addEventListener('click', (event) => {
-      event.preventDefault();
       setLang(link.getAttribute('data-lang'));
       closeLangMenu();
+      const href = link.getAttribute('href');
+      if (!href || href === '#') event.preventDefault();
     });
   });
 

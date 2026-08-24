@@ -556,7 +556,7 @@ document.querySelectorAll('input[type="text"][inputmode]').forEach((input) => {
 
 async function loadModels() {
   try {
-    const response = await fetch('token_models.json', { cache: 'no-store' });
+    const response = await fetch('../token_models.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     models = Array.isArray(data.models) ? data.models : [];
