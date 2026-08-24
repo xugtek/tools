@@ -92,12 +92,15 @@ function saveCurrentPriceDraft() {
 }
 
 function setDocumentLanguage() {
-  document.title = `${t('pageTitle')} - ${t('siteName')}`;
+  const en = getLang() === 'en';
+  document.title = en
+    ? 'Token Cost Calculator – LLM API Pricing Estimator | xugtek'
+    : 'Token费用计算器 - DeepSeek/Kimi/Qwen/GLM 大模型API费用估算 - xugtek';
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
-    meta.setAttribute('content', getLang() === 'en'
-      ? 'Estimate daily and monthly token API costs. Compare CNY/USD, cache hits, and usage estimates.'
-      : '估算每日和每月 Token API 费用，支持人民币/美元双货币、缓存命中与用量估算。');
+    meta.setAttribute('content', en
+      ? 'Free online token cost calculator for LLM APIs. Estimate daily and monthly costs with DeepSeek, Kimi, Qwen and GLM prices. Supports CNY/USD and cache-aware billing.'
+      : '免费在线 Token 费用计算器：内置 DeepSeek、Kimi、Qwen、GLM 等大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
   }
 }
 
