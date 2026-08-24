@@ -50,9 +50,19 @@
 <script>
   (function () {
     try {
+      var ALT = {
+        "en": {
+                "title": "Token Cost Calculator – LLM API Pricing Estimator | xugtek",
+                "description": "Free online token cost calculator for LLM APIs. Estimate daily and monthly costs with DeepSeek, Kimi, Qwen and GLM prices. Supports CNY/USD and cache-aware billing."
+        }
+};
       var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
-      if (saved && pin && saved !== pin) {
+      var alt = saved && ALT[saved];
+      if (saved && pin && saved !== pin && alt) {
+        document.title = alt.title;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', alt.description);
         document.documentElement.classList.add('i18n-wait');
         setTimeout(function () {
           document.documentElement.classList.remove('i18n-wait');

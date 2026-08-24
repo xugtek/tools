@@ -44,9 +44,19 @@
 <script>
   (function () {
     try {
+      var ALT = {
+        "en": {
+                "title": "xugtek – Useful Online Tools | Free Token Cost Calculator",
+                "description": "xugtek: lightweight, fast and practical online tools, featuring a free token/API cost calculator covering DeepSeek, Kimi, Qwen and GLM pricing."
+        }
+};
       var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
-      if (saved && pin && saved !== pin) {
+      var alt = saved && ALT[saved];
+      if (saved && pin && saved !== pin && alt) {
+        document.title = alt.title;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', alt.description);
         document.documentElement.classList.add('i18n-wait');
         setTimeout(function () {
           document.documentElement.classList.remove('i18n-wait');

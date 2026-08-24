@@ -50,9 +50,19 @@
 <script>
   (function () {
     try {
+      var ALT = {
+        "zh-CN": {
+                "title": "Token费用计算器 - DeepSeek/Kimi/Qwen/GLM 大模型API费用估算 - xugtek",
+                "description": "免费在线 Token 费用计算器：内置 DeepSeek、Kimi、Qwen、GLM 等大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。"
+        }
+};
       var saved = localStorage.getItem('xugtek-lang');
       var pin = document.documentElement.getAttribute('data-static-lang');
-      if (saved && pin && saved !== pin) {
+      var alt = saved && ALT[saved];
+      if (saved && pin && saved !== pin && alt) {
+        document.title = alt.title;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', alt.description);
         document.documentElement.classList.add('i18n-wait');
         setTimeout(function () {
           document.documentElement.classList.remove('i18n-wait');
