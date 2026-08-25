@@ -126,6 +126,21 @@ function getNativeCurrency() {
   return getLang() === 'en' ? 'USD' : 'CNY';
 }
 
+function syncCurrencyWithLanguage() {
+  const target = getNativeCurrency();
+  const current = elements.currencySelect.value;
+  if (current === target) {
+    activePriceCurrency = current;
+    return;
+  }
+  const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
+  const switched = switchPriceDraft(priceDrafts, current, target, readFormPrices(), rate);
+  priceDrafts = switched.drafts;
+  writeFormPrices(switched.prices);
+  elements.currencySelect.value = target;
+  activePriceCurrency = target;
+}
+
 function getModelPriceInCurrency(model, currency, rate) {
   const prices = model.prices || {};
 
@@ -566,6 +581,7 @@ function init() {
   initSite();
   setDocumentLanguage();
   bindEvents();
+  syncCurrencyWithLanguage();
   elements.btnPinCompare.disabled = true;
   renderComparisons();
 
@@ -578,6 +594,7 @@ function init() {
     const model = models.find((item) => item.id === previousSelection);
     if (model) applyModelToForm(model);
     elements.modelName.value = modelName;
+    syncCurrencyWithLanguage();
     renderCosts();
     renderComparisons();
     updateEstimateVisibility();
