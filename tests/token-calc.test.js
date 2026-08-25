@@ -8,6 +8,7 @@ import {
   estimateDailyUsage,
   formatMoney,
   normalizeRate,
+  resolvePriceTriples,
   seedPriceDrafts,
   sortByMonthlyCost,
   switchPriceDraft,
@@ -246,4 +247,44 @@ test('sortByMonthlyCost sorts ascending and returns a new array', () => {
   const sorted = sortByMonthlyCost(items);
   assert.deepEqual(sorted.map((i) => i.monthlyCny), [100, 200, 300]);
   assert.deepEqual(items.map((i) => i.monthlyCny), [300, 100, 200]);
+});
+
+test('resolvePriceTriples keeps official dual prices independent', () => {
+  const { CNY, USD } = resolvePriceTriples({
+    modelPrices: {
+      CNY: { input: 20, cachedInput: 2, output: 100 },
+      USD: { input: 3, cachedInput: 0.3, output: 15 }
+    },
+    usdCnyRate: 7.2
+  });
+  assert.deepEqual(CNY, { input: 20, cachedInput: 2, output: 100 });
+  assert.deepEqual(USD, { input: 3, cachedInput: 0.3, output: 15 });
+});
+
+test('resolvePriceTriples converts only the missing currency', () => {
+  const { CNY, USD } = resolvePriceTriples({
+    modelPrices: { USD: { input: 10, cachedInput: 1, output: 20 } },
+    usdCnyRate: 7.2
+  });
+  assert.deepEqual(USD, { input: 10, cachedInput: 1, output: 20 });
+  assert.deepEqual(CNY, { input: 72, cachedInput: 7.2, output: 144 });
+});
+
+test('resolvePriceTriples prefers edited drafts over official prices', () => {
+  const { CNY, USD } = resolvePriceTriples({
+    priceDrafts: { CNY: { input: 50, cachedInput: 5, output: 200 } },
+    modelPrices: {
+      CNY: { input: 20, cachedInput: 2, output: 100 },
+      USD: { input: 3, cachedInput: 0.3, output: 15 }
+    },
+    usdCnyRate: 7.2
+  });
+  assert.deepEqual(CNY, { input: 50, cachedInput: 5, output: 200 });
+  assert.deepEqual(USD, { input: 3, cachedInput: 0.3, output: 15 });
+});
+
+test('resolvePriceTriples defaults to zero when nothing is available', () => {
+  const { CNY, USD } = resolvePriceTriples({ modelPrices: {}, usdCnyRate: 7.2 });
+  assert.deepEqual(CNY, { input: 0, cachedInput: 0, output: 0 });
+  assert.deepEqual(USD, { input: 0, cachedInput: 0, output: 0 });
 });

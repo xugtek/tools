@@ -1,11 +1,11 @@
 import {
   calculateMonthlyCost,
-  convertCurrency,
   convertPriceTriple,
   createComparisonSnapshot,
   estimateDailyUsage,
   formatMoney,
   formatTokens,
+  resolvePriceTriples,
   seedPriceDrafts,
   sortByMonthlyCost,
   switchPriceDraft,
@@ -254,31 +254,11 @@ function getMonthDays() {
   return Math.min(parsed, 31);
 }
 
-function getUsdCosts(cost, usage, model, rate, days) {
-  const usdPrices = (model.prices || {}).USD;
-  if (usdPrices) {
-    const usdCost = calculateMonthlyCost(usage, {
-      input: usdPrices.input,
-      cachedInput: usdPrices.cachedInput ?? usdPrices.input,
-      output: usdPrices.output
-    }, { days });
-
-    return {
-      daily: usdCost.dailyCost,
-      monthly: usdCost.monthlyCost,
-      normal: usdCost.inputCost,
-      cached: usdCost.cachedCost,
-      output: usdCost.outputCost
-    };
-  }
-
-  return {
-    daily: convertCurrency(cost.dailyCost, model.currency, 'USD', rate),
-    monthly: convertCurrency(cost.monthlyCost, model.currency, 'USD', rate),
-    normal: convertCurrency(cost.inputCost, model.currency, 'USD', rate),
-    cached: convertCurrency(cost.cachedCost, model.currency, 'USD', rate),
-    output: convertCurrency(cost.outputCost, model.currency, 'USD', rate)
-  };
+function getResolvedTriples(rate) {
+  const selectedId = elements.modelSelect.value;
+  const model = models.find((item) => item.id === selectedId);
+  const modelPrices = model && model.prices ? model.prices : {};
+  return resolvePriceTriples({ priceDrafts, modelPrices, usdCnyRate: rate });
 }
 
 function renderCosts() {
@@ -286,6 +266,8 @@ function renderCosts() {
   const usage = getEstimatedUsage();
   const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
   const days = getMonthDays();
+
+  priceDrafts[activePriceCurrency] = readFormPrices();
 
   if (usage.input <= 0) {
     const zero = '¥0.00';
@@ -317,20 +299,21 @@ function renderCosts() {
     return;
   }
 
-  const cost = calculateMonthlyCost(usage, model, { days });
-  const usdCosts = getUsdCosts(cost, usage, model, rate, days);
+  const { CNY: cnyPrices, USD: usdPrices } = getResolvedTriples(rate);
+  const cnyCost = calculateMonthlyCost(usage, cnyPrices, { days });
+  const usdCost = calculateMonthlyCost(usage, usdPrices, { days });
 
-  const dailyCny = convertCurrency(cost.dailyCost, model.currency, 'CNY', rate);
-  const dailyUsd = usdCosts.daily;
-  const monthlyCny = convertCurrency(cost.monthlyCost, model.currency, 'CNY', rate);
-  const monthlyUsd = usdCosts.monthly;
+  const dailyCny = cnyCost.dailyCost;
+  const dailyUsd = usdCost.dailyCost;
+  const monthlyCny = cnyCost.monthlyCost;
+  const monthlyUsd = usdCost.monthlyCost;
 
-  const normalCny = convertCurrency(cost.inputCost, model.currency, 'CNY', rate);
-  const normalUsd = usdCosts.normal;
-  const cachedCny = convertCurrency(cost.cachedCost, model.currency, 'CNY', rate);
-  const cachedUsd = usdCosts.cached;
-  const outputCny = convertCurrency(cost.outputCost, model.currency, 'CNY', rate);
-  const outputUsd = usdCosts.output;
+  const normalCny = cnyCost.inputCost;
+  const normalUsd = usdCost.inputCost;
+  const cachedCny = cnyCost.cachedCost;
+  const cachedUsd = usdCost.cachedCost;
+  const outputCny = cnyCost.outputCost;
+  const outputUsd = usdCost.outputCost;
 
   elements.resultDailyCny.textContent = formatMoney(dailyCny, 'CNY', locale());
   elements.resultDailyUsd.textContent = formatMoney(dailyUsd, 'USD', locale());
@@ -342,15 +325,15 @@ function renderCosts() {
   elements.breakdownCachedUsd.textContent = formatMoney(cachedUsd, 'USD', locale());
   elements.breakdownOutputCny.textContent = formatMoney(outputCny, 'CNY', locale());
   elements.breakdownOutputUsd.textContent = formatMoney(outputUsd, 'USD', locale());
-  elements.usageNormal.textContent = `${formatTokens(cost.normalInput, locale())} M`;
-  elements.usageCached.textContent = `${formatTokens(cost.cachedInput, locale())} M`;
-  elements.usageOutput.textContent = `${formatTokens(cost.output, locale())} M`;
+  elements.usageNormal.textContent = `${formatTokens(cnyCost.normalInput, locale())} M`;
+  elements.usageCached.textContent = `${formatTokens(cnyCost.cachedInput, locale())} M`;
+  elements.usageOutput.textContent = `${formatTokens(cnyCost.output, locale())} M`;
 
   lastResult = {
     modelName: model.name,
-    inputM: cost.totalInput,
-    cachedInputM: cost.cachedInput,
-    outputM: cost.output,
+    inputM: cnyCost.totalInput,
+    cachedInputM: cnyCost.cachedInput,
+    outputM: cnyCost.output,
     dailyCny,
     dailyUsd,
     monthlyCny,

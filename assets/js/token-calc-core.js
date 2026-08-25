@@ -153,6 +153,37 @@ export function switchPriceDraft(drafts, fromCurrency, toCurrency, currentPrices
   return { drafts: next, prices: next[toCurrency] };
 }
 
+function normalizeTriple(prices) {
+  if (!prices) return null;
+  const input = toNonNegativeNumber(prices.input);
+  return {
+    input,
+    cachedInput: prices.cachedInput == null ? input : toNonNegativeNumber(prices.cachedInput),
+    output: toNonNegativeNumber(prices.output)
+  };
+}
+
+/**
+ * Resolve independent CNY and USD price triples for a model.
+ * Priority per currency: user-edited draft -> official price -> conversion from
+ * the other currency (only used as a fallback, so official dual prices stay independent).
+ * @param {object} opts
+ * @param {object} [opts.priceDrafts] { CNY?, USD? } edited price triples.
+ * @param {object} [opts.modelPrices] Model's official prices { CNY?, USD? }.
+ * @param {number} [opts.usdCnyRate] USD -> CNY rate for conversion fallback.
+ */
+export function resolvePriceTriples({ priceDrafts = {}, modelPrices = {}, usdCnyRate = 7.2 } = {}) {
+  let cny = normalizeTriple(priceDrafts.CNY) || normalizeTriple(modelPrices.CNY);
+  let usd = normalizeTriple(priceDrafts.USD) || normalizeTriple(modelPrices.USD);
+
+  if (!cny && usd) cny = convertPriceTriple(usd, 'USD', 'CNY', usdCnyRate);
+  if (!usd && cny) usd = convertPriceTriple(cny, 'CNY', 'USD', usdCnyRate);
+  if (!cny) cny = { input: 0, cachedInput: 0, output: 0 };
+  if (!usd) usd = { input: 0, cachedInput: 0, output: 0 };
+
+  return { CNY: cny, USD: usd };
+}
+
 export function formatMoney(amount, currency, locale = 'zh-CN') {
   const symbol = currency === 'CNY' ? '¥' : '$';
   const value = toNonNegativeNumber(amount);
