@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-18",
-  "note": "Prices collected from public sources on 2026-08-18 and verified against OpenRouter list prices. DeepSeek peak/off-peak are separate entries. Foreign model USD prices are official international list prices; Chinese model USD prices are their international (abroad) pricing. Each model lists prices per currency (CNY/USD) for input, cached input, and output; currencies without official prices fall back to exchange-rate conversion from the language-native currency. Verify before production use.",
+  "updated": "2026-09-12",
+  "note": "GPT-6 Astra, GLM-5.3/Flash and DeepSeek-V4.1-Flash prices verified against official pricing pages on 2026-09-12; other entries retain their previous prices. GPT-6 Astra uses Standard rates for requests with up to 272K input tokens; cache writes and long-context surcharges are not included. GLM-5.3-Flash uses standard, non-promotional prices. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Verify before production use.",
+  "sources": {
+    "gpt-6-astra": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "glm-cny": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    "glm-usd": "https://docs.z.ai/guides/overview/pricing",
+    "deepseek-cny": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "deepseek-usd": "https://api-docs.deepseek.com/quick_start/pricing/"
+  },
   "models": [
     {
       "id": "kimi-k3",
@@ -39,21 +46,30 @@
       }
     },
     {
-      "id": "deepseek-v4-flash-peak",
-      "name": "DeepSeek V4 Flash（高峰）",
-      "provider": "DeepSeek",
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "provider": "Zhipu",
       "prices": {
-        "CNY": { "input": 3, "cachedInput": 0.1, "output": 9 },
-        "USD": { "input": 0.14, "cachedInput": 0.028, "output": 0.28 }
+        "CNY": { "input": 0.8, "cachedInput": 0.23, "output": 2.8 },
+        "USD": { "input": 0.15, "cachedInput": 0.03, "output": 0.5 }
       }
     },
     {
-      "id": "deepseek-v4-flash-offpeak",
-      "name": "DeepSeek V4 Flash（空闲）",
+      "id": "deepseek-v4.1-flash-peak",
+      "name": "DeepSeek V4.1 Flash（高峰）",
       "provider": "DeepSeek",
       "prices": {
-        "CNY": { "input": 1.5, "cachedInput": 0.05, "output": 4.5 },
-        "USD": { "input": 0.07, "cachedInput": 0.014, "output": 0.14 }
+        "CNY": { "input": 2, "cachedInput": 0.04, "output": 8 },
+        "USD": { "input": 0.3, "cachedInput": 0.006, "output": 1.2 }
+      }
+    },
+    {
+      "id": "deepseek-v4.1-flash-offpeak",
+      "name": "DeepSeek V4.1 Flash（空闲）",
+      "provider": "DeepSeek",
+      "prices": {
+        "CNY": { "input": 1, "cachedInput": 0.02, "output": 4 },
+        "USD": { "input": 0.15, "cachedInput": 0.003, "output": 0.6 }
       }
     },
     {
@@ -72,6 +88,14 @@
       "prices": {
         "CNY": { "input": 4.5, "cachedInput": 0.15, "output": 13.5 },
         "USD": { "input": 0.66, "cachedInput": 0.022, "output": 1.98 }
+      }
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "provider": "OpenAI",
+      "prices": {
+        "USD": { "input": 10, "cachedInput": 1, "output": 50 }
       }
     },
     {

@@ -105,8 +105,8 @@ token-calc-app.js   UI 逻辑（DOM 操作、事件、渲染）
 ```
 
 - 价格为「每 M Tokens」单价
-- 有官方 USD 价的模型同时含 `CNY` 与 `USD`；无官方 USD 价的模型（如 DeepSeek）仅含 `CNY`
-- 顶层保留 `updated` 与 `note` 元信息
+- 国内与国际平台分别发布价格的模型同时含 `CNY` 与 `USD`（如 GLM、DeepSeek）；只有官方 USD 价的模型仅含 `USD`（如 GPT-6 Astra），人民币按汇率换算
+- 顶层保留 `updated`、`note` 与官方价格链接 `sources` 元信息
 
 ### 4.2 币种与「语言原生币种」
 
@@ -116,19 +116,25 @@ token-calc-app.js   UI 逻辑（DOM 操作、事件、渲染）
   2. 不存在 → 从「语言原生币种」（有则用，否则用 `prices` 首个币种）按汇率换算，并做自适应舍入
 - 结果展示的 USD 费用优先使用官方 USD 价，其次按汇率换算
 
-### 4.3 当前内置模型（2026-08-17 公开数据）
+### 4.3 内置模型价格摘录（2026-09-12 更新）
 
 | 模型 | 币种 | 普通输入 | 缓存输入 | 输出 |
 |------|------|---------|---------|------|
 | Kimi K3 | CNY / USD | 20 / 3 | 2 / 0.3 | 100 / 15 |
 | Qwen3.8 Max | CNY / USD | 12 / 2 | 1.5 / 0.25 | 36 / 6 |
 | GLM-5.2 / GLM-5.3 | CNY / USD | 8 / 1.4 | 2 / 0.26 | 28 / 4.4 |
-| DeepSeek V4 Flash（高峰） | CNY | 3 | 0.1 | 9 |
-| DeepSeek V4 Flash（空闲） | CNY | 1.5 | 0.05 | 4.5 |
-| DeepSeek V4 Pro（高峰） | CNY | 9 | 0.3 | 27 |
-| DeepSeek V4 Pro（空闲） | CNY | 4.5 | 0.15 | 13.5 |
+| GLM-5.3-Flash | CNY / USD | 0.8 / 0.15 | 0.23 / 0.03 | 2.8 / 0.5 |
+| DeepSeek V4.1 Flash（高峰） | CNY / USD | 2 / 0.3 | 0.04 / 0.006 | 8 / 1.2 |
+| DeepSeek V4.1 Flash（空闲） | CNY / USD | 1 / 0.15 | 0.02 / 0.003 | 4 / 0.6 |
+| DeepSeek V4 Pro（高峰） | CNY / USD | 9 / 1.32 | 0.3 / 0.044 | 27 / 3.96 |
+| DeepSeek V4 Pro（空闲） | CNY / USD | 4.5 / 0.66 | 0.15 / 0.022 | 13.5 / 1.98 |
+| GPT-6 Astra | USD | 10 | 1 | 50 |
 
-> 数据来自 2026-08-17 公开渠道，DeepSeek 高峰/空闲以独立条目表示（数据模型无档位选择器），上线前应核验官方最新价格。
+本次核验 GPT-6 Astra、GLM-5.3 / Flash 与 DeepSeek V4.1 Flash，其他模型沿用原价格。完整模型列表以 `token_models.json` 为准。
+
+- GPT-6 Astra 使用 [OpenAI 官方标准价](https://developers.openai.com/api/docs/models/gpt-6-astra)，适用于单次输入不超过 272K tokens。计算器目前不单独计缓存写入费用，也不自动应用长上下文加价；超过 272K 时需手动将输入 / 缓存输入 / 输出价改为 20 / 2 / 75 美元。
+- GLM-5.3 与 Flash 分别采用[国内人民币价](https://docs.bigmodel.cn/cn/guide/start/pricing)和[国际美元价](https://docs.z.ai/guides/overview/pricing)。Flash 使用标准价。
+- DeepSeek V4.1 Flash 采用[官方人民币价](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)和[官方美元价](https://api-docs.deepseek.com/quick_start/pricing/)。高峰为北京时间周一至周五 09:00–12:00、14:00–18:00，其余为空闲时段；空闲价为高峰价的一半。两个档位以独立条目表示，需按使用时段选择。
 
 ## 5. 交互与 UI 设计
 
