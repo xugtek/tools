@@ -13,7 +13,8 @@
     "grok-4.7": "https://llm-stats.com/blog/research/grok-4-7-launch",
     "fable-5.1": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
     "opus-5.5": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-    "mimo-v2.6": "https://routerplex.com/blog/mimo-v2-6-api-pricing-setup"
+    "mimo-v2.6": "https://routerplex.com/blog/mimo-v2-6-api-pricing-setup",
+    "gemini-3.8-flash": "https://ai.google.dev/gemini-api/docs/pricing"
   },
   "models": [
     {
@@ -21,8 +22,16 @@
       "name": "Kimi K3",
       "provider": "Moonshot",
       "prices": {
-        "CNY": { "input": 20, "cachedInput": 2, "output": 100 },
-        "USD": { "input": 3, "cachedInput": 0.3, "output": 15 }
+        "CNY": {
+          "input": 20,
+          "cachedInput": 2,
+          "output": 100
+        },
+        "USD": {
+          "input": 3,
+          "cachedInput": 0.3,
+          "output": 15
+        }
       }
     },
     {
@@ -30,8 +39,16 @@
       "name": "Qwen3.8 Max",
       "provider": "Alibaba",
       "prices": {
-        "CNY": { "input": 12, "cachedInput": 1.5, "output": 36 },
-        "USD": { "input": 2, "cachedInput": 0.25, "output": 6 }
+        "CNY": {
+          "input": 12,
+          "cachedInput": 1.5,
+          "output": 36
+        },
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.25,
+          "output": 6
+        }
       }
     },
     {
@@ -39,8 +56,16 @@
       "name": "GLM-5.2",
       "provider": "Zhipu",
       "prices": {
-        "CNY": { "input": 8, "cachedInput": 2, "output": 28 },
-        "USD": { "input": 1.4, "cachedInput": 0.26, "output": 4.4 }
+        "CNY": {
+          "input": 8,
+          "cachedInput": 2,
+          "output": 28
+        },
+        "USD": {
+          "input": 1.4,
+          "cachedInput": 0.26,
+          "output": 4.4
+        }
       }
     },
     {
@@ -48,8 +73,16 @@
       "name": "GLM-5.3",
       "provider": "Zhipu",
       "prices": {
-        "CNY": { "input": 8, "cachedInput": 2, "output": 28 },
-        "USD": { "input": 1.4, "cachedInput": 0.26, "output": 4.4 }
+        "CNY": {
+          "input": 8,
+          "cachedInput": 2,
+          "output": 28
+        },
+        "USD": {
+          "input": 1.4,
+          "cachedInput": 0.26,
+          "output": 4.4
+        }
       }
     },
     {
@@ -57,53 +90,105 @@
       "name": "GLM-5.3-Flash",
       "provider": "Zhipu",
       "prices": {
-        "CNY": { "input": 0.8, "cachedInput": 0.23, "output": 2.8 },
-        "USD": { "input": 0.15, "cachedInput": 0.03, "output": 0.5 }
+        "CNY": {
+          "input": 0.8,
+          "cachedInput": 0.23,
+          "output": 2.8
+        },
+        "USD": {
+          "input": 0.15,
+          "cachedInput": 0.03,
+          "output": 0.5
+        }
       }
     },
     {
       "id": "deepseek-v4.1-flash-peak",
-      "name": "DeepSeek V4.1 Flash（高峰）",
+      "name": "DeepSeek V4.1 Flash (Peak)",
       "provider": "DeepSeek",
       "prices": {
-        "CNY": { "input": 2, "cachedInput": 0.04, "output": 8 },
-        "USD": { "input": 0.3, "cachedInput": 0.006, "output": 1.2 }
-      }
+        "CNY": {
+          "input": 2,
+          "cachedInput": 0.04,
+          "output": 8
+        },
+        "USD": {
+          "input": 0.3,
+          "cachedInput": 0.006,
+          "output": 1.2
+        }
+      },
+      "nameZh": "DeepSeek V4.1 Flash（高峰）"
     },
     {
       "id": "deepseek-v4.1-flash-offpeak",
-      "name": "DeepSeek V4.1 Flash（空闲）",
+      "name": "DeepSeek V4.1 Flash (Off-peak)",
       "provider": "DeepSeek",
       "prices": {
-        "CNY": { "input": 1, "cachedInput": 0.02, "output": 4 },
-        "USD": { "input": 0.15, "cachedInput": 0.003, "output": 0.6 }
-      }
+        "CNY": {
+          "input": 1,
+          "cachedInput": 0.02,
+          "output": 4
+        },
+        "USD": {
+          "input": 0.15,
+          "cachedInput": 0.003,
+          "output": 0.6
+        }
+      },
+      "nameZh": "DeepSeek V4.1 Flash（空闲）"
     },
     {
       "id": "deepseek-v4-pro-peak",
-      "name": "DeepSeek V4 Pro（高峰）",
+      "name": "DeepSeek V4 Pro (Peak)",
       "provider": "DeepSeek",
       "prices": {
-        "CNY": { "input": 9, "cachedInput": 0.3, "output": 27 },
-        "USD": { "input": 1.32, "cachedInput": 0.044, "output": 3.96 }
-      }
+        "CNY": {
+          "input": 9,
+          "cachedInput": 0.3,
+          "output": 27
+        },
+        "USD": {
+          "input": 1.32,
+          "cachedInput": 0.044,
+          "output": 3.96
+        }
+      },
+      "nameZh": "DeepSeek V4 Pro（高峰）"
     },
     {
       "id": "deepseek-v4-pro-offpeak",
-      "name": "DeepSeek V4 Pro（空闲）",
+      "name": "DeepSeek V4 Pro (Off-peak)",
       "provider": "DeepSeek",
       "prices": {
-        "CNY": { "input": 4.5, "cachedInput": 0.15, "output": 13.5 },
-        "USD": { "input": 0.66, "cachedInput": 0.022, "output": 1.98 }
-      }
+        "CNY": {
+          "input": 4.5,
+          "cachedInput": 0.15,
+          "output": 13.5
+        },
+        "USD": {
+          "input": 0.66,
+          "cachedInput": 0.022,
+          "output": 1.98
+        }
+      },
+      "nameZh": "DeepSeek V4 Pro（空闲）"
     },
     {
       "id": "mimo-v2.6-pro",
       "name": "Mimo-V2.6 Pro",
       "provider": "Xiaomi",
       "prices": {
-        "CNY": { "input": 3, "cachedInput": 0.025, "output": 6 },
-        "USD": { "input": 0.435, "cachedInput": 0.0036, "output": 0.87 }
+        "CNY": {
+          "input": 3,
+          "cachedInput": 0.025,
+          "output": 6
+        },
+        "USD": {
+          "input": 0.435,
+          "cachedInput": 0.0036,
+          "output": 0.87
+        }
       }
     },
     {
@@ -111,8 +196,16 @@
       "name": "Mimo-V2.6 Flash",
       "provider": "Xiaomi",
       "prices": {
-        "CNY": { "input": 1, "cachedInput": 0.02, "output": 2 },
-        "USD": { "input": 0.14, "cachedInput": 0.0028, "output": 0.28 }
+        "CNY": {
+          "input": 1,
+          "cachedInput": 0.02,
+          "output": 2
+        },
+        "USD": {
+          "input": 0.14,
+          "cachedInput": 0.0028,
+          "output": 0.28
+        }
       }
     },
     {
@@ -120,7 +213,11 @@
       "name": "GPT-6 Astra",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 10, "cachedInput": 1, "output": 50 }
+        "USD": {
+          "input": 10,
+          "cachedInput": 1,
+          "output": 50
+        }
       }
     },
     {
@@ -128,7 +225,11 @@
       "name": "GPT-6 Sol",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.2, "output": 10 }
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.2,
+          "output": 10
+        }
       }
     },
     {
@@ -136,7 +237,11 @@
       "name": "GPT-6 Luna",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 0.1, "cachedInput": 0.01, "output": 0.5 }
+        "USD": {
+          "input": 0.1,
+          "cachedInput": 0.01,
+          "output": 0.5
+        }
       }
     },
     {
@@ -144,7 +249,11 @@
       "name": "GPT-5.6 Sol",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 2.5, "cachedInput": 0.25, "output": 15 }
+        "USD": {
+          "input": 2.5,
+          "cachedInput": 0.25,
+          "output": 15
+        }
       }
     },
     {
@@ -152,7 +261,11 @@
       "name": "GPT-5.6 Terra",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.2, "output": 12 }
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.2,
+          "output": 12
+        }
       }
     },
     {
@@ -160,15 +273,11 @@
       "name": "GPT-5.6 Luna",
       "provider": "OpenAI",
       "prices": {
-        "USD": { "input": 0.2, "cachedInput": 0.02, "output": 1.2 }
-      }
-    },
-    {
-      "id": "gpt-5",
-      "name": "GPT-5",
-      "provider": "OpenAI",
-      "prices": {
-        "USD": { "input": 1.25, "cachedInput": 0.125, "output": 10 }
+        "USD": {
+          "input": 0.2,
+          "cachedInput": 0.02,
+          "output": 1.2
+        }
       }
     },
     {
@@ -176,7 +285,11 @@
       "name": "Claude Fable 5.1",
       "provider": "Anthropic",
       "prices": {
-        "USD": { "input": 10, "cachedInput": 0.25, "output": 50 }
+        "USD": {
+          "input": 10,
+          "cachedInput": 0.25,
+          "output": 50
+        }
       }
     },
     {
@@ -184,7 +297,11 @@
       "name": "Claude Opus 5.5",
       "provider": "Anthropic",
       "prices": {
-        "USD": { "input": 4, "cachedInput": 0.2, "output": 20 }
+        "USD": {
+          "input": 4,
+          "cachedInput": 0.2,
+          "output": 20
+        }
       }
     },
     {
@@ -192,7 +309,11 @@
       "name": "Claude Opus 5",
       "provider": "Anthropic",
       "prices": {
-        "USD": { "input": 5, "cachedInput": 0.5, "output": 25 }
+        "USD": {
+          "input": 5,
+          "cachedInput": 0.5,
+          "output": 25
+        }
       }
     },
     {
@@ -200,23 +321,23 @@
       "name": "Claude Sonnet 5",
       "provider": "Anthropic",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.2, "output": 10 }
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.2,
+          "output": 10
+        }
       }
     },
     {
-      "id": "gemini-3-pro",
-      "name": "Gemini 3 Pro",
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
       "provider": "Google",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.2, "output": 12 }
-      }
-    },
-    {
-      "id": "gemini-3.5-flash",
-      "name": "Gemini 3.5 Flash",
-      "provider": "Google",
-      "prices": {
-        "USD": { "input": 1.5, "cachedInput": 0.15, "output": 9 }
+        "USD": {
+          "input": 0.75,
+          "cachedInput": 0.075,
+          "output": 3.75
+        }
       }
     },
     {
@@ -224,7 +345,11 @@
       "name": "Grok 4.7",
       "provider": "xAI",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.5, "output": 6 }
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.5,
+          "output": 6
+        }
       }
     },
     {
@@ -232,15 +357,11 @@
       "name": "Grok 4.6",
       "provider": "xAI",
       "prices": {
-        "USD": { "input": 2, "cachedInput": 0.5, "output": 6 }
-      }
-    },
-    {
-      "id": "mistral-large",
-      "name": "Mistral Large",
-      "provider": "Mistral",
-      "prices": {
-        "USD": { "input": 2, "cachedInput": 0.2, "output": 6 }
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.5,
+          "output": 6
+        }
       }
     }
   ]

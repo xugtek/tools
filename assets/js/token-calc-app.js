@@ -91,6 +91,11 @@ function saveCurrentPriceDraft() {
   priceDrafts[activePriceCurrency] = readFormPrices();
 }
 
+function getDisplayName(model) {
+  if (!model) return '';
+  return getLang() === 'en' ? (model.name || '') : (model.nameZh || model.name || '');
+}
+
 function setDocumentLanguage() {
   const en = getLang() === 'en';
   document.title = en
@@ -99,8 +104,8 @@ function setDocumentLanguage() {
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', en
-      ? 'Free online token cost calculator with 27 LLM prices: GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, DeepSeek, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
-      : '免费在线 Token 费用计算器：内置 GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、DeepSeek、Kimi、Qwen、GLM 等 27 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
+      ? 'Free online token cost calculator with 24 LLM prices: GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, DeepSeek, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
+      : '免费在线 Token 费用计算器：内置 GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、DeepSeek、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
   }
 }
 
@@ -115,7 +120,7 @@ function fillModelSelect() {
   models.forEach((model) => {
     const option = document.createElement('option');
     option.value = model.id;
-    option.textContent = `${model.name} · ${model.provider}`;
+    option.textContent = `${getDisplayName(model)} · ${model.provider}`;
     fragment.appendChild(option);
   });
 
@@ -288,7 +293,7 @@ function renderCosts() {
     const zero = '¥0.00';
     const zeroUsd = '$0.00';
     lastResult = {
-      modelName: model.name,
+      modelName: getDisplayName(model),
       inputM: 0,
       cachedInputM: 0,
       outputM: 0,
@@ -345,7 +350,7 @@ function renderCosts() {
   elements.usageOutput.textContent = `${formatTokens(cnyCost.output, locale())} M`;
 
   lastResult = {
-    modelName: model.name,
+    modelName: getDisplayName(model),
     inputM: cnyCost.totalInput,
     cachedInputM: cnyCost.cachedInput,
     outputM: cnyCost.output,
@@ -461,7 +466,7 @@ function bindEvents() {
     const model = models.find((item) => item.id === elements.modelSelect.value);
     if (model) {
       applyModelToForm(model);
-      elements.modelName.value = model.name;
+      elements.modelName.value = getDisplayName(model);
     } else {
       saveCurrentPriceDraft();
       elements.modelName.value = '';
@@ -570,7 +575,7 @@ async function loadModels() {
   if (models.length > 0) {
     elements.modelSelect.value = models[0].id;
     applyModelToForm(models[0]);
-    elements.modelName.value = models[0].name;
+    elements.modelName.value = getDisplayName(models[0]);
   }
   renderCosts();
   updateEstimateVisibility();
@@ -592,8 +597,15 @@ function init() {
     fillModelSelect();
     elements.modelSelect.value = previousSelection;
     const model = models.find((item) => item.id === previousSelection);
-    if (model) applyModelToForm(model);
-    elements.modelName.value = modelName;
+    if (model) {
+      applyModelToForm(model);
+      const knownName = !modelName
+        || modelName === model.name
+        || modelName === (model.nameZh || model.name);
+      elements.modelName.value = knownName ? getDisplayName(model) : modelName;
+    } else {
+      elements.modelName.value = modelName;
+    }
     syncCurrencyWithLanguage();
     renderCosts();
     renderComparisons();
