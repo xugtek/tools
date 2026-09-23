@@ -1,12 +1,19 @@
 {
-  "updated": "2026-09-12",
-  "note": "GPT-6 Astra, GLM-5.3/Flash and DeepSeek-V4.1-Flash prices verified against official pricing pages on 2026-09-12; other entries retain their previous prices. GPT-6 Astra uses Standard rates for requests with up to 272K input tokens; cache writes and long-context surcharges are not included. GLM-5.3-Flash uses standard, non-promotional prices. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Verify before production use.",
+  "updated": "2026-09-23",
+  "note": "New on 2026-09-23: Grok 4.7, Claude Fable 5.1, GPT-6 Sol/Luna, Claude Opus 5.5, Mimo-V2.6 Pro/Flash (standard rates verified against public pricing pages). Grok 4.7 matches Grok 4.6 at $2/$0.50/$6 for prompts under 200k; at or above 200k the whole request bills at 2x ($4/$1/$12); note only, no separate long-context entry. GPT-6 Sol/Luna use Standard rates for prompts up to 272K (over 272K: 2x input/cache and 1.5x output for the full request; cache writes and long-context surcharges not modeled). Claude Fable 5.1 cache reads are 0.025x input ($0.25), unlike the usual 0.1x; Claude Opus 5.5 cache reads are 0.05x input ($0.20). Mimo cachedInput uses official cache-hit rates (~1% of input, not 10%): Pro $0.0036/¥0.025, Flash $0.0028/¥0.02. GPT-6 Astra and GLM/DeepSeek entries unchanged from 2026-09-12. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Old model entries are retained for comparison. Verify before production use.",
   "sources": {
     "gpt-6-astra": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "gpt-6-sol": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+    "gpt-6-luna": "https://developers.openai.com/api/docs/models/gpt-6-luna",
     "glm-cny": "https://docs.bigmodel.cn/cn/guide/start/pricing",
     "glm-usd": "https://docs.z.ai/guides/overview/pricing",
     "deepseek-cny": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-    "deepseek-usd": "https://api-docs.deepseek.com/quick_start/pricing/"
+    "deepseek-usd": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "grok-4.6": "https://docs.x.ai/developers/pricing",
+    "grok-4.7": "https://llm-stats.com/blog/research/grok-4-7-launch",
+    "fable-5.1": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+    "opus-5.5": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+    "mimo-v2.6": "https://routerplex.com/blog/mimo-v2-6-api-pricing-setup"
   },
   "models": [
     {
@@ -91,11 +98,45 @@
       }
     },
     {
+      "id": "mimo-v2.6-pro",
+      "name": "Mimo-V2.6 Pro",
+      "provider": "Xiaomi",
+      "prices": {
+        "CNY": { "input": 3, "cachedInput": 0.025, "output": 6 },
+        "USD": { "input": 0.435, "cachedInput": 0.0036, "output": 0.87 }
+      }
+    },
+    {
+      "id": "mimo-v2.6-flash",
+      "name": "Mimo-V2.6 Flash",
+      "provider": "Xiaomi",
+      "prices": {
+        "CNY": { "input": 1, "cachedInput": 0.02, "output": 2 },
+        "USD": { "input": 0.14, "cachedInput": 0.0028, "output": 0.28 }
+      }
+    },
+    {
       "id": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "provider": "OpenAI",
       "prices": {
         "USD": { "input": 10, "cachedInput": 1, "output": 50 }
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "provider": "OpenAI",
+      "prices": {
+        "USD": { "input": 2, "cachedInput": 0.2, "output": 10 }
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "provider": "OpenAI",
+      "prices": {
+        "USD": { "input": 0.1, "cachedInput": 0.01, "output": 0.5 }
       }
     },
     {
@@ -131,6 +172,22 @@
       }
     },
     {
+      "id": "claude-fable-5.1",
+      "name": "Claude Fable 5.1",
+      "provider": "Anthropic",
+      "prices": {
+        "USD": { "input": 10, "cachedInput": 0.25, "output": 50 }
+      }
+    },
+    {
+      "id": "claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "provider": "Anthropic",
+      "prices": {
+        "USD": { "input": 4, "cachedInput": 0.2, "output": 20 }
+      }
+    },
+    {
       "id": "claude-opus-5",
       "name": "Claude Opus 5",
       "provider": "Anthropic",
@@ -160,6 +217,14 @@
       "provider": "Google",
       "prices": {
         "USD": { "input": 1.5, "cachedInput": 0.15, "output": 9 }
+      }
+    },
+    {
+      "id": "grok-4.7",
+      "name": "Grok 4.7",
+      "provider": "xAI",
+      "prices": {
+        "USD": { "input": 2, "cachedInput": 0.5, "output": 6 }
       }
     },
     {
