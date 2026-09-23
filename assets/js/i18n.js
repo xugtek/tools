@@ -55,7 +55,22 @@ const translations = {
     compareMonthly: '每月',
     compareInput: '输入',
     compareCached: '缓存',
-    compareOutput: '输出'
+    compareOutput: '输出',
+    priceTableTitle: '模型价格总表',
+    priceTableIntro: '下表汇总当前内置的 27 款大模型官方定价：GPT-6 Astra/Sol/Luna、GPT-5.6、Claude Opus 5.5/5、Fable 5.1、Sonnet 5、Grok 4.6/4.7、DeepSeek V4、Kimi K3、Qwen3.8 Max、GLM-5.3、Mimo-V2.6、Gemini 3.5、Mistral Large，按每 100 万 Token 计价（输入 / 缓存输入 / 输出）。',
+    priceTableNote: '价格更新于 2026-09-23，仅供参考，实际以模型官方计费为准。',
+    priceColModel: '模型',
+    priceColProvider: '提供商',
+    priceColPrice: '价格 · 输入/缓存/输出（每 1M Tokens）',
+    faqTitle: '常见问题',
+    faq1q: '缓存命中价是什么意思？',
+    faq1a: '缓存命中价（cached input）指复用此前已处理过的前缀内容时，命中缓存的输入 Token 单价，通常远低于普通输入价。本工具按“缓存命中率”把每日输入拆分为普通输入与缓存输入分别计费。',
+    faq2q: '为什么人民币和美元费用换算不等价？',
+    faq2a: '部分模型在国内与国际市场的官方定价是独立发布的（例如 Kimi K3 的 ¥20 与 $3 并非 7.2 汇率关系）。对有官方双币定价的模型，本工具按各自官方价独立计算，仅在缺少某一币种时才按汇率换算，因此人民币与美元结果可能无法按汇率严格互换。',
+    faq3q: '计算结果是准确的账单吗？',
+    faq3a: '不是。本工具仅根据你填写的用量与所选模型价格做预估计算，实际费用以模型官方计费为准：促销价、长上下文加价、税费与区域差价等因素不在估算范围内，请以官方最新定价与实际账单为准。',
+    faq4q: '价格多久更新一次？',
+    faq4a: '价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-09-23）。价格仅供参考，请以各模型官方定价页为准。'
   },
   en: {
     siteName: 'xugtek',
@@ -111,7 +126,22 @@ const translations = {
     compareMonthly: 'Monthly',
     compareInput: 'Input',
     compareCached: 'Cached',
-    compareOutput: 'Output'
+    compareOutput: 'Output',
+    priceTableTitle: 'Model price list',
+    priceTableIntro: 'Official per-million-token prices (input / cached input / output) for the 27 models built into this calculator: GPT-6 Astra/Sol/Luna, GPT-5.6, Claude Opus 5.5/5, Fable 5.1, Sonnet 5, Grok 4.6/4.7, DeepSeek V4, Kimi K3, Qwen3.8 Max, GLM-5.3, Mimo-V2.6, Gemini 3.5 and Mistral Large.',
+    priceTableNote: 'Prices updated 2026-09-23. For reference only; official provider billing always applies.',
+    priceColModel: 'Model',
+    priceColProvider: 'Provider',
+    priceColPrice: 'Price · input/cached/output (per 1M tokens)',
+    faqTitle: 'FAQ',
+    faq1q: 'What does the cached input price mean?',
+    faq1a: 'The cached input price applies to input tokens that reuse an already-processed prefix from an earlier request. It is usually much lower than the standard input price. This tool splits daily input into normal and cached portions using your cache hit rate.',
+    faq2q: 'Why do CNY and USD results not convert exactly?',
+    faq2a: 'Some models publish independent domestic and international list prices (for example Kimi K3 at CNY 20 and USD 3 is not a 7.2 exchange-rate pair). This tool bills each currency from its official price and only converts when a currency is missing, so the two currency results may not match by exchange rate.',
+    faq3q: 'Are these results exact bills?',
+    faq3a: 'No. Results are estimates based on the usage and model prices you enter. Actual charges follow official provider billing: promotional rates, long-context surcharges, taxes and regional differences are not modeled. Always verify against official pricing and your invoice.',
+    faq4q: 'How often are prices updated?',
+    faq4a: 'Prices are updated whenever model pricing changes; the page shows the latest update date (currently 2026-09-23). Prices are for reference only - check each model’s official pricing page for the latest rates.'
   }
 };
 
