@@ -16,6 +16,7 @@ import { initSite } from './site.js';
 
 const DAYS_PER_MONTH = 30;
 const CUSTOM_MODEL_ID = '__custom__';
+const DEFAULT_MODEL_ID = 'deepseek-v4.1-flash-peak';
 const COMPARISONS_STORAGE_KEY = 'xugtek-token-comparisons';
 
 const elements = {
@@ -99,13 +100,13 @@ function getDisplayName(model) {
 function setDocumentLanguage() {
   const en = getLang() === 'en';
   document.title = en
-    ? 'Token Cost Calculator – GPT, Opus, Mimo, DeepSeek, GLM & Kimi Pricing'
-    : 'Token费用计算器 - GPT/Opus/Mimo/DeepSeek/GLM/Kimi/Grok模型API费用估算';
+    ? 'Token Cost Calculator – DeepSeek, GPT, Opus, Mimo, GLM & Kimi Pricing'
+    : 'Token费用计算器 - DeepSeek/GPT/Opus/Mimo/GLM/Kimi/Grok模型API费用估算';
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', en
-      ? 'Free online token cost calculator with 24 LLM prices: GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, DeepSeek, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
-      : '免费在线 Token 费用计算器：内置 GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、DeepSeek、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
+      ? 'Free online token cost calculator with 24 LLM prices: DeepSeek, GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
+      : '免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
   }
 }
 
@@ -573,9 +574,10 @@ async function loadModels() {
 
   fillModelSelect();
   if (models.length > 0) {
-    elements.modelSelect.value = models[0].id;
-    applyModelToForm(models[0]);
-    elements.modelName.value = getDisplayName(models[0]);
+    const initial = models.find((item) => item.id === DEFAULT_MODEL_ID) || models[0];
+    elements.modelSelect.value = initial.id;
+    applyModelToForm(initial);
+    elements.modelName.value = getDisplayName(initial);
   }
   renderCosts();
   updateEstimateVisibility();
