@@ -1,6 +1,6 @@
 # xugtek Tools
 
-面向开发者和普通用户的轻量在线工具站，纯静态站点，生产环境为 <https://tools.xugtek.com>。
+面向开发者和普通用户的轻量在线工具站，纯静态站点，生产环境为 <https://tools.xugtek.com>（GitHub Pages 托管，Netlify CDN 加速）。
 
 当前包含：
 
@@ -22,7 +22,7 @@
 - 原生 HTML5 / CSS3（CSS 变量 + Grid/Flex）
 - 原生 JavaScript ES Modules（无框架、无构建工具）
 - Node.js 内置测试运行器（`node --test`）
-- Netlify 静态托管（`_redirects` 提供旧路径 301）
+- GitHub Pages 静态托管，Netlify 作为 CDN 加速（`_redirects` 提供旧路径 301）
 
 ## 目录结构
 
@@ -97,11 +97,11 @@ npm test
 
 ## 部署
 
-项目托管于 Netlify：
+站点源码托管于 GitHub Pages，Netlify 作为 CDN 加速层：
 
-1. 推送 `main` 分支，Netlify 自动构建（无构建步骤，直接发布）
-2. 自定义域名 `tools.xugtek.com` 在 Netlify 站点设置中绑定并配置 DNS
-3. 旧路径重写/301 规则维护在根目录 `_redirects`
+1. 将代码推送至 `main` 分支，在仓库 Settings → Pages 选择 `Deploy from a branch`（`main` / root）
+2. 在 Netlify 为同一仓库创建站点（无构建步骤，直接发布），自定义域名 `tools.xugtek.com` 绑定 Netlify 并在 DNS 添加对应记录
+3. 旧路径重写/301 规则维护在根目录 `_redirects`（Netlify 读取）
 4. 域名变更后同步更新 `sitemap.xml`、canonical、hreflang 与 OG 中的 URL（当前为 `https://tools.xugtek.com`）
 
 ## SEO / GEO
