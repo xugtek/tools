@@ -584,6 +584,19 @@ select.form-control {
   word-break: break-word;
 }
 
+.compare-card .compare-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 1px;
+}
+
 .compare-card .compare-value {
   font-size: 13px;
   color: var(--text-muted);

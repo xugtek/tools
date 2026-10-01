@@ -34,6 +34,7 @@ const elements = {
   outputRatio: document.getElementById('output-ratio'),
   outputRatioRange: document.getElementById('output-ratio-range'),
   exchangeRate: document.getElementById('exchange-rate'),
+  discountRate: document.getElementById('discount-rate'),
   monthDays: document.getElementById('month-days'),
   estimateSection: document.getElementById('estimate-section'),
   cacheEstimateControl: document.getElementById('cache-estimate-control'),
@@ -45,6 +46,7 @@ const elements = {
   resultDailyUsd: document.getElementById('result-daily-usd'),
   resultMonthlyCny: document.getElementById('result-monthly-cny'),
   resultMonthlyUsd: document.getElementById('result-monthly-usd'),
+  discountNote: document.getElementById('discount-note'),
   breakdownNormalCny: document.getElementById('breakdown-normal-cny'),
   breakdownNormalUsd: document.getElementById('breakdown-normal-usd'),
   breakdownCachedCny: document.getElementById('breakdown-cached-cny'),
@@ -275,6 +277,26 @@ function getMonthDays() {
   return Math.min(parsed, 31);
 }
 
+const DISCOUNT_MIN = 0.01;
+const DISCOUNT_MAX = 10;
+
+function getDiscountMultiplier() {
+  const raw = elements.discountRate.value.trim();
+  const parsed = Number(raw);
+  if (raw === '' || !Number.isFinite(parsed) || parsed <= 0) return 1;
+  return Math.min(Math.max(parsed, DISCOUNT_MIN), DISCOUNT_MAX);
+}
+
+function updateDiscountNote(multiplier) {
+  if (!elements.discountNote) return;
+  if (multiplier === 1) {
+    elements.discountNote.hidden = true;
+    return;
+  }
+  elements.discountNote.textContent = t('discountAppliedNote', { multiplier: String(multiplier) });
+  elements.discountNote.hidden = false;
+}
+
 function getResolvedTriples(rate) {
   const selectedId = elements.modelSelect.value;
   const model = models.find((item) => item.id === selectedId);
@@ -287,6 +309,7 @@ function renderCosts() {
   const usage = getEstimatedUsage();
   const rate = toNonNegativeNumber(elements.exchangeRate.value) || 7.2;
   const days = getMonthDays();
+  const multiplier = getDiscountMultiplier();
 
   priceDrafts[activePriceCurrency] = readFormPrices();
 
@@ -301,9 +324,11 @@ function renderCosts() {
       dailyCny: 0,
       dailyUsd: 0,
       monthlyCny: 0,
-      monthlyUsd: 0
+      monthlyUsd: 0,
+      discountMultiplier: multiplier
     };
     elements.btnPinCompare.disabled = true;
+    updateDiscountNote(1);
     elements.resultDailyCny.textContent = zero;
     elements.resultDailyUsd.textContent = zeroUsd;
     elements.resultMonthlyCny.textContent = zero;
@@ -321,8 +346,9 @@ function renderCosts() {
   }
 
   const { CNY: cnyPrices, USD: usdPrices } = getResolvedTriples(rate);
-  const cnyCost = calculateMonthlyCost(usage, cnyPrices, { days });
-  const usdCost = calculateMonthlyCost(usage, usdPrices, { days });
+  const cnyCost = calculateMonthlyCost(usage, cnyPrices, { days, discountMultiplier: multiplier });
+  const usdCost = calculateMonthlyCost(usage, usdPrices, { days, discountMultiplier: multiplier });
+  updateDiscountNote(multiplier);
 
   const dailyCny = cnyCost.dailyCost;
   const dailyUsd = usdCost.dailyCost;
@@ -358,7 +384,8 @@ function renderCosts() {
     dailyCny,
     dailyUsd,
     monthlyCny,
-    monthlyUsd
+    monthlyUsd,
+    discountMultiplier: multiplier
   };
   elements.btnPinCompare.disabled = false;
 }
@@ -419,6 +446,13 @@ function renderComparisons() {
     const name = document.createElement('div');
     name.className = 'compare-name';
     name.textContent = entry.modelName || t('modelCustom');
+    const entryMultiplier = toNonNegativeNumber(entry.discountMultiplier) || 1;
+    if (entryMultiplier !== 1) {
+      const badge = document.createElement('span');
+      badge.className = 'compare-badge';
+      badge.textContent = `×${entryMultiplier}`;
+      name.append(badge);
+    }
 
     const usage = document.createElement('div');
     usage.className = 'compare-usage';
@@ -507,6 +541,7 @@ function bindEvents() {
     elements.cacheRate,
     elements.outputRatio,
     elements.exchangeRate,
+    elements.discountRate,
     elements.monthDays
   ].forEach((el) => {
     el.addEventListener('input', () => {

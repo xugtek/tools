@@ -288,3 +288,68 @@ test('resolvePriceTriples defaults to zero when nothing is available', () => {
   assert.deepEqual(CNY, { input: 0, cachedInput: 0, output: 0 });
   assert.deepEqual(USD, { input: 0, cachedInput: 0, output: 0 });
 });
+
+test('calculateMonthlyCost applies discount multiplier to every cost item', () => {
+  const model = { input: 2, cachedInput: 1, output: 8 };
+  const result = calculateMonthlyCost(
+    { input: 1, cachedInput: 0.5, output: 0.25 },
+    model,
+    { days: 30, discountMultiplier: 0.8 }
+  );
+
+  assert.ok(Math.abs(result.inputCost - 0.8) < 1e-9);
+  assert.ok(Math.abs(result.cachedCost - 0.4) < 1e-9);
+  assert.ok(Math.abs(result.outputCost - 1.6) < 1e-9);
+  assert.ok(Math.abs(result.dailyCost - 2.8) < 1e-9);
+  assert.ok(Math.abs(result.monthlyCost - 84) < 1e-9);
+  assert.ok(Math.abs(result.discountMultiplier - 0.8) < 1e-9);
+  // usage figures stay untouched by the multiplier
+  assert.equal(result.normalInput, 0.5);
+  assert.equal(result.cachedInput, 0.5);
+  assert.equal(result.output, 0.25);
+});
+
+test('calculateMonthlyCost defaults discount multiplier to one', () => {
+  const model = { input: 2, cachedInput: 1, output: 8 };
+  const usage = { input: 1, cachedInput: 0.5, output: 0.25 };
+
+  const withoutOption = calculateMonthlyCost(usage, model, { days: 30 });
+  const withUndefined = calculateMonthlyCost(usage, model, { days: 30, discountMultiplier: undefined });
+  const withOne = calculateMonthlyCost(usage, model, { days: 30, discountMultiplier: 1 });
+
+  assert.equal(withoutOption.dailyCost, withUndefined.dailyCost);
+  assert.equal(withoutOption.dailyCost, withOne.dailyCost);
+  assert.equal(withoutOption.discountMultiplier, 1);
+});
+
+test('calculateMonthlyCost treats empty, zero or invalid multiplier as one', () => {
+  const model = { input: 2, cachedInput: 1, output: 8 };
+  for (const value of ['', 0, 'abc', null, -3]) {
+    const result = calculateMonthlyCost(
+      { input: 1, cachedInput: 0, output: 0 },
+      model,
+      { days: 1, discountMultiplier: value }
+    );
+    assert.ok(Math.abs(result.dailyCost - 2) < 1e-9, `multiplier ${JSON.stringify(value)}`);
+    assert.equal(result.discountMultiplier, 1);
+  }
+});
+
+test('createComparisonSnapshot stores the multiplier and defaults it for legacy entries', () => {
+  const base = {
+    modelName: 'M',
+    inputM: 1,
+    cachedInputM: 0,
+    outputM: 0,
+    dailyCny: 1,
+    dailyUsd: 0.1,
+    monthlyCny: 30,
+    monthlyUsd: 3
+  };
+
+  const withMultiplier = createComparisonSnapshot({ ...base, discountMultiplier: 0.8 });
+  assert.ok(Math.abs(withMultiplier.discountMultiplier - 0.8) < 1e-9);
+
+  const legacy = createComparisonSnapshot(base);
+  assert.equal(legacy.discountMultiplier, 1);
+});

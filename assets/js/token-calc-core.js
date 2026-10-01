@@ -43,7 +43,7 @@ export function estimateDailyUsage(inputTokens, { cacheHitRate = 90, outputRatio
  * @param {object} [options]
  * @param {number} [options.days] Days per month, default 30.
  */
-export function calculateMonthlyCost(usage, model, { days = 30 } = {}) {
+export function calculateMonthlyCost(usage, model, { days = 30, discountMultiplier = 1 } = {}) {
   const totalInput = toNonNegativeNumber(usage.input);
   const cachedInput = Math.min(toNonNegativeNumber(usage.cachedInput), totalInput);
   const output = toNonNegativeNumber(usage.output);
@@ -52,10 +52,11 @@ export function calculateMonthlyCost(usage, model, { days = 30 } = {}) {
   const inputPrice = toNonNegativeNumber(model.input);
   const cachedPrice = model.cachedInput == null ? inputPrice : toNonNegativeNumber(model.cachedInput);
   const outputPrice = toNonNegativeNumber(model.output);
+  const multiplier = toNonNegativeNumber(discountMultiplier) || 1;
 
-  const inputCost = normalInput * inputPrice;
-  const cachedCost = cachedInput * cachedPrice;
-  const outputCost = output * outputPrice;
+  const inputCost = normalInput * inputPrice * multiplier;
+  const cachedCost = cachedInput * cachedPrice * multiplier;
+  const outputCost = output * outputPrice * multiplier;
   const dailyCost = inputCost + cachedCost + outputCost;
   const monthlyCost = dailyCost * toNonNegativeNumber(days);
 
@@ -68,7 +69,8 @@ export function calculateMonthlyCost(usage, model, { days = 30 } = {}) {
     cachedCost,
     outputCost,
     dailyCost,
-    monthlyCost
+    monthlyCost,
+    discountMultiplier: multiplier
   };
 }
 
@@ -202,7 +204,7 @@ export function formatTokens(value, locale = 'zh-CN') {
  * Stores raw numeric values (not pre-formatted strings) so sorting and
  * re-rendering under a different locale work correctly.
  */
-export function createComparisonSnapshot({ modelName, inputM, cachedInputM, outputM, dailyCny, dailyUsd, monthlyCny, monthlyUsd }) {
+export function createComparisonSnapshot({ modelName, inputM, cachedInputM, outputM, dailyCny, dailyUsd, monthlyCny, monthlyUsd, discountMultiplier }) {
   return {
     id: `cmp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     modelName: String(modelName || '').trim(),
@@ -213,6 +215,7 @@ export function createComparisonSnapshot({ modelName, inputM, cachedInputM, outp
     dailyUsd: toNonNegativeNumber(dailyUsd),
     monthlyCny: toNonNegativeNumber(monthlyCny),
     monthlyUsd: toNonNegativeNumber(monthlyUsd),
+    discountMultiplier: toNonNegativeNumber(discountMultiplier) || 1,
     createdAt: Date.now()
   };
 }
