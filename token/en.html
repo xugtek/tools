@@ -171,6 +171,8 @@
             <label for="price-output" data-i18n="outputPriceLabel">Output price</label>
             <input id="price-output" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
           </div>
+        </div>
+        <div class="form-grid">
           <div class="form-group">
             <label for="currency-select" data-i18n="currencyLabel">Pricing currency</label>
             <select id="currency-select" class="form-control">
@@ -185,7 +187,6 @@
           <div class="form-group">
             <label for="discount-rate" data-i18n="discountLabel">Discount multiplier</label>
             <input id="discount-rate" class="form-control" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" value="1">
-            <span class="hint" data-i18n="discountHint">1 = list price, 0.8 = 20% off; empty or 0 counts as 1</span>
           </div>
         </div>
         <p class="note" data-i18n="modelSourceNote">Prices are for reference only; always check the latest official pricing.</p>
