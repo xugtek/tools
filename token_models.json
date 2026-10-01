@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-23",
+  "updated": "2026-10-01",
   "note": "New on 2026-09-23: Grok 4.7, Claude Fable 5.1, GPT-6 Sol/Luna, Claude Opus 5.5, Mimo-V2.6 Pro/Flash (standard rates verified against public pricing pages). Grok 4.7 matches Grok 4.6 at $2/$0.50/$6 for prompts under 200k; at or above 200k the whole request bills at 2x ($4/$1/$12); note only, no separate long-context entry. GPT-6 Sol/Luna use Standard rates for prompts up to 272K (over 272K: 2x input/cache and 1.5x output for the full request; cache writes and long-context surcharges not modeled). Claude Fable 5.1 cache reads are 0.025x input ($0.25), unlike the usual 0.1x; Claude Opus 5.5 cache reads are 0.05x input ($0.20). Mimo cachedInput uses official cache-hit rates (~1% of input, not 10%): Pro $0.0036/¥0.025, Flash $0.0028/¥0.02. GPT-6 Astra and GLM/DeepSeek entries unchanged from 2026-09-12. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Old model entries are retained for comparison. Verify before production use.",
   "sources": {
     "gpt-6-astra": "https://developers.openai.com/api/docs/models/gpt-6-astra",
@@ -14,7 +14,9 @@
     "fable-5.1": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
     "opus-5.5": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
     "mimo-v2.6": "https://routerplex.com/blog/mimo-v2-6-api-pricing-setup",
-    "gemini-3.8-flash": "https://ai.google.dev/gemini-api/docs/pricing"
+    "gemini-3.8-flash": "https://ai.google.dev/gemini-api/docs/pricing",
+    "claude-sonnet-5.5": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+    "gpt-6.1-sol": "https://developers.openai.com/api/docs/pricing"
   },
   "models": [
     {
@@ -52,23 +54,6 @@
       }
     },
     {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "provider": "Zhipu",
-      "prices": {
-        "CNY": {
-          "input": 8,
-          "cachedInput": 2,
-          "output": 28
-        },
-        "USD": {
-          "input": 1.4,
-          "cachedInput": 0.26,
-          "output": 4.4
-        }
-      }
-    },
-    {
       "id": "glm-5.3",
       "name": "GLM-5.3",
       "provider": "Zhipu",
@@ -99,6 +84,23 @@
           "input": 0.15,
           "cachedInput": 0.03,
           "output": 0.5
+        }
+      }
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
+      "provider": "Zhipu",
+      "prices": {
+        "CNY": {
+          "input": 2,
+          "cachedInput": 0.57,
+          "output": 7
+        },
+        "USD": {
+          "input": 0.37,
+          "cachedInput": 0.075,
+          "output": 1.25
         }
       }
     },
@@ -221,6 +223,18 @@
       }
     },
     {
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "provider": "OpenAI",
+      "prices": {
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.1,
+          "output": 10
+        }
+      }
+    },
+    {
       "id": "gpt-6-sol",
       "name": "GPT-6 Sol",
       "provider": "OpenAI",
@@ -250,9 +264,9 @@
       "provider": "OpenAI",
       "prices": {
         "USD": {
-          "input": 2.5,
-          "cachedInput": 0.25,
-          "output": 15
+          "input": 4,
+          "cachedInput": 0.4,
+          "output": 20
         }
       }
     },
@@ -313,6 +327,18 @@
           "input": 5,
           "cachedInput": 0.5,
           "output": 25
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "provider": "Anthropic",
+      "prices": {
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.2,
+          "output": 10
         }
       }
     },

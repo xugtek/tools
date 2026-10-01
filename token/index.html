@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Token费用计算器 - DeepSeek/GPT/Opus/Mimo/GLM/Kimi/Grok模型API费用估算</title>
-  <meta name="description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
+  <meta name="description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Sonnet 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 26 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="xugtek">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="Token费用计算器 - DeepSeek/GPT/Opus/Mimo/GLM/Kimi/Grok模型API费用估算">
-  <meta property="og:description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
+  <meta property="og:description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Sonnet 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 26 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
   <meta property="og:url" content="https://tools.xugtek.com/token/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Token费用计算器 - DeepSeek/GPT/Opus/Mimo/GLM/Kimi/Grok模型API费用估算">
-  <meta name="twitter:description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
+  <meta name="twitter:description" content="免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Sonnet 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 26 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。">
   <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
   <link rel="canonical" href="https://tools.xugtek.com/token/">
   <link rel="alternate" hreflang="zh-CN" href="https://tools.xugtek.com/token/">
@@ -32,7 +32,7 @@
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web",
       "browserRequirements": "Requires JavaScript",
-      "description": "免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。",
+      "description": "免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Sonnet 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 26 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
       "publisher": { "@type": "Organization", "name": "xugtek", "url": "https://tools.xugtek.com/" }
     },
@@ -64,7 +64,7 @@
         {
           "@type": "Question",
           "name": "价格多久更新一次？",
-          "acceptedAnswer": { "@type": "Answer", "text": "价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-09-23）。价格仅供参考，请以各模型官方定价页为准。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-10-01）。价格仅供参考，请以各模型官方定价页为准。" }
         }
       ]
     }
@@ -87,7 +87,7 @@
       var ALT = {
         "en": {
                 "title": "Token Cost Calculator – DeepSeek, GPT, Opus, Mimo, GLM & Kimi Pricing",
-                "description": "Free online token cost calculator with 24 LLM prices: DeepSeek, GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing."
+                "description": "Free online token cost calculator with 26 LLM prices: DeepSeek, GPT-6, Opus 5.5, Sonnet 5.5, Fable 5.1, Grok 4.7, Mimo, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing."
         }
 };
       var pin = document.documentElement.getAttribute('data-static-lang');
@@ -290,7 +290,7 @@
 
       <section class="card" id="price-table-section" aria-labelledby="price-table-title">
         <h2 id="price-table-title" class="section-title" data-i18n="priceTableTitle">模型价格总表</h2>
-        <p class="price-table-intro" data-i18n="priceTableIntro">下表汇总当前内置的 24 款大模型官方定价：DeepSeek V4、GPT-6 Astra/Sol/Luna、GPT-5.6、Claude Opus 5.5/5、Fable 5.1、Sonnet 5、Grok 4.6/4.7、Kimi K3、Qwen3.8 Max、GLM-5.3、Mimo-V2.6、Gemini 3.8 Flash，按每 100 万 Token 计价（输入 / 缓存输入 / 输出）。</p>
+        <p class="price-table-intro" data-i18n="priceTableIntro">下表汇总当前内置的 26 款大模型官方定价：DeepSeek V4、GPT-6.1 Sol、GPT-6 Astra/Sol/Luna、GPT-5.6、Claude Opus 5.5/5、Sonnet 5.5/5、Fable 5.1、Grok 4.6/4.7、Kimi K3、Qwen3.8 Max、GLM-5.3（含 Flash/FlashX）、Mimo-V2.6、Gemini 3.8 Flash，按每 100 万 Token 计价（输入 / 缓存输入 / 输出）。</p>
         <div class="price-table-wrap">
           <table class="price-table" id="price-table">
             <thead>
@@ -303,9 +303,9 @@
             <tbody>
             <tr id="model-kimi-k3"><td class="model-name">Kimi K3</td><td class="provider">Moonshot</td><td class="price">¥20 / ¥2 / ¥100 <span class="price-alt">· $3 / $0.3 / $15</span></td></tr>
             <tr id="model-qwen3.8-max"><td class="model-name">Qwen3.8 Max</td><td class="provider">Alibaba</td><td class="price">¥12 / ¥1.5 / ¥36 <span class="price-alt">· $2 / $0.25 / $6</span></td></tr>
-            <tr id="model-glm-5.2"><td class="model-name">GLM-5.2</td><td class="provider">Zhipu</td><td class="price">¥8 / ¥2 / ¥28 <span class="price-alt">· $1.4 / $0.26 / $4.4</span></td></tr>
             <tr id="model-glm-5.3"><td class="model-name">GLM-5.3</td><td class="provider">Zhipu</td><td class="price">¥8 / ¥2 / ¥28 <span class="price-alt">· $1.4 / $0.26 / $4.4</span></td></tr>
             <tr id="model-glm-5.3-flash"><td class="model-name">GLM-5.3-Flash</td><td class="provider">Zhipu</td><td class="price">¥0.8 / ¥0.23 / ¥2.8 <span class="price-alt">· $0.15 / $0.03 / $0.5</span></td></tr>
+            <tr id="model-glm-5.3-flashx"><td class="model-name">GLM-5.3-FlashX</td><td class="provider">Zhipu</td><td class="price">¥2 / ¥0.57 / ¥7 <span class="price-alt">· $0.37 / $0.075 / $1.25</span></td></tr>
             <tr id="model-deepseek-v4.1-flash-peak"><td class="model-name">DeepSeek V4.1 Flash（高峰）</td><td class="provider">DeepSeek</td><td class="price">¥2 / ¥0.04 / ¥8 <span class="price-alt">· $0.3 / $0.006 / $1.2</span></td></tr>
             <tr id="model-deepseek-v4.1-flash-offpeak"><td class="model-name">DeepSeek V4.1 Flash（空闲）</td><td class="provider">DeepSeek</td><td class="price">¥1 / ¥0.02 / ¥4 <span class="price-alt">· $0.15 / $0.003 / $0.6</span></td></tr>
             <tr id="model-deepseek-v4-pro-peak"><td class="model-name">DeepSeek V4 Pro（高峰）</td><td class="provider">DeepSeek</td><td class="price">¥9 / ¥0.3 / ¥27 <span class="price-alt">· $1.32 / $0.044 / $3.96</span></td></tr>
@@ -313,14 +313,16 @@
             <tr id="model-mimo-v2.6-pro"><td class="model-name">Mimo-V2.6 Pro</td><td class="provider">Xiaomi</td><td class="price">¥3 / ¥0.025 / ¥6 <span class="price-alt">· $0.435 / $0.0036 / $0.87</span></td></tr>
             <tr id="model-mimo-v2.6-flash"><td class="model-name">Mimo-V2.6 Flash</td><td class="provider">Xiaomi</td><td class="price">¥1 / ¥0.02 / ¥2 <span class="price-alt">· $0.14 / $0.0028 / $0.28</span></td></tr>
             <tr id="model-gpt-6-astra"><td class="model-name">GPT-6 Astra</td><td class="provider">OpenAI</td><td class="price">$10 / $1 / $50</td></tr>
+            <tr id="model-gpt-6.1-sol"><td class="model-name">GPT-6.1 Sol</td><td class="provider">OpenAI</td><td class="price">$2 / $0.1 / $10</td></tr>
             <tr id="model-gpt-6-sol"><td class="model-name">GPT-6 Sol</td><td class="provider">OpenAI</td><td class="price">$2 / $0.2 / $10</td></tr>
             <tr id="model-gpt-6-luna"><td class="model-name">GPT-6 Luna</td><td class="provider">OpenAI</td><td class="price">$0.1 / $0.01 / $0.5</td></tr>
-            <tr id="model-gpt-5.6-sol"><td class="model-name">GPT-5.6 Sol</td><td class="provider">OpenAI</td><td class="price">$2.5 / $0.25 / $15</td></tr>
+            <tr id="model-gpt-5.6-sol"><td class="model-name">GPT-5.6 Sol</td><td class="provider">OpenAI</td><td class="price">$4 / $0.4 / $20</td></tr>
             <tr id="model-gpt-5.6-terra"><td class="model-name">GPT-5.6 Terra</td><td class="provider">OpenAI</td><td class="price">$2 / $0.2 / $12</td></tr>
             <tr id="model-gpt-5.6-luna"><td class="model-name">GPT-5.6 Luna</td><td class="provider">OpenAI</td><td class="price">$0.2 / $0.02 / $1.2</td></tr>
             <tr id="model-claude-fable-5.1"><td class="model-name">Claude Fable 5.1</td><td class="provider">Anthropic</td><td class="price">$10 / $0.25 / $50</td></tr>
             <tr id="model-claude-opus-5.5"><td class="model-name">Claude Opus 5.5</td><td class="provider">Anthropic</td><td class="price">$4 / $0.2 / $20</td></tr>
             <tr id="model-claude-opus-5"><td class="model-name">Claude Opus 5</td><td class="provider">Anthropic</td><td class="price">$5 / $0.5 / $25</td></tr>
+            <tr id="model-claude-sonnet-5.5"><td class="model-name">Claude Sonnet 5.5</td><td class="provider">Anthropic</td><td class="price">$2 / $0.2 / $10</td></tr>
             <tr id="model-claude-sonnet-5"><td class="model-name">Claude Sonnet 5</td><td class="provider">Anthropic</td><td class="price">$2 / $0.2 / $10</td></tr>
             <tr id="model-gemini-3.8-flash"><td class="model-name">Gemini 3.8 Flash</td><td class="provider">Google</td><td class="price">$0.75 / $0.075 / $3.75</td></tr>
             <tr id="model-grok-4.7"><td class="model-name">Grok 4.7</td><td class="provider">xAI</td><td class="price">$2 / $0.5 / $6</td></tr>
@@ -328,7 +330,7 @@
             </tbody>
           </table>
         </div>
-        <p class="note" data-i18n="priceTableNote">价格更新于 2026-09-23，仅供参考，实际以模型官方计费为准。</p>
+        <p class="note" data-i18n="priceTableNote">价格更新于 2026-10-01，仅供参考，实际以模型官方计费为准。</p>
       </section>
 
       <section class="card" id="faq-section" aria-labelledby="faq-title">
@@ -341,7 +343,7 @@
           <dt data-i18n="faq3q">计算结果是准确的账单吗？</dt>
           <dd data-i18n="faq3a">不是。本工具仅根据你填写的用量与所选模型价格做预估计算，实际费用以模型官方计费为准：促销价、长上下文加价、税费与区域差价等因素不在估算范围内，请以官方最新定价与实际账单为准。</dd>
           <dt data-i18n="faq4q">价格多久更新一次？</dt>
-          <dd data-i18n="faq4a">价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-09-23）。价格仅供参考，请以各模型官方定价页为准。</dd>
+          <dd data-i18n="faq4a">价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-10-01）。价格仅供参考，请以各模型官方定价页为准。</dd>
         </dl>
       </section>
     </div>

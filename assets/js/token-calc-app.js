@@ -107,8 +107,8 @@ function setDocumentLanguage() {
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', en
-      ? 'Free online token cost calculator with 24 LLM prices: DeepSeek, GPT-6, Opus 5.5, Fable 5.1, Grok 4.7, Mimo, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
-      : '免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 24 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
+      ? 'Free online token cost calculator with 26 LLM prices: DeepSeek, GPT-6, Opus 5.5, Sonnet 5.5, Fable 5.1, Grok 4.7, Mimo, Kimi, Qwen and GLM. Estimate daily and monthly API costs in CNY/USD with cache-aware billing.'
+      : '免费在线 Token 费用计算器：内置 DeepSeek、GPT-6、Opus 5.5、Sonnet 5.5、Fable 5.1、Grok 4.7、Mimo、Kimi、Qwen、GLM 等 26 款大模型价格，快速估算每日/每月 API 成本，支持人民币/美元双币种与缓存命中计费。');
   }
 }
 

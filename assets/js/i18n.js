@@ -59,8 +59,8 @@ const translations = {
     compareCached: '缓存',
     compareOutput: '输出',
     priceTableTitle: '模型价格总表',
-    priceTableIntro: '下表汇总当前内置的 24 款大模型官方定价：DeepSeek V4、GPT-6 Astra/Sol/Luna、GPT-5.6、Claude Opus 5.5/5、Fable 5.1、Sonnet 5、Grok 4.6/4.7、Kimi K3、Qwen3.8 Max、GLM-5.3、Mimo-V2.6、Gemini 3.8 Flash，按每 100 万 Token 计价（输入 / 缓存输入 / 输出）。',
-    priceTableNote: '价格更新于 2026-09-23，仅供参考，实际以模型官方计费为准。',
+    priceTableIntro: '下表汇总当前内置的 26 款大模型官方定价：DeepSeek V4、GPT-6.1 Sol、GPT-6 Astra/Sol/Luna、GPT-5.6、Claude Opus 5.5/5、Sonnet 5.5/5、Fable 5.1、Grok 4.6/4.7、Kimi K3、Qwen3.8 Max、GLM-5.3（含 Flash/FlashX）、Mimo-V2.6、Gemini 3.8 Flash，按每 100 万 Token 计价（输入 / 缓存输入 / 输出）。',
+    priceTableNote: '价格更新于 2026-10-01，仅供参考，实际以模型官方计费为准。',
     priceColModel: '模型',
     priceColProvider: '提供商',
     priceColPrice: '价格 · 输入/缓存/输出（每 1M Tokens）',
@@ -72,7 +72,7 @@ const translations = {
     faq3q: '计算结果是准确的账单吗？',
     faq3a: '不是。本工具仅根据你填写的用量与所选模型价格做预估计算，实际费用以模型官方计费为准：促销价、长上下文加价、税费与区域差价等因素不在估算范围内，请以官方最新定价与实际账单为准。',
     faq4q: '价格多久更新一次？',
-    faq4a: '价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-09-23）。价格仅供参考，请以各模型官方定价页为准。'
+    faq4a: '价格随模型定价变动更新，页面标注最近更新日期（当前为 2026-10-01）。价格仅供参考，请以各模型官方定价页为准。'
   },
   en: {
     siteName: 'xugtek',
@@ -132,8 +132,8 @@ const translations = {
     compareCached: 'Cached',
     compareOutput: 'Output',
     priceTableTitle: 'Model price list',
-    priceTableIntro: 'Official per-million-token prices (input / cached input / output) for the 24 models built into this calculator: DeepSeek V4, GPT-6 Astra/Sol/Luna, GPT-5.6, Claude Opus 5.5/5, Fable 5.1, Sonnet 5, Grok 4.6/4.7, Kimi K3, Qwen3.8 Max, GLM-5.3, Mimo-V2.6 and Gemini 3.8 Flash.',
-    priceTableNote: 'Prices updated 2026-09-23. For reference only; official provider billing always applies.',
+    priceTableIntro: 'Official per-million-token prices (input / cached input / output) for the 26 models built into this calculator: DeepSeek V4, GPT-6.1 Sol, GPT-6 Astra/Sol/Luna, GPT-5.6, Claude Opus 5.5/5, Sonnet 5.5/5, Fable 5.1, Grok 4.6/4.7, Kimi K3, Qwen3.8 Max, GLM-5.3 (incl. Flash/FlashX), Mimo-V2.6 and Gemini 3.8 Flash.',
+    priceTableNote: 'Prices updated 2026-10-01. For reference only; official provider billing always applies.',
     priceColModel: 'Model',
     priceColProvider: 'Provider',
     priceColPrice: 'Price · input/cached/output (per 1M tokens)',
@@ -145,7 +145,7 @@ const translations = {
     faq3q: 'Are these results exact bills?',
     faq3a: 'No. Results are estimates based on the usage and model prices you enter. Actual charges follow official provider billing: promotional rates, long-context surcharges, taxes and regional differences are not modeled. Always verify against official pricing and your invoice.',
     faq4q: 'How often are prices updated?',
-    faq4a: 'Prices are updated whenever model pricing changes; the page shows the latest update date (currently 2026-09-23). Prices are for reference only - check each model’s official pricing page for the latest rates.'
+    faq4a: 'Prices are updated whenever model pricing changes; the page shows the latest update date (currently 2026-10-01). Prices are for reference only - check each model’s official pricing page for the latest rates.'
   }
 };
 
