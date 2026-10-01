@@ -313,6 +313,8 @@ function renderCosts() {
 
   priceDrafts[activePriceCurrency] = readFormPrices();
 
+  elements.dailyInput.classList.toggle('pending-input', isBlankOrZero(elements.dailyInput.value));
+
   if (usage.input <= 0) {
     const zero = '¥0.00';
     const zeroUsd = '$0.00';

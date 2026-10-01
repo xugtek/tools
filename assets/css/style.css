@@ -390,6 +390,10 @@ html[data-theme="dark"] .icon-sun {
   border-color: var(--accent);
 }
 
+.form-control.pending-input {
+  border-color: var(--accent);
+}
+
 select.form-control {
   cursor: pointer;
 }
