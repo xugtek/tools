@@ -33,6 +33,7 @@ function locale() {
 function readRows() {
   rowState = [...elements.table.querySelectorAll('tbody tr')].map((tr) => ({
     tr,
+    name: tr.querySelector('.model-name').textContent.trim(),
     intelligence: Number(tr.dataset.i),
     speed: Number(tr.dataset.s),
     tokens: Number(tr.dataset.n),

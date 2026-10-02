@@ -58,17 +58,19 @@ export function computeValue(intelligence, tokensPerTask, outputPricePerM) {
 /**
  * Generic stable sort for ranking rows.
  * key: property name on the row objects; direction: 'asc' | 'desc'.
+ * Ties break deterministically by row name (ascending).
  * Returns a new array; rows lacking the key sink to the bottom.
  */
 export function sortRows(rows, key, direction = 'desc') {
   const sign = direction === 'asc' ? 1 : -1;
+  const byName = (a, b) => String(a.name ?? a.id ?? '').localeCompare(String(b.name ?? b.id ?? ''));
   return [...rows].sort((a, b) => {
     const av = a[key];
     const bv = b[key];
-    if (av == null && bv == null) return 0;
+    if (av == null && bv == null) return byName(a, b);
     if (av == null) return 1;
     if (bv == null) return -1;
-    if (av === bv) return String(a.id ?? '').localeCompare(String(b.id ?? ''));
+    if (av === bv) return byName(a, b);
     return sign * (av - bv);
   });
 }

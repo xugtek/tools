@@ -72,6 +72,18 @@ test('sortRows sorts descending by default and stays stable on ties', () => {
   assert.notEqual(sorted, rows, 'input array must not be mutated');
 });
 
+test('sortRows breaks ties deterministically by name in both directions', () => {
+  const rows = [
+    { name: 'Claude Sonnet 5.5', intelligence: 63.5 },
+    { name: 'Claude Opus 5.5', intelligence: 63.5 },
+    { name: 'GPT-6 Astra', intelligence: 60.8 }
+  ];
+  const desc = sortRows(rows, 'intelligence', 'desc');
+  assert.deepEqual(desc.map((r) => r.name), ['Claude Opus 5.5', 'Claude Sonnet 5.5', 'GPT-6 Astra']);
+  const asc = sortRows(rows, 'intelligence', 'asc');
+  assert.deepEqual(asc.map((r) => r.name), ['GPT-6 Astra', 'Claude Opus 5.5', 'Claude Sonnet 5.5']);
+});
+
 test('sortRows sinks rows with missing keys to the bottom', () => {
   const rows = [
     { id: 'a', valueUsd: null },
