@@ -18,9 +18,9 @@
       "aaSlug": "kimi-k3",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 12.6,
+        "terminalBench": 12.63,
         "hle": 46.9,
-        "automationBench": 58.3
+        "automationBench": 58.27
       },
       "speedTokensPerSec": 33.9,
       "tokensPerTask": 56327,
@@ -34,9 +34,9 @@
       "aaSlug": "qwen3-8-max",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 38.9,
+        "terminalBench": 38.89,
         "hle": 43.1,
-        "automationBench": 56.2
+        "automationBench": 56.19
       },
       "speedTokensPerSec": 39.0,
       "tokensPerTask": 117179,
@@ -50,8 +50,8 @@
       "aaSlug": "glm-5-3",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 41.9,
-        "hle": 42.3,
+        "terminalBench": 41.92,
+        "hle": 42.26,
         "automationBench": 62.2
       },
       "speedTokensPerSec": 65.9,
@@ -66,9 +66,9 @@
       "aaSlug": "glm-5-3-flash",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 32.8,
-        "hle": 39.9,
-        "automationBench": 60.4
+        "terminalBench": 32.83,
+        "hle": 39.85,
+        "automationBench": 60.37
       },
       "speedTokensPerSec": 48.9,
       "tokensPerTask": 81496,
@@ -82,9 +82,9 @@
       "aaSlug": null,
       "estimated": true,
       "intelligence": {
-        "terminalBench": 32.8,
-        "hle": 39.9,
-        "automationBench": 60.4
+        "terminalBench": 32.83,
+        "hle": 39.85,
+        "automationBench": 60.37
       },
       "speedTokensPerSec": 48.9,
       "tokensPerTask": 81496,
@@ -98,9 +98,9 @@
       "aaSlug": "deepseek-v4-1-flash",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 26.8,
-        "hle": 39.2,
-        "automationBench": 68.9
+        "terminalBench": 26.77,
+        "hle": 39.25,
+        "automationBench": 68.89
       },
       "speedTokensPerSec": 209.4,
       "tokensPerTask": 135649,
@@ -114,9 +114,9 @@
       "aaSlug": "deepseek-v4-1-flash",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 26.8,
-        "hle": 39.2,
-        "automationBench": 68.9
+        "terminalBench": 26.77,
+        "hle": 39.25,
+        "automationBench": 68.89
       },
       "speedTokensPerSec": 209.4,
       "tokensPerTask": 135649,
@@ -130,9 +130,9 @@
       "aaSlug": "deepseek-v4-pro",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 14.1,
-        "hle": 41.0,
-        "automationBench": 56.7
+        "terminalBench": 14.14,
+        "hle": 41.01,
+        "automationBench": 56.71
       },
       "speedTokensPerSec": 100.5,
       "tokensPerTask": 80897,
@@ -146,9 +146,9 @@
       "aaSlug": "deepseek-v4-pro",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 14.1,
-        "hle": 41.0,
-        "automationBench": 56.7
+        "terminalBench": 14.14,
+        "hle": 41.01,
+        "automationBench": 56.71
       },
       "speedTokensPerSec": 100.5,
       "tokensPerTask": 80897,
@@ -162,9 +162,9 @@
       "aaSlug": "mimo-v2-6-pro",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 34.8,
-        "hle": 49.4,
-        "automationBench": 58.6
+        "terminalBench": 34.85,
+        "hle": 49.35,
+        "automationBench": 58.62
       },
       "speedTokensPerSec": 43.7,
       "tokensPerTask": 76040,
@@ -178,9 +178,9 @@
       "aaSlug": "mimo-v2-6-flash",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 22.7,
-        "hle": 35.1,
-        "automationBench": 64.1
+        "terminalBench": 22.73,
+        "hle": 35.08,
+        "automationBench": 64.05
       },
       "speedTokensPerSec": 51.2,
       "tokensPerTask": 101258,
@@ -194,9 +194,9 @@
       "aaSlug": "gpt-6-astra",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 59.1,
-        "hle": 54.7,
-        "automationBench": 68.5
+        "terminalBench": 59.09,
+        "hle": 54.68,
+        "automationBench": 68.49
       },
       "speedTokensPerSec": 51.6,
       "tokensPerTask": 32021,
@@ -210,9 +210,9 @@
       "aaSlug": "gpt-6-1-sol",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 56.1,
-        "hle": 52.9,
-        "automationBench": 64.9
+        "terminalBench": 56.06,
+        "hle": 52.92,
+        "automationBench": 64.87
       },
       "speedTokensPerSec": 64.2,
       "tokensPerTask": 43278,
@@ -226,9 +226,9 @@
       "aaSlug": "gpt-6-sol",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 43.9,
-        "hle": 47.9,
-        "automationBench": 61.6
+        "terminalBench": 43.94,
+        "hle": 47.91,
+        "automationBench": 61.63
       },
       "speedTokensPerSec": 87.1,
       "tokensPerTask": 40939,
@@ -242,9 +242,9 @@
       "aaSlug": "gpt-6-luna",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 12.6,
-        "hle": 38.5,
-        "automationBench": 53.2
+        "terminalBench": 12.63,
+        "hle": 38.51,
+        "automationBench": 53.17
       },
       "speedTokensPerSec": 128.3,
       "tokensPerTask": 66190,
@@ -259,8 +259,8 @@
       "estimated": false,
       "intelligence": {
         "terminalBench": 39.9,
-        "hle": 49.5,
-        "automationBench": 60.1
+        "hle": 49.49,
+        "automationBench": 60.08
       },
       "speedTokensPerSec": 79.6,
       "tokensPerTask": 35651,
@@ -274,9 +274,9 @@
       "aaSlug": "gpt-5-6-terra",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 35.4,
-        "hle": 42.9,
-        "automationBench": 59.6
+        "terminalBench": 35.35,
+        "hle": 42.91,
+        "automationBench": 59.65
       },
       "speedTokensPerSec": 95.3,
       "tokensPerTask": 57306,
@@ -290,9 +290,9 @@
       "aaSlug": "gpt-5-6-luna",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 11.6,
-        "hle": 39.5,
-        "automationBench": 50.2
+        "terminalBench": 11.62,
+        "hle": 39.48,
+        "automationBench": 50.21
       },
       "speedTokensPerSec": 124.0,
       "tokensPerTask": 60456,
@@ -306,9 +306,9 @@
       "aaSlug": "claude-fable-5-1",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 52.0,
-        "hle": 59.1,
-        "automationBench": 59.4
+        "terminalBench": 52.02,
+        "hle": 59.13,
+        "automationBench": 59.38
       },
       "speedTokensPerSec": 68.2,
       "tokensPerTask": 84892,
@@ -323,8 +323,8 @@
       "estimated": false,
       "intelligence": {
         "terminalBench": 59.6,
-        "hle": 61.4,
-        "automationBench": 69.5
+        "hle": 61.35,
+        "automationBench": 69.54
       },
       "speedTokensPerSec": 92.4,
       "tokensPerTask": 109962,
@@ -338,9 +338,9 @@
       "aaSlug": "claude-opus-5",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 49.0,
-        "hle": 54.9,
-        "automationBench": 56.6
+        "terminalBench": 48.99,
+        "hle": 54.87,
+        "automationBench": 56.57
       },
       "speedTokensPerSec": 54.6,
       "tokensPerTask": 85378,
@@ -354,12 +354,12 @@
       "aaSlug": "claude-sonnet-5-5",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 63.6,
-        "hle": 55.0,
-        "automationBench": 71.8
+        "terminalBench": 63.64,
+        "hle": 54.96,
+        "automationBench": 71.77
       },
       "speedTokensPerSec": 139.1,
-      "tokensPerTask": 165183,
+      "tokensPerTask": 165879,
       "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5"
     },
     {
@@ -370,9 +370,9 @@
       "aaSlug": "claude-sonnet-5",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 14.1,
-        "hle": 41.3,
-        "automationBench": 36.5
+        "terminalBench": 14.14,
+        "hle": 41.29,
+        "automationBench": 36.51
       },
       "speedTokensPerSec": 83.8,
       "tokensPerTask": 162868,
@@ -387,8 +387,8 @@
       "estimated": false,
       "intelligence": {
         "terminalBench": 19.7,
-        "hle": 47.8,
-        "automationBench": 59.9
+        "hle": 47.82,
+        "automationBench": 59.93
       },
       "speedTokensPerSec": 248.6,
       "tokensPerTask": 84807,
@@ -402,9 +402,9 @@
       "aaSlug": "grok-4-7",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 25.8,
-        "hle": 43.1,
-        "automationBench": 65.6
+        "terminalBench": 25.76,
+        "hle": 43.14,
+        "automationBench": 65.56
       },
       "speedTokensPerSec": 79.0,
       "tokensPerTask": 80416,
@@ -418,9 +418,9 @@
       "aaSlug": "grok-4-6",
       "estimated": false,
       "intelligence": {
-        "terminalBench": 21.2,
-        "hle": 42.9,
-        "automationBench": 66.7
+        "terminalBench": 21.21,
+        "hle": 42.91,
+        "automationBench": 66.68
       },
       "speedTokensPerSec": 77.2,
       "tokensPerTask": 42179,
