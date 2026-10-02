@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="en" data-theme="light" data-static-lang="en">
+<html lang="zh" data-theme="light" data-static-lang="zh">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LLM Value Ranking – Intelligence Density & Value per Dollar</title>
-  <meta name="description" content="LLM value ranking based on independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench): intelligence density and intelligence per dollar for 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi, in CNY/USD.">
+  <title>大模型性价比排行榜 - GPT/DeepSeek/Opus/Mimo/GLM/Kimi智能密度与每元智能</title>
+  <meta name="description" content="大模型性价比排行榜：基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型（DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi）的智能密度与每元智能，支持人民币/美元双币种。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="xugtek">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="LLM Value Ranking – Intelligence Density & Value per Dollar">
-  <meta property="og:description" content="LLM value ranking based on independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench): intelligence density and intelligence per dollar for 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi, in CNY/USD.">
-  <meta property="og:url" content="https://tools.xugtek.com/llm/en.html">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="大模型性价比排行榜 - GPT/DeepSeek/Opus/Mimo/GLM/Kimi智能密度与每元智能">
+  <meta property="og:description" content="大模型性价比排行榜：基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型（DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi）的智能密度与每元智能，支持人民币/美元双币种。">
+  <meta property="og:url" content="https://tools.xugtek.com/llm-rank/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="LLM Value Ranking – Intelligence Density & Value per Dollar">
-  <meta name="twitter:description" content="LLM value ranking based on independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench): intelligence density and intelligence per dollar for 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi, in CNY/USD.">
+  <meta name="twitter:title" content="大模型性价比排行榜 - GPT/DeepSeek/Opus/Mimo/GLM/Kimi智能密度与每元智能">
+  <meta name="twitter:description" content="大模型性价比排行榜：基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型（DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi）的智能密度与每元智能，支持人民币/美元双币种。">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/icons/favicon-48.png" type="image/png" sizes="48x48">
   <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
-  <link rel="canonical" href="https://tools.xugtek.com/llm/en.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://tools.xugtek.com/llm/">
-  <link rel="alternate" hreflang="en" href="https://tools.xugtek.com/llm/en.html">
-  <link rel="alternate" hreflang="x-default" href="https://tools.xugtek.com/llm/en.html">
+  <link rel="canonical" href="https://tools.xugtek.com/llm-rank/">
+  <link rel="alternate" hreflang="zh-CN" href="https://tools.xugtek.com/llm-rank/">
+  <link rel="alternate" hreflang="en" href="https://tools.xugtek.com/llm-rank/en.html">
+  <link rel="alternate" hreflang="x-default" href="https://tools.xugtek.com/llm-rank/en.html">
   <link rel="stylesheet" href="../assets/css/style.css">
 <script type="application/ld+json">
 {
@@ -29,10 +29,10 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "name": "LLM Value Ranking",
-      "url": "https://tools.xugtek.com/llm/en.html",
-      "inLanguage": "en",
-      "description": "Intelligence density and intelligence per dollar for 26 LLMs, computed from independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench), in CNY/USD."
+      "name": "大模型性价比排行榜",
+      "url": "https://tools.xugtek.com/llm-rank/",
+      "inLanguage": "zh-CN",
+      "description": "基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型的智能密度与每元智能，支持人民币/美元双币种。"
     },
     {
       "@type": "BreadcrumbList",
@@ -40,14 +40,14 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
+          "name": "首页",
           "item": "https://tools.xugtek.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "LLM Value Ranking",
-          "item": "https://tools.xugtek.com/llm/en.html"
+          "name": "大模型性价比排行榜",
+          "item": "https://tools.xugtek.com/llm-rank/"
         }
       ]
     },
@@ -56,26 +56,26 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How are the intelligence index and intelligence per unit computed?",
+          "name": "智能指数和每元智能是怎么计算的？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The intelligence index is the average of three independently measured benchmarks: Terminal-Bench 4.0, Humanity’s Last Exam and AutomationBench. Intelligence per unit = intelligence index ÷ cost per task, where cost per task = measured output tokens per task × the model’s output price."
+            "text": "智能指数是 Terminal-Bench 4.0、Humanity's Last Exam、AutomationBench 三项独立实测得分的平均值。每元智能 = 智能指数 ÷ 每任务成本，其中每任务成本 = 实测的每任务输出 Token 数 × 模型输出单价。"
           }
         },
         {
           "@type": "Question",
-          "name": "Where does the data come from?",
+          "name": "数据来源是什么，可靠吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Capability, speed and token use are independently measured by Artificial Analysis (unified harness, not vendor-reported); prices come from official provider pricing pages."
+            "text": "能力、速度与 Token 消耗均来自 Artificial Analysis 的独立实测（统一基准环境，非厂商自报）；价格取自各厂商官方 API 定价页。"
           }
         },
         {
           "@type": "Question",
-          "name": "Why isn’t the fastest model the best value?",
+          "name": "为什么速度快的模型性价比不一定高？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Intelligence per unit measures how much intelligence one unit of money buys; speed is captured separately by intelligence density (D = I/100 × speed)."
+            "text": "每元智能只衡量“花一元钱买到多少智能”，速度由智能密度（D = 智能指数/100 × 速度）单独体现。在意吞吐看智能密度列，在意成本看每元智能列。"
           }
         }
       ]
@@ -97,9 +97,9 @@
   (function () {
     try {
       var ALT = {
-        "zh-CN": {
-                "title": "大模型性价比排行榜 - GPT/DeepSeek/Opus/Mimo/GLM/Kimi智能密度与每元智能",
-                "description": "大模型性价比排行榜：基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型（DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi）的智能密度与每元智能，支持人民币/美元双币种。"
+        "en": {
+                "title": "LLM Value Ranking – Intelligence Density & Value per Dollar",
+                "description": "LLM value ranking based on independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench): intelligence density and intelligence per dollar for 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi, in CNY/USD."
         }
 };
       var pin = document.documentElement.getAttribute('data-static-lang');
@@ -127,17 +127,17 @@
         <span data-i18n="siteName">xugtek</span>
       </a>
       <div class="nav-links">
-        <a href="../index.html" data-i18n="backHome">Back to home</a>
+        <a href="../index.html" data-i18n="backHome">返回首页</a>
         <div class="lang-switch">
           <button type="button" class="lang-switch-btn" data-lang-toggle aria-haspopup="listbox" aria-label="Language / 语言" title="Language / 语言">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </button>
           <ul class="lang-switch-list" role="listbox" aria-label="Language / 语言">
-            <li><a data-lang="zh-CN" class="" href="./">简体中文</a></li>
-            <li><a data-lang="en" class="current" href="en.html">English</a></li>
+            <li><a data-lang="zh-CN" class="current" href="./">简体中文</a></li>
+            <li><a data-lang="en" class="" href="en.html">English</a></li>
           </ul>
         </div>
-        <button type="button" class="theme-toggle" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+        <button type="button" class="theme-toggle" data-theme-toggle data-i18n-title="themeToggle" data-i18n-aria-label="themeToggle" title="切换主题" aria-label="切换主题">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </button>
@@ -148,33 +148,33 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1 data-i18n="llmPageTitle">LLM Value Ranking</h1>
-        <p data-i18n="llmHeroSubtitle">Independently measured benchmarks: how much intelligence each yuan or dollar buys</p>
+        <h1 data-i18n="llmPageTitle">大模型性价比排行榜</h1>
+        <p data-i18n="llmHeroSubtitle">基于 Terminal-Bench、HLE 等独立实测基准，计算每元能买到多少智能</p>
       </div>
     </section>
 
     <div class="container">
       <section class="card" aria-labelledby="rank-section-title">
-        <h2 id="rank-section-title" class="section-title" data-i18n="llmRankSection">Value ranking</h2>
+        <h2 id="rank-section-title" class="section-title" data-i18n="llmRankSection">性价比榜单</h2>
         <div class="rank-controls">
-          <span class="hint" data-i18n="rankSortHint">Click a column header to sort</span>
+          <span class="hint" data-i18n="rankSortHint">点击表头排序</span>
           <div class="rank-toggle-group" id="currency-toggle" role="group" aria-label="Currency">
             <button type="button" class="btn btn-ghost" data-currency="CNY">¥ CNY</button>
             <button type="button" class="btn btn-ghost" data-currency="USD">$ USD</button>
           </div>
         </div>
         <div class="price-table-wrap">
-          <table class="price-table rank-table" id="rank-table" data-default-currency="USD" data-cur="USD">
+          <table class="price-table rank-table" id="rank-table" data-default-currency="CNY" data-cur="CNY">
             <thead>
               <tr>
             <th>#</th>
-            <th data-sort="intelligence" data-i18n="rankColModel">Model</th>
-            <th data-sort="speed" data-i18n="rankColIntelligence">Intelligence</th>
-            <th data-sort="tokens" data-i18n="rankColSpeed">Speed tok/s</th>
-            <th data-sort="density" data-i18n="rankColTokens">Tokens/task</th>
-            <th data-sort="price" data-i18n="rankColDensity">Density</th>
-            <th data-sort="valueCny" data-i18n="rankColPrice">Output price/1M</th>
-            <th class="v-cny" data-sort="valueUsd" data-i18n="rankColValueCny">Value ¥</th>
+            <th data-sort="intelligence" data-i18n="rankColModel">模型</th>
+            <th data-sort="speed" data-i18n="rankColIntelligence">智能指数</th>
+            <th data-sort="tokens" data-i18n="rankColSpeed">速度 tok/s</th>
+            <th data-sort="density" data-i18n="rankColTokens">Token/任务</th>
+            <th data-sort="price" data-i18n="rankColDensity">智能密度</th>
+            <th data-sort="valueCny" data-i18n="rankColPrice">输出价/1M</th>
+            <th class="v-cny" data-sort="valueUsd" data-i18n="rankColValueCny">每元智能 ¥</th>
               </tr>
             </thead>
             <tbody>
@@ -182,21 +182,21 @@
             <tr data-i="44.4" data-s="48.9" data-n="81496" data-d="21.7" data-pc="2.8" data-pu="0.5" data-vc="194.4" data-vu="1088.8"><td class="rank-no"></td><td class="model-name">GLM-5.3-Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.4</td><td class="speed">48.9</td><td class="tokens">81k</td><td class="density">21.7</td><td class="price">¥2.8 / $0.5</td><td class="value v-cny">194</td><td class="value v-usd">1,089</td></tr>
             <tr data-i="34.8" data-s="128.3" data-n="66190" data-d="44.6" data-pc="3.6" data-pu="0.5" data-vc="145.9" data-vu="1050.5"><td class="rank-no"></td><td class="model-name">GPT-6 Luna</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:34.8%"></span></span>34.8</td><td class="speed">128.3</td><td class="tokens">66k</td><td class="density">44.6</td><td class="price">¥3.6 / $0.5</td><td class="value v-cny">146</td><td class="value v-usd">1,050</td></tr>
             <tr data-i="47.6" data-s="43.7" data-n="76040" data-d="20.8" data-pc="6" data-pu="0.87" data-vc="104.3" data-vu="719.5"><td class="rank-no"></td><td class="model-name">Mimo-V2.6 Pro</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:47.6%"></span></span>47.6</td><td class="speed">43.7</td><td class="tokens">76k</td><td class="density">20.8</td><td class="price">¥6 / $0.87</td><td class="value v-cny">104</td><td class="value v-usd">720</td></tr>
-            <tr data-i="45.0" data-s="209.4" data-n="135649" data-d="94.2" data-pc="4" data-pu="0.6" data-vc="82.9" data-vu="552.5"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash (Off-peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>45.0</td><td class="speed">209.4</td><td class="tokens">136k</td><td class="density">94.2</td><td class="price">¥4 / $0.6</td><td class="value v-cny">82.9</td><td class="value v-usd">552</td></tr>
-            <tr data-i="33.8" data-s="124" data-n="60456" data-d="41.9" data-pc="8.64" data-pu="1.2" data-vc="64.6" data-vu="465.4"><td class="rank-no"></td><td class="model-name">GPT-5.6 Luna</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:33.8%"></span></span>33.8</td><td class="speed">124</td><td class="tokens">60k</td><td class="density">41.9</td><td class="price">¥8.64 / $1.2</td><td class="value v-cny">64.6</td><td class="value v-usd">465</td></tr>
+            <tr data-i="45.0" data-s="209.4" data-n="135649" data-d="94.2" data-pc="4" data-pu="0.6" data-vc="82.9" data-vu="552.5"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash（空闲）</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>45.0</td><td class="speed">209.4</td><td class="tokens">136k</td><td class="density">94.2</td><td class="price">¥4 / $0.6</td><td class="value v-cny">82.9</td><td class="value v-usd">552</td></tr>
             <tr data-i="44.4" data-s="48.9" data-n="81496" data-d="21.7" data-pc="7" data-pu="1.25" data-vc="77.8" data-vu="435.5"><td class="rank-no"></td><td class="model-name">GLM-5.3-FlashX <sup class="est-mark" data-i18n-title="estMarkTitle">~</sup></td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.4</td><td class="speed">48.9</td><td class="tokens">81k</td><td class="density">21.7</td><td class="price">¥7 / $1.25</td><td class="value v-cny">77.8</td><td class="value v-usd">436</td></tr>
-            <tr data-i="45.0" data-s="209.4" data-n="135649" data-d="94.2" data-pc="8" data-pu="1.2" data-vc="41.4" data-vu="276.2"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash (Peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>45.0</td><td class="speed">209.4</td><td class="tokens">136k</td><td class="density">94.2</td><td class="price">¥8 / $1.2</td><td class="value v-cny">41.4</td><td class="value v-usd">276</td></tr>
-            <tr data-i="37.3" data-s="100.5" data-n="80897" data-d="37.5" data-pc="13.5" data-pu="1.98" data-vc="34.1" data-vu="232.7"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro (Off-peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.3</td><td class="speed">100.5</td><td class="tokens">81k</td><td class="density">37.5</td><td class="price">¥13.5 / $1.98</td><td class="value v-cny">34.1</td><td class="value v-usd">233</td></tr>
+            <tr data-i="33.8" data-s="124" data-n="60456" data-d="41.9" data-pc="8.64" data-pu="1.2" data-vc="64.6" data-vu="465.4"><td class="rank-no"></td><td class="model-name">GPT-5.6 Luna</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:33.8%"></span></span>33.8</td><td class="speed">124</td><td class="tokens">60k</td><td class="density">41.9</td><td class="price">¥8.64 / $1.2</td><td class="value v-cny">64.6</td><td class="value v-usd">465</td></tr>
+            <tr data-i="45.0" data-s="209.4" data-n="135649" data-d="94.2" data-pc="8" data-pu="1.2" data-vc="41.4" data-vu="276.2"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash（高峰）</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>45.0</td><td class="speed">209.4</td><td class="tokens">136k</td><td class="density">94.2</td><td class="price">¥8 / $1.2</td><td class="value v-cny">41.4</td><td class="value v-usd">276</td></tr>
+            <tr data-i="37.3" data-s="100.5" data-n="80897" data-d="37.5" data-pc="13.5" data-pu="1.98" data-vc="34.1" data-vu="232.7"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro（空闲）</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.3</td><td class="speed">100.5</td><td class="tokens">81k</td><td class="density">37.5</td><td class="price">¥13.5 / $1.98</td><td class="value v-cny">34.1</td><td class="value v-usd">233</td></tr>
             <tr data-i="43.6" data-s="77.2" data-n="42179" data-d="33.7" data-pc="43.2" data-pu="6" data-vc="23.9" data-vu="172.3"><td class="rank-no"></td><td class="model-name">Grok 4.6</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:43.6%"></span></span>43.6</td><td class="speed">77.2</td><td class="tokens">42k</td><td class="density">33.7</td><td class="price">¥43.2 / $6</td><td class="value v-cny">23.9</td><td class="value v-usd">172</td></tr>
+            <tr data-i="48.8" data-s="65.9" data-n="91707" data-d="32.2" data-pc="28" data-pu="4.4" data-vc="19" data-vu="120.9"><td class="rank-no"></td><td class="model-name">GLM-5.3</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:48.8%"></span></span>48.8</td><td class="speed">65.9</td><td class="tokens">92k</td><td class="density">32.2</td><td class="price">¥28 / $4.4</td><td class="value v-cny">19.0</td><td class="value v-usd">121</td></tr>
             <tr data-i="58.0" data-s="64.2" data-n="43278" data-d="37.2" data-pc="72" data-pu="10" data-vc="18.6" data-vu="133.9"><td class="rank-no"></td><td class="model-name">GPT-6.1 Sol</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:58.0%"></span></span>58.0</td><td class="speed">64.2</td><td class="tokens">43k</td><td class="density">37.2</td><td class="price">¥72 / $10</td><td class="value v-cny">18.6</td><td class="value v-usd">134</td></tr>
             <tr data-i="42.5" data-s="248.6" data-n="84807" data-d="105.6" data-pc="27" data-pu="3.75" data-vc="18.5" data-vu="133.5"><td class="rank-no"></td><td class="model-name">Gemini 3.8 Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:42.5%"></span></span>42.5</td><td class="speed">248.6</td><td class="tokens">85k</td><td class="density">105.6</td><td class="price">¥27 / $3.75</td><td class="value v-cny">18.5</td><td class="value v-usd">134</td></tr>
             <tr data-i="51.1" data-s="87.1" data-n="40939" data-d="44.5" data-pc="72" data-pu="10" data-vc="17.3" data-vu="124.9"><td class="rank-no"></td><td class="model-name">GPT-6 Sol</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:51.1%"></span></span>51.1</td><td class="speed">87.1</td><td class="tokens">41k</td><td class="density">44.5</td><td class="price">¥72 / $10</td><td class="value v-cny">17.3</td><td class="value v-usd">125</td></tr>
-            <tr data-i="48.8" data-s="65.9" data-n="91707" data-d="32.2" data-pc="28" data-pu="4.4" data-vc="19" data-vu="120.9"><td class="rank-no"></td><td class="model-name">GLM-5.3</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:48.8%"></span></span>48.8</td><td class="speed">65.9</td><td class="tokens">92k</td><td class="density">32.2</td><td class="price">¥28 / $4.4</td><td class="value v-cny">19.0</td><td class="value v-usd">121</td></tr>
-            <tr data-i="37.3" data-s="100.5" data-n="80897" data-d="37.5" data-pc="27" data-pu="3.96" data-vc="17.1" data-vu="116.3"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro (Peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.3</td><td class="speed">100.5</td><td class="tokens">81k</td><td class="density">37.5</td><td class="price">¥27 / $3.96</td><td class="value v-cny">17.1</td><td class="value v-usd">116</td></tr>
+            <tr data-i="37.3" data-s="100.5" data-n="80897" data-d="37.5" data-pc="27" data-pu="3.96" data-vc="17.1" data-vu="116.3"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro（高峰）</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.3</td><td class="speed">100.5</td><td class="tokens">81k</td><td class="density">37.5</td><td class="price">¥27 / $3.96</td><td class="value v-cny">17.1</td><td class="value v-usd">116</td></tr>
             <tr data-i="44.8" data-s="79" data-n="80416" data-d="35.4" data-pc="43.2" data-pu="6" data-vc="12.9" data-vu="92.9"><td class="rank-no"></td><td class="model-name">Grok 4.7</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.8%"></span></span>44.8</td><td class="speed">79</td><td class="tokens">80k</td><td class="density">35.4</td><td class="price">¥43.2 / $6</td><td class="value v-cny">12.9</td><td class="value v-usd">92.9</td></tr>
+            <tr data-i="46.1" data-s="39" data-n="117179" data-d="18" data-pc="36" data-pu="6" data-vc="10.9" data-vu="65.5"><td class="rank-no"></td><td class="model-name">Qwen3.8 Max</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.1%"></span></span>46.1</td><td class="speed">39</td><td class="tokens">117k</td><td class="density">18</td><td class="price">¥36 / $6</td><td class="value v-cny">10.9</td><td class="value v-usd">65.5</td></tr>
             <tr data-i="49.8" data-s="79.6" data-n="35651" data-d="39.7" data-pc="144" data-pu="20" data-vc="9.7" data-vu="69.9"><td class="rank-no"></td><td class="model-name">GPT-5.6 Sol</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:49.8%"></span></span>49.8</td><td class="speed">79.6</td><td class="tokens">36k</td><td class="density">39.7</td><td class="price">¥144 / $20</td><td class="value v-cny">9.7</td><td class="value v-usd">69.9</td></tr>
             <tr data-i="46.0" data-s="95.3" data-n="57306" data-d="43.8" data-pc="86.4" data-pu="12" data-vc="9.3" data-vu="66.8"><td class="rank-no"></td><td class="model-name">GPT-5.6 Terra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.0%"></span></span>46.0</td><td class="speed">95.3</td><td class="tokens">57k</td><td class="density">43.8</td><td class="price">¥86.4 / $12</td><td class="value v-cny">9.3</td><td class="value v-usd">66.8</td></tr>
-            <tr data-i="46.1" data-s="39" data-n="117179" data-d="18" data-pc="36" data-pu="6" data-vc="10.9" data-vu="65.5"><td class="rank-no"></td><td class="model-name">Qwen3.8 Max</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.1%"></span></span>46.1</td><td class="speed">39</td><td class="tokens">117k</td><td class="density">18</td><td class="price">¥36 / $6</td><td class="value v-cny">10.9</td><td class="value v-usd">65.5</td></tr>
             <tr data-i="39.3" data-s="33.9" data-n="56327" data-d="13.3" data-pc="100" data-pu="15" data-vc="7" data-vu="46.5"><td class="rank-no"></td><td class="model-name">Kimi K3</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:39.3%"></span></span>39.3</td><td class="speed">33.9</td><td class="tokens">56k</td><td class="density">13.3</td><td class="price">¥100 / $15</td><td class="value v-cny">7.0</td><td class="value v-usd">46.5</td></tr>
             <tr data-i="63.3" data-s="139.1" data-n="165183" data-d="88.1" data-pc="72" data-pu="10" data-vc="5.3" data-vu="38.3"><td class="rank-no"></td><td class="model-name">Claude Sonnet 5.5</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.3%"></span></span>63.3</td><td class="speed">139.1</td><td class="tokens">165k</td><td class="density">88.1</td><td class="price">¥72 / $10</td><td class="value v-cny">5.3</td><td class="value v-usd">38.3</td></tr>
             <tr data-i="60.8" data-s="51.6" data-n="32021" data-d="31.4" data-pc="360" data-pu="50" data-vc="5.3" data-vu="38"><td class="rank-no"></td><td class="model-name">GPT-6 Astra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:60.8%"></span></span>60.8</td><td class="speed">51.6</td><td class="tokens">32k</td><td class="density">31.4</td><td class="price">¥360 / $50</td><td class="value v-cny">5.3</td><td class="value v-usd">38.0</td></tr>
@@ -207,33 +207,33 @@
             </tbody>
           </table>
         </div>
-        <p class="note">Data updated 2026-10-02: benchmark scores, speed and token use are independently measured by Artificial Analysis; prices come from official provider API pricing pages.</p>
-        <p class="note">GLM-5.3-FlashX has no independent measurement; values are estimated from GLM-5.3-Flash (marked ~).</p>
-        <p class="note">DeepSeek peak/off-peak share intelligence and speed; only prices differ, so off-peak ranks higher on value.</p>
-        <p class="note">Prices are for reference only; always check the latest official pricing.</p>
+        <p class="note">数据更新于 2026-10-02：基准得分、速度与 Token 消耗来自 Artificial Analysis 独立实测；价格来自各厂商官方 API 定价。</p>
+        <p class="note">GLM-5.3-FlashX 无独立实测，采用 GLM-5.3-Flash 数据估算（标 ~）。</p>
+        <p class="note">DeepSeek 高峰/空闲为同一模型：能力与速度相同，仅价格不同，空闲版性价比更高。</p>
+        <p class="note">价格仅供参考，请以官方最新价格为准。</p>
       </section>
 
       <section class="card" aria-labelledby="method-title">
-        <h2 id="method-title" class="section-title" data-i18n="methodTitle">Methodology</h2>
+        <h2 id="method-title" class="section-title" data-i18n="methodTitle">方法论</h2>
         <ol class="method-list">
-          <li><strong>Intelligence I:</strong> the arithmetic mean of Terminal-Bench 4.0 (agentic terminal coding), Humanity’s Last Exam (multidisciplinary reasoning) and AutomationBench (SaaS workflow automation), all independently measured by Artificial Analysis under a unified harness — not vendor-reported.</li>
-          <li><strong>Speed S and token use N:</strong> both AA-measured. S is output speed in tokens/s; N is the average output tokens (including reasoning) per benchmark task, so verbose models are charged for their real cost.</li>
-          <li><strong>Intelligence density D = I/100 × S:</strong> quality-weighted tokens per second.</li>
-          <li><strong>Intelligence per unit V = I ÷ (N/1M × output price):</strong> the benchmark points one yuan (or dollar) buys on a typical task. Speed is not part of V; it is captured by D.</li>
-          <li><strong>Dual currency:</strong> models with official dual pricing (DeepSeek, Kimi, Qwen, GLM, Mimo) are computed from each official price independently; USD-only models convert at 1 USD = 7.2 CNY.</li>
-          <li><strong>Sorting:</strong> default is intelligence per unit in this page’s currency (descending); click any column header to re-sort.</li>
+          <li><strong>智能指数 I：</strong>Terminal-Bench 4.0（终端代理编程）、Humanity's Last Exam（综合推理）与 AutomationBench（SaaS 工作流自动化）三项得分的算术平均，全部由 Artificial Analysis 以统一口径独立实测，非厂商自报。</li>
+          <li><strong>速度 S 与 Token 消耗 N：</strong>均为 AA 实测。S 为输出速度（tokens/s）；N 为三项基准每任务输出 Token（含推理）的平均值，话痨模型的真实成本会被如实计入。</li>
+          <li><strong>智能密度 D = I/100 × S：</strong>每秒产出的“质量加权 Token”数，衡量智能产出速率。</li>
+          <li><strong>每元智能 V = I ÷ (N/1M × 输出单价)：</strong>在典型基准任务上，一元钱（或一美元）能买到的智能分。速度不计入 V，由 D 单独体现。</li>
+          <li><strong>双币种：</strong>有官方双币定价的模型（DeepSeek、Kimi、Qwen、GLM、Mimo）按各自官方价独立计算；仅美元定价的模型按 1 USD = 7.2 CNY 换算。</li>
+          <li><strong>排序：</strong>默认为本页语言对应币种的每元智能降序，点击表头可按其他指标重排。</li>
         </ol>
       </section>
 
       <section class="card" id="faq-section" aria-labelledby="faq-title">
-        <h2 id="faq-title" class="section-title" data-i18n="faqTitle">FAQ</h2>
+        <h2 id="faq-title" class="section-title" data-i18n="faqTitle">常见问题</h2>
         <dl class="faq-list">
-          <dt data-i18n="llmFaq1q">How are the intelligence index and intelligence per unit computed?</dt>
-          <dd data-i18n="llmFaq1a">The intelligence index is the average of three independently measured benchmarks: Terminal-Bench 4.0, Humanity’s Last Exam and AutomationBench. Intelligence per unit = intelligence index ÷ cost per task, where cost per task = measured output tokens per task × the model’s output price — so a verbose model can offer poor value despite a low unit price.</dd>
-          <dt data-i18n="llmFaq2q">Where does the data come from?</dt>
-          <dd data-i18n="llmFaq2a">Capability, speed and token use are independently measured by Artificial Analysis (unified harness, not vendor-reported); prices come from official provider pricing pages. For example, Claude Sonnet 5.5 measures 55.0% on HLE, matching Anthropic’s published 54.9%.</dd>
-          <dt data-i18n="llmFaq3q">Why isn’t the fastest model the best value?</dt>
-          <dd data-i18n="llmFaq3a">Intelligence per unit measures how much intelligence one unit of money buys; speed is captured separately by intelligence density (D = I/100 × speed). Gemini 3.8 Flash tops density, but its higher token use puts it mid-table on value. Watch the density column for throughput and the value columns for cost.</dd>
+          <dt data-i18n="llmFaq1q">智能指数和每元智能是怎么计算的？</dt>
+          <dd data-i18n="llmFaq1a">智能指数是 Terminal-Bench 4.0、Humanity's Last Exam、AutomationBench 三项独立实测得分的平均值。每元智能 = 智能指数 ÷ 每任务成本，其中每任务成本 = 实测的每任务输出 Token 数 × 模型输出单价——因此话痨模型即使单价低，也可能因 Token 消耗大而性价比变低。</dd>
+          <dt data-i18n="llmFaq2q">数据来源是什么，可靠吗？</dt>
+          <dd data-i18n="llmFaq2a">能力、速度与 Token 消耗均来自 Artificial Analysis 的独立实测（统一基准环境，非厂商自报）；价格取自各厂商官方 API 定价页。例如 Claude Sonnet 5.5 在 HLE 上的实测得分 55.0% 与 Anthropic 官方公布的 54.9% 基本一致。</dd>
+          <dt data-i18n="llmFaq3q">为什么速度快的模型性价比不一定高？</dt>
+          <dd data-i18n="llmFaq3a">每元智能只衡量“花一元钱买到多少智能”，速度由智能密度（D = 智能指数/100 × 速度）单独体现。例如 Gemini 3.8 Flash 智能密度第一，但 Token 消耗较高使其性价比位于中游。在意吞吐看智能密度列，在意成本看每元智能列。</dd>
         </dl>
       </section>
     </div>
@@ -243,7 +243,7 @@
     <div class="footer-inner">
       <span>© <span id="year"></span> xugtek</span>
       <div class="links">
-        <a href="../index.html" data-i18n="backHome">Back to home</a>
+        <a href="../index.html" data-i18n="backHome">返回首页</a>
         <a href="mailto:dev@xugtek.com">dev@xugtek.com</a>
       </div>
     </div>
