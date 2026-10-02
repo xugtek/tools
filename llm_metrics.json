@@ -356,7 +356,7 @@
       "intelligence": {
         "terminalBench": 63.6,
         "hle": 55.0,
-        "automationBench": 71.3
+        "automationBench": 71.8
       },
       "speedTokensPerSec": 139.1,
       "tokensPerTask": 165183,
