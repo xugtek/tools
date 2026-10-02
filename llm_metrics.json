@@ -1,0 +1,430 @@
+{
+  "updated": "2026-10-02",
+  "exchangeRate": 7.2,
+  "evaluations": [
+    "Terminal-Bench 4.0",
+    "Humanity's Last Exam",
+    "AutomationBench-AA"
+  ],
+  "source": "Artificial Analysis",
+  "sourceUrl": "https://artificialanalysis.ai/models",
+  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测；GLM-5.3-FlashX 无独立实测，采用 GLM-5.3-Flash 数据估算（标 ~）。",
+  "models": [
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "nameZh": null,
+      "provider": "Moonshot",
+      "aaSlug": "kimi-k3",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 12.6,
+        "hle": 46.9,
+        "automationBench": 58.3
+      },
+      "speedTokensPerSec": 33.9,
+      "tokensPerTask": 56327,
+      "aaUrl": "https://artificialanalysis.ai/models/kimi-k3"
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "nameZh": null,
+      "provider": "Alibaba",
+      "aaSlug": "qwen3-8-max",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 38.9,
+        "hle": 43.1,
+        "automationBench": 56.2
+      },
+      "speedTokensPerSec": 39.0,
+      "tokensPerTask": 117179,
+      "aaUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "nameZh": null,
+      "provider": "Zhipu",
+      "aaSlug": "glm-5-3",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 41.9,
+        "hle": 42.3,
+        "automationBench": 62.2
+      },
+      "speedTokensPerSec": 65.9,
+      "tokensPerTask": 91707,
+      "aaUrl": "https://artificialanalysis.ai/models/glm-5-3"
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "nameZh": null,
+      "provider": "Zhipu",
+      "aaSlug": "glm-5-3-flash",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 32.8,
+        "hle": 39.9,
+        "automationBench": 60.4
+      },
+      "speedTokensPerSec": 48.9,
+      "tokensPerTask": 81496,
+      "aaUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
+      "nameZh": null,
+      "provider": "Zhipu",
+      "aaSlug": null,
+      "estimated": true,
+      "intelligence": {
+        "terminalBench": 32.8,
+        "hle": 39.9,
+        "automationBench": 60.4
+      },
+      "speedTokensPerSec": 48.9,
+      "tokensPerTask": 81496,
+      "aaUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+    },
+    {
+      "id": "deepseek-v4.1-flash-peak",
+      "name": "DeepSeek V4.1 Flash (Peak)",
+      "nameZh": "DeepSeek V4.1 Flash（高峰）",
+      "provider": "DeepSeek",
+      "aaSlug": "deepseek-v4-1-flash",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 26.8,
+        "hle": 39.2,
+        "automationBench": 68.9
+      },
+      "speedTokensPerSec": 209.4,
+      "tokensPerTask": 135649,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash"
+    },
+    {
+      "id": "deepseek-v4.1-flash-offpeak",
+      "name": "DeepSeek V4.1 Flash (Off-peak)",
+      "nameZh": "DeepSeek V4.1 Flash（空闲）",
+      "provider": "DeepSeek",
+      "aaSlug": "deepseek-v4-1-flash",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 26.8,
+        "hle": 39.2,
+        "automationBench": 68.9
+      },
+      "speedTokensPerSec": 209.4,
+      "tokensPerTask": 135649,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash"
+    },
+    {
+      "id": "deepseek-v4-pro-peak",
+      "name": "DeepSeek V4 Pro (Peak)",
+      "nameZh": "DeepSeek V4 Pro（高峰）",
+      "provider": "DeepSeek",
+      "aaSlug": "deepseek-v4-pro",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 14.1,
+        "hle": 41.0,
+        "automationBench": 56.7
+      },
+      "speedTokensPerSec": 100.5,
+      "tokensPerTask": 80897,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+    },
+    {
+      "id": "deepseek-v4-pro-offpeak",
+      "name": "DeepSeek V4 Pro (Off-peak)",
+      "nameZh": "DeepSeek V4 Pro（空闲）",
+      "provider": "DeepSeek",
+      "aaSlug": "deepseek-v4-pro",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 14.1,
+        "hle": 41.0,
+        "automationBench": 56.7
+      },
+      "speedTokensPerSec": 100.5,
+      "tokensPerTask": 80897,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+    },
+    {
+      "id": "mimo-v2.6-pro",
+      "name": "Mimo-V2.6 Pro",
+      "nameZh": null,
+      "provider": "Xiaomi",
+      "aaSlug": "mimo-v2-6-pro",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 34.8,
+        "hle": 49.4,
+        "automationBench": 58.6
+      },
+      "speedTokensPerSec": 43.7,
+      "tokensPerTask": 76040,
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+    },
+    {
+      "id": "mimo-v2.6-flash",
+      "name": "Mimo-V2.6 Flash",
+      "nameZh": null,
+      "provider": "Xiaomi",
+      "aaSlug": "mimo-v2-6-flash",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 22.7,
+        "hle": 35.1,
+        "automationBench": 64.1
+      },
+      "speedTokensPerSec": 51.2,
+      "tokensPerTask": 101258,
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-6-astra",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 59.1,
+        "hle": 54.7,
+        "automationBench": 68.5
+      },
+      "speedTokensPerSec": 51.6,
+      "tokensPerTask": 32021,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra"
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-6-1-sol",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 56.1,
+        "hle": 52.9,
+        "automationBench": 64.9
+      },
+      "speedTokensPerSec": 64.2,
+      "tokensPerTask": 43278,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol"
+    },
+    {
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-6-sol",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 43.9,
+        "hle": 47.9,
+        "automationBench": 61.6
+      },
+      "speedTokensPerSec": 87.1,
+      "tokensPerTask": 40939,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-6-luna",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 12.6,
+        "hle": 38.5,
+        "automationBench": 53.2
+      },
+      "speedTokensPerSec": 128.3,
+      "tokensPerTask": 66190,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-5-6-sol",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 39.9,
+        "hle": 49.5,
+        "automationBench": 60.1
+      },
+      "speedTokensPerSec": 79.6,
+      "tokensPerTask": 35651,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-5-6-terra",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 35.4,
+        "hle": 42.9,
+        "automationBench": 59.6
+      },
+      "speedTokensPerSec": 95.3,
+      "tokensPerTask": 57306,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-terra"
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-5-6-luna",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 11.6,
+        "hle": 39.5,
+        "automationBench": 50.2
+      },
+      "speedTokensPerSec": 124.0,
+      "tokensPerTask": 60456,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+    },
+    {
+      "id": "claude-fable-5.1",
+      "name": "Claude Fable 5.1",
+      "nameZh": null,
+      "provider": "Anthropic",
+      "aaSlug": "claude-fable-5-1",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 52.0,
+        "hle": 59.1,
+        "automationBench": 59.4
+      },
+      "speedTokensPerSec": 68.2,
+      "tokensPerTask": 84892,
+      "aaUrl": "https://artificialanalysis.ai/models/claude-fable-5-1"
+    },
+    {
+      "id": "claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "nameZh": null,
+      "provider": "Anthropic",
+      "aaSlug": "claude-opus-5-5",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 59.6,
+        "hle": 61.4,
+        "automationBench": 69.5
+      },
+      "speedTokensPerSec": 92.4,
+      "tokensPerTask": 109962,
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "nameZh": null,
+      "provider": "Anthropic",
+      "aaSlug": "claude-opus-5",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 49.0,
+        "hle": 54.9,
+        "automationBench": 56.6
+      },
+      "speedTokensPerSec": 54.6,
+      "tokensPerTask": 85378,
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "nameZh": null,
+      "provider": "Anthropic",
+      "aaSlug": "claude-sonnet-5-5",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 63.6,
+        "hle": 55.0,
+        "automationBench": 71.3
+      },
+      "speedTokensPerSec": 139.1,
+      "tokensPerTask": 165183,
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "nameZh": null,
+      "provider": "Anthropic",
+      "aaSlug": "claude-sonnet-5",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 14.1,
+        "hle": 41.3,
+        "automationBench": 36.5
+      },
+      "speedTokensPerSec": 83.8,
+      "tokensPerTask": 162868,
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "nameZh": null,
+      "provider": "Google",
+      "aaSlug": "gemini-3-8-flash",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 19.7,
+        "hle": 47.8,
+        "automationBench": 59.9
+      },
+      "speedTokensPerSec": 248.6,
+      "tokensPerTask": 84807,
+      "aaUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+    },
+    {
+      "id": "grok-4.7",
+      "name": "Grok 4.7",
+      "nameZh": null,
+      "provider": "xAI",
+      "aaSlug": "grok-4-7",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 25.8,
+        "hle": 43.1,
+        "automationBench": 65.6
+      },
+      "speedTokensPerSec": 79.0,
+      "tokensPerTask": 80416,
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-7"
+    },
+    {
+      "id": "grok-4.6",
+      "name": "Grok 4.6",
+      "nameZh": null,
+      "provider": "xAI",
+      "aaSlug": "grok-4-6",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 21.2,
+        "hle": 42.9,
+        "automationBench": 66.7
+      },
+      "speedTokensPerSec": 77.2,
+      "tokensPerTask": 42179,
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-6"
+    }
+  ]
+}
