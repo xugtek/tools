@@ -665,7 +665,8 @@ select.form-control {
 }
 
 .tool-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -697,7 +698,8 @@ select.form-control {
 
 .tool-card .hint {
   display: inline-block;
-  margin-top: 14px;
+  margin-top: auto;
+  padding-top: 14px;
   color: var(--accent);
   font-weight: 600;
 }
