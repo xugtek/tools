@@ -892,9 +892,46 @@ footer {
   margin-left: 1px;
 }
 
-.rank-table[data-cur="CNY"] .v-usd,
-.rank-table[data-cur="USD"] .v-cny {
-  color: var(--text-faint);
+.rank-sliders {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.weight-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weight-row label {
+  flex: 0 0 64px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.weight-row .range-slider {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent);
+}
+
+.weight-row .weight-value {
+  flex: 0 0 48px;
+  text-align: right;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-table .score {
+  font-weight: 700;
+  color: var(--text);
 }
 
 .method-list {

@@ -1,29 +1,34 @@
 import { getLang, t } from './i18n.js';
 import { initSite } from './site.js';
 import {
+  WEIGHT_PRESETS,
+  formatMinutes,
+  formatScore,
   formatTokensCompact,
-  formatValue,
+  normalizeWeights,
+  scoreRows,
   sortRows
 } from './llm-rank-core.js';
 
 const DEFAULT_DIRECTIONS = {
   intelligence: 'desc',
   speed: 'desc',
+  time: 'asc',
   tokens: 'asc',
-  density: 'desc',
-  price: 'asc',
-  valueCny: 'desc',
-  valueUsd: 'desc'
+  cost: 'asc',
+  score: 'desc'
 };
 
 const elements = {
   table: document.getElementById('rank-table'),
-  toggleGroup: document.getElementById('currency-toggle')
+  presetGroup: document.getElementById('preset-toggle'),
+  sliders: document.getElementById('weight-sliders')
 };
 
 let rowState = [];
-let activeCurrency = 'CNY';
-let sortKey = null;
+let weights = { ...WEIGHT_PRESETS.balanced };
+let preset = 'balanced';
+let sortKey = 'score';
 let sortDirection = 'desc';
 
 function locale() {
@@ -37,21 +42,22 @@ function readRows() {
     intelligence: Number(tr.dataset.i),
     speed: Number(tr.dataset.s),
     tokens: Number(tr.dataset.n),
-    density: Number(tr.dataset.d),
-    priceCny: Number(tr.dataset.pc),
-    priceUsd: Number(tr.dataset.pu),
-    valueCny: Number(tr.dataset.vc),
-    valueUsd: Number(tr.dataset.vu)
+    timePerTaskSec: Number(tr.dataset.t),
+    costPerTaskUsd: Number(tr.dataset.cost)
   }));
 }
 
-function sortKeyForColumn(key) {
-  if (key === 'price') return activeCurrency === 'CNY' ? 'priceCny' : 'priceUsd';
-  return key;
-}
+const COLUMN_KEYS = {
+  intelligence: 'intelligence',
+  speed: 'speed',
+  time: 'timePerTaskSec',
+  tokens: 'tokens',
+  cost: 'costPerTaskUsd',
+  score: 'score'
+};
 
 function applySort(key, direction) {
-  const sorted = sortRows(rowState, sortKeyForColumn(key), direction);
+  const sorted = sortRows(rowState, COLUMN_KEYS[key] || key, direction);
   const tbody = elements.table.querySelector('tbody');
   sorted.forEach((row) => tbody.appendChild(row.tr));
   sorted.forEach((row, index) => {
@@ -66,20 +72,84 @@ function updateHeaderIndicators() {
   });
 }
 
-function setActiveCurrency(currency) {
-  activeCurrency = currency;
-  elements.table.dataset.cur = currency;
-  elements.toggleGroup.querySelectorAll('button').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.currency === currency);
+function rescore() {
+  const scored = scoreRows(rowState, weights);
+  rowState.forEach((row) => {
+    const match = scored.find((s) => s.tr === row.tr);
+    row.score = match ? match.score : 0;
+    row.tr.querySelector('.score').textContent = formatScore(row.score, locale());
   });
-  const valueKey = currency === 'CNY' ? 'valueCny' : 'valueUsd';
-  sortKey = valueKey;
+}
+
+function updateSliderLabels() {
+  if (!elements.sliders) return;
+  const pct = (v) => `${Math.round(v * 100)}%`;
+  elements.sliders.querySelector('[data-weight-label="performance"]').textContent = pct(weights.performance);
+  elements.sliders.querySelector('[data-weight-label="cost"]').textContent = pct(weights.cost);
+  elements.sliders.querySelector('[data-weight-label="speed"]').textContent = pct(weights.speed);
+  elements.sliders.querySelector('#weight-performance').value = String(Math.round(weights.performance * 100));
+  elements.sliders.querySelector('#weight-cost').value = String(Math.round(weights.cost * 100));
+  elements.sliders.querySelector('#weight-speed').value = String(Math.round(weights.speed * 100));
+}
+
+function setActivePreset(name) {
+  preset = name;
+  elements.presetGroup.querySelectorAll('button').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.preset === name);
+    if (btn.dataset.preset === 'custom') {
+      btn.setAttribute('aria-expanded', String(name === 'custom'));
+    }
+  });
+  if (elements.sliders) {
+    elements.sliders.hidden = name !== 'custom';
+  }
+}
+
+function applyPreset(name) {
+  if (name === 'custom') {
+    setActivePreset('custom');
+    updateSliderLabels();
+    return;
+  }
+  weights = { ...WEIGHT_PRESETS[name] };
+  setActivePreset(name);
+  updateSliderLabels();
+  rescore();
+  sortKey = 'score';
   sortDirection = 'desc';
   applySort(sortKey, sortDirection);
   updateHeaderIndicators();
 }
 
 function bindEvents() {
+  elements.presetGroup.querySelectorAll('button[data-preset]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.preset !== preset) applyPreset(btn.dataset.preset);
+    });
+  });
+
+  if (elements.sliders) {
+    ['performance', 'cost', 'speed'].forEach((axis) => {
+      const slider = elements.sliders.querySelector(`#weight-${axis}`);
+      slider.addEventListener('input', () => {
+        const raw = {
+          performance: Number(elements.sliders.querySelector('#weight-performance').value),
+          cost: Number(elements.sliders.querySelector('#weight-cost').value),
+          speed: Number(elements.sliders.querySelector('#weight-speed').value)
+        };
+        raw[axis] = Number(slider.value);
+        weights = normalizeWeights(raw);
+        setActivePreset('custom');
+        updateSliderLabels();
+        rescore();
+        sortKey = 'score';
+        sortDirection = 'desc';
+        applySort(sortKey, sortDirection);
+        updateHeaderIndicators();
+      });
+    });
+  }
+
   elements.table.querySelectorAll('th[data-sort]').forEach((th) => {
     th.addEventListener('click', () => {
       const key = th.dataset.sort;
@@ -94,38 +164,28 @@ function bindEvents() {
     });
   });
 
-  elements.toggleGroup.querySelectorAll('button').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (btn.dataset.currency !== activeCurrency) {
-        setActiveCurrency(btn.dataset.currency);
-      }
-    });
-  });
-
-  document.addEventListener('xugtek:langchange', () => {
-    renderNumericCells();
-  });
+  document.addEventListener('xugtek:langchange', renderLocalizedCells);
 }
 
-function renderNumericCells() {
+function renderLocalizedCells() {
   const loc = locale();
   rowState.forEach((row) => {
     row.tr.querySelector('.tokens').textContent = formatTokensCompact(row.tokens, loc);
-    row.tr.querySelector('.v-cny').textContent = formatValue(row.valueCny, loc);
-    row.tr.querySelector('.v-usd').textContent = formatValue(row.valueUsd, loc);
+    row.tr.querySelector('.time').textContent = formatMinutes(row.timePerTaskSec, loc);
+    row.tr.querySelector('.score').textContent = formatScore(row.score, loc);
   });
 }
 
 function setDocumentLanguage() {
   const en = getLang() === 'en';
   document.title = en
-    ? 'LLM Value Ranking – Intelligence Density & Value per Dollar'
-    : '大模型性价比排行榜 - GPT/DeepSeek/Opus/Mimo/GLM/Kimi智能密度与每元智能';
+    ? 'LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way'
+    : '大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定';
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', en
-      ? 'LLM value ranking based on independently measured benchmarks (Terminal-Bench 4.0, HLE, AutomationBench): intelligence density and intelligence per dollar for 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi, in CNY/USD.'
-      : '大模型性价比排行榜：基于 Terminal-Bench 4.0、HLE、AutomationBench 独立实测，计算 26 款大模型（DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi）的智能密度与每元智能，支持人民币/美元双币种。');
+      ? 'LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.'
+      : '大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 26 款大模型。');
   }
 }
 
@@ -134,18 +194,19 @@ function init() {
   setDocumentLanguage();
   if (!elements.table) return;
 
-  activeCurrency = elements.table.dataset.defaultCurrency || 'CNY';
   readRows();
 
-  const valueKey = activeCurrency === 'CNY' ? 'valueCny' : 'valueUsd';
-  sortKey = valueKey;
+  weights = { ...WEIGHT_PRESETS.balanced };
+  rescore();
+  sortKey = 'score';
   sortDirection = 'desc';
-  setActiveCurrency(activeCurrency);
-  renderNumericCells();
+  applySort(sortKey, sortDirection);
+  updateHeaderIndicators();
+  setActivePreset('balanced');
+  updateSliderLabels();
+  renderLocalizedCells();
 
-  document.addEventListener('xugtek:langchange', () => {
-    setDocumentLanguage();
-  });
+  document.addEventListener('xugtek:langchange', setDocumentLanguage);
 
   bindEvents();
 }

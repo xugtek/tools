@@ -1,8 +1,9 @@
 /**
  * LLM value ranking core calculations (pure functions).
  *
- * All monetary values are per 1M output tokens. Benchmark scores are
- * percentages (0-100) independently measured by Artificial Analysis.
+ * All monetary values are in USD per benchmark task, independently measured
+ * by Artificial Analysis (input + cache + reasoning + output tokens).
+ * Benchmark scores are percentages (0-100). Time is seconds per task.
  */
 
 export function toNonNegativeNumber(value) {
@@ -25,34 +26,93 @@ export function computeIntelligence(evals) {
 }
 
 /**
- * Intelligence density: quality-weighted tokens per second.
- * D = I/100 × S  → "smart tokens per second".
+ * Built-in emphasis presets for the composite score.
+ * Weights are normalized to sum 1.
  */
-export function computeDensity(intelligence, speedTokensPerSec) {
-  const i = toNonNegativeNumber(intelligence);
-  const s = toNonNegativeNumber(speedTokensPerSec);
-  return (i / 100) * s;
+export const WEIGHT_PRESETS = {
+  balanced: { performance: 1 / 3, cost: 1 / 3, speed: 1 / 3 },
+  performance: { performance: 0.75, cost: 0.125, speed: 0.125 },
+  cost: { performance: 0.2, cost: 0.6, speed: 0.2 },
+  speed: { performance: 0.2, cost: 0.2, speed: 0.6 }
+};
+
+/**
+ * Normalize raw weight inputs so performance + cost + speed = 1.
+ * Falls back to the balanced preset when all inputs are unusable.
+ */
+export function normalizeWeights(raw) {
+  const perf = toNonNegativeNumber(raw?.performance);
+  const cost = toNonNegativeNumber(raw?.cost);
+  const speed = toNonNegativeNumber(raw?.speed);
+  const sum = perf + cost + speed;
+  if (sum <= 0) return { ...WEIGHT_PRESETS.balanced };
+  return { performance: perf / sum, cost: cost / sum, speed: speed / sum };
 }
 
 /**
- * Output-token cost of one typical benchmark task, in the given currency.
- * cost = tokensPerTask / 1M × outputPricePerM
+ * Composite value score with per-axis min-max normalization.
+ *
+ * Each axis is normalized to [floor, 1] where 1 = best in the current set:
+ * - performance: linear on intelligence (higher is better)
+ * - cost: log scale (cost spans orders of magnitude across models)
+ * - time: log scale
+ *
+ * score = perfN^a × costN^b × timeN^c, weights normalized to sum 1.
+ * The geometric form means a model cannot compensate for a terrible axis
+ * with a single strong axis. Rows missing cost or time sink to 0.
  */
-export function computeTaskCost(tokensPerTask, outputPricePerM) {
-  const tokens = toNonNegativeNumber(tokensPerTask);
-  const price = toNonNegativeNumber(outputPricePerM);
-  return (tokens / 1000000) * price;
+export const AXIS_FLOOR = 0.05;
+
+function normalizePositive(value, min, max, useLog) {
+  const v = toNonNegativeNumber(value);
+  const lo = toNonNegativeNumber(min);
+  const hi = toNonNegativeNumber(max);
+  if (v <= 0) return 0;
+  if (hi <= lo) return 1; // degenerate axis: everyone equal -> neutral
+  let ratio;
+  if (useLog) {
+    if (v >= hi) return AXIS_FLOOR;
+    if (v <= lo) return 1;
+    ratio = (Math.log(hi) - Math.log(v)) / (Math.log(hi) - Math.log(lo));
+  } else {
+    if (v >= hi) return 1;
+    if (v <= lo) return AXIS_FLOOR;
+    ratio = (v - lo) / (hi - lo);
+  }
+  return AXIS_FLOOR + (1 - AXIS_FLOOR) * ratio;
+}
+
+export function compositeScore(intelligence, costPerTaskUsd, timePerTaskSec, { performance, cost, speed, bounds }) {
+  const c = toNonNegativeNumber(costPerTaskUsd);
+  const t = toNonNegativeNumber(timePerTaskSec);
+  if (c <= 0 || t <= 0) return 0;
+  const w = normalizeWeights({ performance, cost, speed });
+  const b = bounds || {};
+  const perfN = normalizePositive(intelligence, b.minIntelligence, b.maxIntelligence, false);
+  const costN = normalizePositive(c, b.minCost, b.maxCost, true);
+  const timeN = normalizePositive(t, b.minTime, b.maxTime, true);
+  return Math.pow(perfN, w.performance) * Math.pow(costN, w.cost) * Math.pow(timeN, w.speed);
 }
 
 /**
- * Intelligence per unit of money: benchmark points bought per currency unit.
- * V = I ÷ taskCost. Returns 0 when the cost is not positive.
+ * Compute composite scores for a full row set with per-axis bounds derived
+ * from the set itself. Returns a new array of { ...row, score }.
  */
-export function computeValue(intelligence, tokensPerTask, outputPricePerM) {
-  const i = toNonNegativeNumber(intelligence);
-  const cost = computeTaskCost(tokensPerTask, outputPricePerM);
-  if (cost <= 0) return 0;
-  return i / cost;
+export function scoreRows(rows, weights) {
+  const usable = rows.filter((r) => toNonNegativeNumber(r.costPerTaskUsd) > 0 && toNonNegativeNumber(r.timePerTaskSec) > 0);
+  if (!usable.length) return rows.map((row) => ({ ...row, score: 0 }));
+  const bounds = {
+    minIntelligence: Math.min(...usable.map((r) => r.intelligence)),
+    maxIntelligence: Math.max(...usable.map((r) => r.intelligence)),
+    minCost: Math.min(...usable.map((r) => r.costPerTaskUsd)),
+    maxCost: Math.max(...usable.map((r) => r.costPerTaskUsd)),
+    minTime: Math.min(...usable.map((r) => r.timePerTaskSec)),
+    maxTime: Math.max(...usable.map((r) => r.timePerTaskSec))
+  };
+  return rows.map((row) => ({
+    ...row,
+    score: compositeScore(row.intelligence, row.costPerTaskUsd, row.timePerTaskSec, { ...weights, bounds })
+  }));
 }
 
 /**
@@ -76,14 +136,12 @@ export function sortRows(rows, key, direction = 'desc') {
 }
 
 /**
- * Format a value score adaptively: large values lose decimals,
- * small values keep one so the low end stays readable.
+ * Format a composite score for display: 0-100 with one decimal.
  */
-export function formatValue(value, locale = 'zh-CN') {
+export function formatScore(value, locale = 'zh-CN') {
   const v = Number(value);
   if (!Number.isFinite(v) || v <= 0) return '—';
-  if (v >= 100) return Math.round(v).toLocaleString(locale);
-  return v.toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return (v * 100).toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
 /**
@@ -94,4 +152,14 @@ export function formatTokensCompact(value, locale = 'zh-CN') {
   if (v <= 0) return '—';
   if (v < 1000) return String(Math.round(v));
   return `${Math.round(v / 1000).toLocaleString(locale)}k`;
+}
+
+/**
+ * Format seconds per task as minutes with one decimal: 1840 → "30.7分".
+ * The unit label is left to the caller for i18n.
+ */
+export function formatMinutes(timeSec, locale = 'zh-CN') {
+  const v = toNonNegativeNumber(timeSec);
+  if (v <= 0) return '—';
+  return (v / 60).toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }

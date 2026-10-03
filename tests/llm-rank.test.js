@@ -2,74 +2,89 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  computeDensity,
+  WEIGHT_PRESETS,
+  compositeScore,
   computeIntelligence,
-  computeTaskCost,
-  computeValue,
+  formatMinutes,
+  formatScore,
   formatTokensCompact,
-  formatValue,
+  normalizeWeights,
+  scoreRows,
   sortRows
 } from '../assets/js/llm-rank-core.js';
 
 test('computeIntelligence averages the three benchmark scores', () => {
-  const i = computeIntelligence({ terminalBench: 63.6, hle: 55.0, automationBench: 71.3 });
-  assert.ok(Math.abs(i - 63.3) < 0.05);
+  const i = computeIntelligence({ terminalBench: 63.6, hle: 55.0, automationBench: 71.8 });
+  assert.ok(Math.abs(i - 63.47) < 0.02);
 });
 
-test('computeIntelligence ignores missing scores', () => {
-  const i = computeIntelligence({ terminalBench: 40, hle: null });
-  assert.ok(Math.abs(i - 20) < 1e-9);
-});
-
-test('computeIntelligence returns zero without usable scores', () => {
+test('computeIntelligence ignores missing scores and returns zero without data', () => {
+  assert.ok(Math.abs(computeIntelligence({ terminalBench: 40, hle: null }) - 20) < 1e-9);
   assert.equal(computeIntelligence(null), 0);
-  assert.equal(computeIntelligence({}), 0);
   assert.equal(computeIntelligence({ hle: 'abc' }), 0);
 });
 
-test('computeDensity is quality-weighted tokens per second', () => {
-  // Sonnet 5.5: I=63.3, S=139.1 → 88.1
-  const d = computeDensity(63.3, 139.1);
-  assert.ok(Math.abs(d - 88.1) < 0.1);
-  assert.equal(computeDensity(0, 999), 0);
-  assert.equal(computeDensity(-5, 999), 0);
+test('normalizeWeights scales weights to sum one and falls back to balanced', () => {
+  const w = normalizeWeights({ performance: 2, cost: 1, speed: 1 });
+  assert.ok(Math.abs(w.performance - 0.5) < 1e-9);
+  assert.ok(Math.abs(w.cost - 0.25) < 1e-9);
+  assert.ok(Math.abs(w.speed - 0.25) < 1e-9);
+  assert.deepEqual(normalizeWeights({}), { ...WEIGHT_PRESETS.balanced });
+  assert.deepEqual(normalizeWeights(null), { ...WEIGHT_PRESETS.balanced });
+  const sum = Object.values(normalizeWeights({ performance: 7, cost: 3, speed: 0 })).reduce((a, b) => a + b, 0);
+  assert.ok(Math.abs(sum - 1) < 1e-9);
 });
 
-test('computeTaskCost scales tokens by output price', () => {
-  // 101,257 tokens at $0.28/M → $0.0284
-  const cost = computeTaskCost(101257, 0.28);
-  assert.ok(Math.abs(cost - 0.02835196) < 1e-6);
-  assert.equal(computeTaskCost(0, 10), 0);
-  assert.equal(computeTaskCost(1000, 0), 0);
+test('compositeScore normalizes each axis to the set and floors the worst', () => {
+  const bounds = { minIntelligence: 0, maxIntelligence: 100, minCost: 0.1, maxCost: 10, minTime: 100, maxTime: 1000 };
+  // best on all axes -> exactly 1
+  const best = compositeScore(100, 0.1, 100, { performance: 1 / 3, cost: 1 / 3, speed: 1 / 3, bounds });
+  assert.ok(Math.abs(best - 1) < 1e-9);
+  // zero cost or time -> 0 (unusable)
+  assert.equal(compositeScore(80, 0, 100, { ...WEIGHT_PRESETS.balanced, bounds }), 0);
+  assert.equal(compositeScore(80, 1, 0, { ...WEIGHT_PRESETS.balanced, bounds }), 0);
+  // worst axis hits the floor (0.05), never zero, under geometric weighting
+  const worstCost = compositeScore(100, 10, 100, { performance: 1 / 3, cost: 1 / 3, speed: 1 / 3, bounds });
+  assert.ok(Math.abs(worstCost - Math.pow(0.05, 1 / 3)) < 1e-9);
+  // single-axis emphasis: score equals the normalized axis (floor included)
+  const perfOnly = compositeScore(50, 1, 316.2, { performance: 1, cost: 0, speed: 0, bounds });
+  assert.ok(Math.abs(perfOnly - 0.525) < 1e-9);
 });
 
-test('computeValue divides intelligence by task cost', () => {
-  // MiMo-V2.6-Flash: I=40.6, N=101,257, $0.28/M → ~1,433 points per dollar
-  const v = computeValue(40.6, 101257, 0.28);
-  assert.ok(Math.abs(v - 1432.5) < 1);
-  // zero cost never divides
-  assert.equal(computeValue(40, 1000, 0), 0);
-  assert.equal(computeValue(0, 1000, 5), 0);
+test('scoreRows derives bounds from the set and marks unusable rows', () => {
+  const scored = scoreRows([
+    { name: 'A', intelligence: 100, costPerTaskUsd: 0.1, timePerTaskSec: 100 },
+    { name: 'B', intelligence: 60, costPerTaskUsd: 0.2, timePerTaskSec: 200 },
+    { name: 'C', intelligence: 60, costPerTaskUsd: 0, timePerTaskSec: 50 }
+  ], WEIGHT_PRESETS.balanced);
+  assert.equal(scored[0].score, 1);           // A is best on every axis
+  assert.ok(scored[1].score > 0 && scored[1].score < 1);
+  assert.equal(scored[2].score, 0);           // missing cost -> unusable
 });
 
-test('computeValue is currency-consistent via price input', () => {
-  const vUsd = computeValue(44.4, 81495, 0.5);
-  const vCny = computeValue(44.4, 81495, 3.6); // 3.6 = 0.5 × 7.2
-  assert.ok(Math.abs(vCny - vUsd / 7.2) < 0.01);
-});
-
-test('sortRows sorts descending by default and stays stable on ties', () => {
+test('emphasis presets flip the leader (stylized archetypes)', () => {
+  // each preset crowns a different archetype: weighting visibly controls outcome
   const rows = [
-    { id: 'a', valueUsd: 10 },
-    { id: 'b', valueUsd: 30 },
-    { id: 'c', valueUsd: 20 },
-    { id: 'd', valueUsd: 20 }
+    { name: 'Strong Premium', intelligence: 95, costPerTaskUsd: 1.5, timePerTaskSec: 450 },
+    { name: 'Cheap Mid', intelligence: 55, costPerTaskUsd: 0.09, timePerTaskSec: 450 },
+    { name: 'Fast Standard', intelligence: 50, costPerTaskUsd: 1.0, timePerTaskSec: 300 },
+    { name: 'All-rounder', intelligence: 70, costPerTaskUsd: 0.5, timePerTaskSec: 450 }
   ];
-  const sorted = sortRows(rows, 'valueUsd');
-  assert.deepEqual(sorted.map((r) => r.id), ['b', 'c', 'd', 'a']);
-  const asc = sortRows(rows, 'valueUsd', 'asc');
-  assert.deepEqual(asc.map((r) => r.id), ['a', 'c', 'd', 'b']);
-  assert.notEqual(sorted, rows, 'input array must not be mutated');
+  const leader = (weights) => sortRows(scoreRows(rows, weights), 'score')[0].name;
+  assert.equal(leader(WEIGHT_PRESETS.balanced), 'All-rounder');
+  assert.equal(leader(WEIGHT_PRESETS.performance), 'Strong Premium');
+  assert.equal(leader(WEIGHT_PRESETS.cost), 'Cheap Mid');
+  assert.equal(leader(WEIGHT_PRESETS.speed), 'Fast Standard');
+});
+
+test('composite scores are currency-independent', () => {
+  // score is computed from set-relative ratios; currency never enters the formula
+  const s = scoreRows([
+    { name: 'A', intelligence: 50, costPerTaskUsd: 0.1, timePerTaskSec: 100 },
+    { name: 'B', intelligence: 50, costPerTaskUsd: 0.4, timePerTaskSec: 100 }
+  ], WEIGHT_PRESETS.balanced);
+  // B costs 4x A: perfN^⅓ × (log-ratio)^⅓... just assert deterministic & < A
+  assert.ok(s[1].score > 0 && s[1].score < s[0].score);
 });
 
 test('sortRows breaks ties deterministically by name in both directions', () => {
@@ -84,23 +99,29 @@ test('sortRows breaks ties deterministically by name in both directions', () => 
   assert.deepEqual(asc.map((r) => r.name), ['GPT-6 Astra', 'Claude Opus 5.5', 'Claude Sonnet 5.5']);
 });
 
-test('sortRows sinks rows with missing keys to the bottom', () => {
+test('sortRows sinks missing keys and does not mutate input', () => {
   const rows = [
-    { id: 'a', valueUsd: null },
-    { id: 'b', valueUsd: 1 },
+    { id: 'a', score: null },
+    { id: 'b', score: 1 },
     { id: 'c' }
   ];
-  const sorted = sortRows(rows, 'valueUsd', 'desc');
+  const sorted = sortRows(rows, 'score');
   assert.equal(sorted[0].id, 'b');
-  assert.deepEqual(new Set([sorted[1].id, sorted[2].id]), new Set(['a', 'c']));
+  assert.notEqual(sorted, rows);
+  assert.deepEqual(rows.map((r) => r.id), ['a', 'b', 'c']);
 });
 
-test('formatValue adapts precision to magnitude', () => {
-  assert.equal(formatValue(1432.5), '1,433');
-  assert.equal(formatValue(38.25), '38.3');
-  assert.equal(formatValue(5.3), '5.3');
-  assert.equal(formatValue(0), '—');
-  assert.equal(formatValue(-3), '—');
+test('formatScore renders 0-100 with one decimal', () => {
+  assert.equal(formatScore(1), '100.0');
+  assert.equal(formatScore(0.467), '46.7');
+  assert.equal(formatScore(0), '—');
+  assert.equal(formatScore(-1), '—');
+});
+
+test('formatMinutes renders seconds as minutes with one decimal', () => {
+  assert.equal(formatMinutes(1840), '30.7');
+  assert.equal(formatMinutes(90), '1.5');
+  assert.equal(formatMinutes(0), '—');
 });
 
 test('formatTokensCompact abbreviates thousands', () => {
