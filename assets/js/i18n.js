@@ -227,14 +227,19 @@ const translations = {
 
 let currentLang = 'zh-CN';
 
+function staticLangKey() {
+  const raw = document.documentElement.getAttribute('data-static-lang');
+  return raw === 'zh' ? 'zh-CN' : raw;
+}
+
 function detectLanguage() {
   let followed = false;
   try {
     followed = typeof sessionStorage !== 'undefined' && !!sessionStorage.getItem(NAV_FLAG_KEY);
   } catch (e) {}
   if (followed && typeof document !== 'undefined') {
-    const staticLang = document.documentElement.getAttribute('data-static-lang');
-    if (staticLang && translations[staticLang]) return staticLang;
+    const key = staticLangKey();
+    if (key && translations[key]) return key;
   }
   if (typeof navigator !== 'undefined') {
     const navLang = navigator.language || navigator.userLanguage || '';
