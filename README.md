@@ -123,6 +123,7 @@ npm test
 - `sitemap.xml`：6 个 URL，中英互为 `hreflang` alternate（zh-CN / en / x-default）
 - 每页含 `canonical`、`hreflang`、描述与 OG/Twitter 标签；计算器页含 `WebApplication` + `BreadcrumbList` + `FAQPage` 结构化数据
 - 中英文页各有独立静态正文（价格总表、FAQ），以内容差异而非 URL 区分翻译对页
+- **IndexNow**：根目录 `<key>.txt` 公钥文件 + `scripts/indexnow.sh`，内容更新后向 Bing/Yandex/Naver/Seznam 即时通知 URL（需先推送使 `https://tools.xugtek.com/<key>.txt` 可访问，再运行脚本；建议同时在 [Bing Webmaster Tools](https://www.bing.com/webmasters) 绑定域名并提交 sitemap）
 
 > 语言适配发生在会话首帧（同 URL 内切换不改变 URL 归属），切换语言为真实链接导航，避免爬虫自动重定向。
 
