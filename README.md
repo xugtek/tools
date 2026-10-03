@@ -5,7 +5,7 @@
 当前包含：
 
 - **Token 费用计算器**（`token/index.html` 中文 · `token/en.html` 英文）——估算每日/每月 Token API 调用费用，内置 26 款主流大模型官方价格（2026-10-01 更新），支持人民币/美元双币种独立计价、缓存命中计费、优惠倍率、用量估算与自定义模型。
-- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench）计算 26 款大模型的智能密度与每元智能（含每任务 Token 消耗），双币种排名，静态表格可按列重排。
+- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench）的智能指数、每任务全成本与耗时，对 25 款大模型做三维归一化几何加权排名；内置均衡/性能/成本/速度预设与自定义权重滑杆，静态表格可按列重排。
 
 ## 特性
 
@@ -14,10 +14,10 @@
 - 模型价格独立于代码，存放于 `token_models.json`，缺失币种按汇率补算，官方双币定价各自独立
 - 结果区支持人民币/美元双币同时展示、明细拆分与"固定到对比"
 - 计算器页含静态价格总表（26 款模型，带行锚点）、底部 FAQ 与 `FAQPage` 结构化数据
-- 排行榜页含静态排名表（智能指数条形图）、方法论与 `WebPage`/`BreadcrumbList`/`FAQPage` 结构化数据
+- 排行榜页含静态排名表（智能指数条形图）、方法论与 `WebPage`/`BreadcrumbList`/`FAQPage` 结构化数据，综合分为三维归一化几何加权（成本/耗时对数映射，下限 0.05）
 - 明暗主题切换，视觉风格与 [xugtek.com](https://xugtek.com) 对齐
 - 核心计算逻辑与 UI 分离，便于单元测试
-- 基础 SEO：`robots.txt`、`sitemap.xml`、canonical、hreflang、OG/Twitter 标签
+- 基础 SEO：`robots.txt`、`sitemap.xml`、canonical、hreflang、OG/Twitter 标签与全站分享图（og:image）
 
 ## 技术栈
 
@@ -40,7 +40,7 @@
 │   ├── index.html             # 大模型性价比排行榜（zh）
 │   └── en.html                # 大模型性价比排行榜（en）
 ├── token_models.json          # 模型价格数据（每 M Tokens）
-├── llm_metrics.json           # 排行榜数据（基准分/速度/Token 消耗）
+├── llm_metrics.json           # 排行榜数据（基准分/速度/Token 消耗/每任务成本与耗时）
 ├── robots.txt                 # 搜索引擎 / AI 爬虫策略
 ├── sitemap.xml                # 站点地图（6 个 URL，含 hreflang）
 ├── _redirects                 # Netlify 旧路径 301 规则
@@ -59,7 +59,7 @@
 │       ├── token-calc-core.js # 费用计算核心（纯函数）
 │       ├── token-calc-app.js  # 计算器 UI 逻辑
 │       ├── llm-rank-core.js   # 排行榜计算核心（纯函数）
-│       └── llm-rank-app.js    # 排行榜 UI 逻辑（排序/币种切换）
+│       └── llm-rank-app.js    # 排行榜 UI 逻辑（排序/预设与权重滑杆）
 └── tests/
     ├── token-calc.test.js     # 费用计算单元测试
     └── llm-rank.test.js       # 排行榜计算单元测试
@@ -93,8 +93,8 @@ npm test
 - 百分比归一化（1% 不等于 100%）
 - 默认 AI 编程场景估算（缓存命中 90%、输出比例 5%）
 - 货币换算、金额 / Token 格式化
-- 排行榜智能指数均值、智能密度、每任务成本与每元智能
-- 排行榜排序稳定性与缺失值下沉、数值自适应格式化
+- 排行榜智能指数均值、三维归一化综合分（含对数/地板边界）与预设侧重切换
+- 排行榜排序稳定性、退化轴处理与数值自适应格式化
 
 ## 开发指南
 
@@ -120,7 +120,7 @@ npm test
 已包含基础技术 SEO：
 
 - `robots.txt`：允许主流搜索引擎与 AI 爬虫（GPTBot、PerplexityBot、ClaudeBot、Google-Extended 等），并声明 sitemap
-- `sitemap.xml`：4 个 URL，中英互为 `hreflang` alternate（zh-CN / en / x-default）
+- `sitemap.xml`：6 个 URL，中英互为 `hreflang` alternate（zh-CN / en / x-default）
 - 每页含 `canonical`、`hreflang`、描述与 OG/Twitter 标签；计算器页含 `WebApplication` + `BreadcrumbList` + `FAQPage` 结构化数据
 - 中英文页各有独立静态正文（价格总表、FAQ），以内容差异而非 URL 区分翻译对页
 
