@@ -830,6 +830,14 @@ footer {
   margin-bottom: 14px;
 }
 
+.rank-controls .rank-toggle-group {
+  order: 0;
+}
+
+.rank-controls .hint {
+  order: 1;
+}
+
 .rank-toggle-group {
   display: flex;
   gap: 8px;

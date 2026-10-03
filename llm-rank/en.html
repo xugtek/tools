@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way</title>
-  <meta name="description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
+  <meta name="description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="xugtek">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
-  <meta property="og:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
+  <meta property="og:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
   <meta property="og:url" content="https://tools.xugtek.com/llm-rank/en.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
-  <meta name="twitter:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
+  <meta name="twitter:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/icons/favicon-48.png" type="image/png" sizes="48x48">
   <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
@@ -32,7 +32,7 @@
       "name": "LLM Value Ranking",
       "url": "https://tools.xugtek.com/llm-rank/en.html",
       "inLanguage": "en",
-      "description": "Composite value ranking of 26 LLMs from independently measured intelligence, cost per task and time per task, with adjustable performance/cost/speed weighting."
+      "description": "Composite value ranking of 25 LLMs from independently measured intelligence, cost per task and time per task, with adjustable performance/cost/speed weighting."
     },
     {
       "@type": "BreadcrumbList",
@@ -99,7 +99,7 @@
       var ALT = {
         "zh-CN": {
                 "title": "大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定",
-                "description": "大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 26 款大模型。"
+                "description": "大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。"
         }
 };
       var pin = document.documentElement.getAttribute('data-static-lang');
@@ -157,15 +157,15 @@
       <section class="card" aria-labelledby="rank-section-title">
         <h2 id="rank-section-title" class="section-title" data-i18n="llmRankSection">Value ranking</h2>
         <div class="rank-controls">
-          <span class="hint" data-i18n="rankSortHint">Click a column header to sort</span>
           <div class="rank-toggle-group" id="preset-toggle" role="group" aria-label="Emphasis">
             <button type="button" class="btn btn-ghost active" data-preset="balanced" data-i18n="presetBalanced">Balanced</button>
             <button type="button" class="btn btn-ghost" data-preset="performance" data-i18n="presetPerformance">Performance</button>
             <button type="button" class="btn btn-ghost" data-preset="cost" data-i18n="presetCost">Cost</button>
             <button type="button" class="btn btn-ghost" data-preset="speed" data-i18n="presetSpeed">Speed</button>
             <button type="button" class="btn btn-ghost" data-preset="custom" data-i18n="presetCustom">Custom</button>          </div>
+          <span class="hint" data-i18n="rankSortHint">Click a column header to sort</span>
         </div>
-      <div class="rank-sliders" id="weight-sliders" hidden>
+        <div class="rank-sliders" id="weight-sliders" hidden>
         <div class="weight-row">
           <label for="weight-performance" data-i18n="weightPerformance">Performance</label>
           <input id="weight-performance" class="range-slider" type="range" min="0" max="100" step="1" value="33">
@@ -208,7 +208,6 @@
             <tr data-i="44.350" data-s="48.9" data-n="81496" data-t="1198" data-cost="0.2807"><td class="rank-no"></td><td class="model-name">GLM-5.3-Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.35</td><td class="speed">48.9</td><td class="time">20.0</td><td class="tokens">81k</td><td class="cost">¥2.02 / $0.281</td><td class="score">50.2</td></tr>
             <tr data-i="47.607" data-s="43.7" data-n="76040" data-t="1647" data-cost="0.1667"><td class="rank-no"></td><td class="model-name">Mimo-V2.6 Pro</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:47.6%"></span></span>47.61</td><td class="speed">43.7</td><td class="time">27.4</td><td class="tokens">76k</td><td class="cost">¥1.2 / $0.167</td><td class="score">47.1</td></tr>
             <tr data-i="45.970" data-s="95.3" data-n="57306" data-t="592" data-cost="2.4483"><td class="rank-no"></td><td class="model-name">GPT-5.6 Terra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.0%"></span></span>45.97</td><td class="speed">95.3</td><td class="time">9.9</td><td class="tokens">57k</td><td class="cost">¥17.63 / $2.448</td><td class="score">47.0</td></tr>
-            <tr data-i="44.350" data-s="48.9" data-n="81496" data-t="1198" data-cost="0.7017"><td class="rank-no"></td><td class="model-name">GLM-5.3-FlashX <sup class="est-mark" data-i18n-title="estMarkTitle">~</sup></td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.35</td><td class="speed">48.9</td><td class="time">20.0</td><td class="tokens">81k</td><td class="cost">¥5.05 / $0.702</td><td class="score">45.4</td></tr>
             <tr data-i="37.287" data-s="100.5" data-n="80897" data-t="669" data-cost="0.7053"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro (Off-peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.29</td><td class="speed">100.5</td><td class="time">11.2</td><td class="tokens">81k</td><td class="cost">¥5.08 / $0.705</td><td class="score">44.5</td></tr>
             <tr data-i="43.600" data-s="77.2" data-n="42179" data-t="557" data-cost="2.7941"><td class="rank-no"></td><td class="model-name">Grok 4.6</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:43.6%"></span></span>43.60</td><td class="speed">77.2</td><td class="time">9.3</td><td class="tokens">42k</td><td class="cost">¥20.12 / $2.794</td><td class="score">43.8</td></tr>
             <tr data-i="63.497" data-s="92.4" data-n="109962" data-t="760" data-cost="5.0855"><td class="rank-no"></td><td class="model-name">Claude Opus 5.5</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.5%"></span></span>63.50</td><td class="speed">92.4</td><td class="time">12.7</td><td class="tokens">110k</td><td class="cost">¥36.62 / $5.085</td><td class="score">43.7</td></tr>
@@ -227,7 +226,7 @@
           </table>
         </div>
         <p class="note">Data updated 2026-10-02: intelligence, cost and time are independently measured by Artificial Analysis; prices come from official provider API pricing pages.</p>
-        <p class="note">GLM-5.3-FlashX has no independent measurement; values are estimated from GLM-5.3-Flash (marked ~).</p>
+        <p class="note">GLM-5.3-FlashX has no independent measurement and is excluded from this ranking; see the Token Cost Calculator for its pricing.</p>
         <p class="note">DeepSeek peak/off-peak share intelligence and time; only cost differs (half), so off-peak scores higher.</p>
         <p class="note">Prices and costs are for reference; always check official pricing.</p>
       </section>
@@ -240,7 +239,7 @@
           <li><strong>Composite formula:</strong> score = (I/100)^a × (minC/C)^b × (minT/T)^c with a+b+c=1. The geometric form means a weak axis drags the total down — one extreme strength cannot buy off another axis.</li>
           <li><strong>Presets:</strong> Balanced = ⅓/⅓/⅓; Performance = 75/12.5/12.5; Cost = 20/60/20; Speed = 20/20/60; Custom sliders combine freely (auto-normalized to 100%).</li>
           <li><strong>Currency-independent:</strong> the score is computed from ratios, so it does not depend on currency. The cost column is measured in USD; CNY figures convert at 1 USD = 7.2 CNY for reference.</li>
-          <li><strong>Estimates:</strong> GLM-5.3-FlashX has no independent measurement: intelligence and time borrow GLM-5.3-Flash, cost scales by the 2.5× official price ratio (marked ~); DeepSeek off-peak shares capability and time with peak at half the cost.</li>
+          <li><strong>Inclusion:</strong> only models with independent measurements are ranked; GLM-5.3-FlashX is unmeasured and excluded. DeepSeek off-peak shares capability and time with peak at half the cost.</li>
         </ol>
       </section>
 

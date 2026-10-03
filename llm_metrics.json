@@ -8,7 +8,7 @@
   ],
   "source": "Artificial Analysis",
   "sourceUrl": "https://artificialanalysis.ai/models",
-  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测；GLM-5.3-FlashX 无独立实测，采用 GLM-5.3-Flash 数据估算（标 ~）。",
+  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。",
   "models": [
     {
       "id": "kimi-k3",
@@ -80,24 +80,6 @@
       "tokensPerTask": 81496,
       "aaUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
       "costPerTaskUsd": 0.2807,
-      "timePerTaskSec": 1198
-    },
-    {
-      "id": "glm-5.3-flashx",
-      "name": "GLM-5.3-FlashX",
-      "nameZh": null,
-      "provider": "Zhipu",
-      "aaSlug": null,
-      "estimated": true,
-      "intelligence": {
-        "terminalBench": 32.83,
-        "hle": 39.85,
-        "automationBench": 60.37
-      },
-      "speedTokensPerSec": 48.9,
-      "tokensPerTask": 81496,
-      "aaUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
-      "costPerTaskUsd": 0.7017,
       "timePerTaskSec": 1198
     },
     {

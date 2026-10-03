@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定</title>
-  <meta name="description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 26 款大模型。">
+  <meta name="description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="xugtek">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定">
-  <meta property="og:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 26 款大模型。">
+  <meta property="og:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。">
   <meta property="og:url" content="https://tools.xugtek.com/llm-rank/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定">
-  <meta name="twitter:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 26 款大模型。">
+  <meta name="twitter:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/icons/favicon-48.png" type="image/png" sizes="48x48">
   <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
@@ -32,7 +32,7 @@
       "name": "大模型性价比排行榜",
       "url": "https://tools.xugtek.com/llm-rank/",
       "inLanguage": "zh-CN",
-      "description": "基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 26 款大模型。"
+      "description": "基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 25 款大模型。"
     },
     {
       "@type": "BreadcrumbList",
@@ -99,7 +99,7 @@
       var ALT = {
         "en": {
                 "title": "LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way",
-                "description": "LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 26 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi."
+                "description": "LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi."
         }
 };
       var pin = document.documentElement.getAttribute('data-static-lang');
@@ -157,15 +157,15 @@
       <section class="card" aria-labelledby="rank-section-title">
         <h2 id="rank-section-title" class="section-title" data-i18n="llmRankSection">性价比榜单</h2>
         <div class="rank-controls">
-          <span class="hint" data-i18n="rankSortHint">点击表头排序</span>
           <div class="rank-toggle-group" id="preset-toggle" role="group" aria-label="Emphasis">
             <button type="button" class="btn btn-ghost active" data-preset="balanced" data-i18n="presetBalanced">均衡</button>
             <button type="button" class="btn btn-ghost" data-preset="performance" data-i18n="presetPerformance">性能</button>
             <button type="button" class="btn btn-ghost" data-preset="cost" data-i18n="presetCost">成本</button>
             <button type="button" class="btn btn-ghost" data-preset="speed" data-i18n="presetSpeed">速度</button>
             <button type="button" class="btn btn-ghost" data-preset="custom" data-i18n="presetCustom">自定义</button>          </div>
+          <span class="hint" data-i18n="rankSortHint">点击表头排序</span>
         </div>
-      <div class="rank-sliders" id="weight-sliders" hidden>
+        <div class="rank-sliders" id="weight-sliders" hidden>
         <div class="weight-row">
           <label for="weight-performance" data-i18n="weightPerformance">性能</label>
           <input id="weight-performance" class="range-slider" type="range" min="0" max="100" step="1" value="33">
@@ -208,7 +208,6 @@
             <tr data-i="44.350" data-s="48.9" data-n="81496" data-t="1198" data-cost="0.2807"><td class="rank-no"></td><td class="model-name">GLM-5.3-Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.35</td><td class="speed">48.9</td><td class="time">20.0</td><td class="tokens">81k</td><td class="cost">¥2.02 / $0.281</td><td class="score">50.2</td></tr>
             <tr data-i="47.607" data-s="43.7" data-n="76040" data-t="1647" data-cost="0.1667"><td class="rank-no"></td><td class="model-name">Mimo-V2.6 Pro</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:47.6%"></span></span>47.61</td><td class="speed">43.7</td><td class="time">27.4</td><td class="tokens">76k</td><td class="cost">¥1.2 / $0.167</td><td class="score">47.1</td></tr>
             <tr data-i="45.970" data-s="95.3" data-n="57306" data-t="592" data-cost="2.4483"><td class="rank-no"></td><td class="model-name">GPT-5.6 Terra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.0%"></span></span>45.97</td><td class="speed">95.3</td><td class="time">9.9</td><td class="tokens">57k</td><td class="cost">¥17.63 / $2.448</td><td class="score">47.0</td></tr>
-            <tr data-i="44.350" data-s="48.9" data-n="81496" data-t="1198" data-cost="0.7017"><td class="rank-no"></td><td class="model-name">GLM-5.3-FlashX <sup class="est-mark" data-i18n-title="estMarkTitle">~</sup></td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.35</td><td class="speed">48.9</td><td class="time">20.0</td><td class="tokens">81k</td><td class="cost">¥5.05 / $0.702</td><td class="score">45.4</td></tr>
             <tr data-i="37.287" data-s="100.5" data-n="80897" data-t="669" data-cost="0.7053"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro（空闲）</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.29</td><td class="speed">100.5</td><td class="time">11.2</td><td class="tokens">81k</td><td class="cost">¥5.08 / $0.705</td><td class="score">44.5</td></tr>
             <tr data-i="43.600" data-s="77.2" data-n="42179" data-t="557" data-cost="2.7941"><td class="rank-no"></td><td class="model-name">Grok 4.6</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:43.6%"></span></span>43.60</td><td class="speed">77.2</td><td class="time">9.3</td><td class="tokens">42k</td><td class="cost">¥20.12 / $2.794</td><td class="score">43.8</td></tr>
             <tr data-i="63.497" data-s="92.4" data-n="109962" data-t="760" data-cost="5.0855"><td class="rank-no"></td><td class="model-name">Claude Opus 5.5</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.5%"></span></span>63.50</td><td class="speed">92.4</td><td class="time">12.7</td><td class="tokens">110k</td><td class="cost">¥36.62 / $5.085</td><td class="score">43.7</td></tr>
@@ -227,7 +226,7 @@
           </table>
         </div>
         <p class="note">数据更新于 2026-10-02：智能、成本、耗时均来自 Artificial Analysis 独立实测；价格为各厂商官方 API 定价。</p>
-        <p class="note">GLM-5.3-FlashX 无独立实测，采用 GLM-5.3-Flash 数据估算（标 ~）。</p>
+        <p class="note">GLM-5.3-FlashX 无独立实测数据，未收入本榜单；其价格见 Token 费用计算器。</p>
         <p class="note">DeepSeek 高峰/空闲为同一模型：能力与耗时相同，仅成本差一倍，空闲版综合分更高。</p>
         <p class="note">价格与成本仅供参考，请以官方最新定价为准。</p>
       </section>
@@ -240,7 +239,7 @@
           <li><strong>综合分公式：</strong>综合分 = (I/100)^a × (Cmin/C)^b × (Tmin/T)^c，权重 a+b+c=1。几何加权意味着任何一轴过弱都会显著拖累总分——单项偏科无法靠另一项极端优势翻盘。</li>
           <li><strong>预设侧重：</strong>均衡=⅓/⅓/⅓；性能=75/12.5/12.5；成本=20/60/20；速度=20/20/60；自定义可用滑杆任意组合（自动归一化为 100%）。</li>
           <li><strong>币种无关：</strong>综合分由比值计算，与币种无关。成本列美元为实测口径，人民币按 1 USD = 7.2 CNY 换算仅供参照。</li>
-          <li><strong>估算口径：</strong>GLM-5.3-FlashX 无独立实测，能力与耗时采用 GLM-5.3-Flash、成本按官方价 2.5 倍折算（标 ~）；DeepSeek 空闲版与高峰版同能力同时长，成本按官方半价。</li>
+          <li><strong>收录口径：</strong>仅收录有独立实测的模型，GLM-5.3-FlashX 无实测未入榜；DeepSeek 空闲版与高峰版同能力同时长，成本按官方半价。</li>
         </ol>
       </section>
 
