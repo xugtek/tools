@@ -11,7 +11,12 @@
   <meta property="og:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
   <meta property="og:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
   <meta property="og:url" content="https://tools.xugtek.com/llm-rank/en.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="LLM Value Ranking: weighted by intelligence, cost and time">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
   <meta name="twitter:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
   <meta name="twitter:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -32,6 +37,7 @@
       "name": "LLM Value Ranking",
       "url": "https://tools.xugtek.com/llm-rank/en.html",
       "inLanguage": "en",
+      "dateModified": "2026-10-03",
       "description": "Composite value ranking of 25 LLMs from independently measured intelligence, cost per task and time per task, with adjustable performance/cost/speed weighting."
     },
     {
@@ -59,7 +65,7 @@
           "name": "How is the composite score computed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Score = (intelligence/100)^performance-weight × (min-cost/cost)^cost-weight × (min-time/time)^time-weight — a geometric weighting where any weak axis drags the total down. All three axes are independently measured by Artificial Analysis."
+            "text": "Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 25 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis."
           }
         },
         {
@@ -235,7 +241,7 @@
         <ol class="method-list">
           <li><strong>Intelligence I:</strong> the arithmetic mean of Terminal-Bench 4.0 (agentic terminal coding), Humanity’s Last Exam (multidisciplinary reasoning) and AutomationBench (SaaS workflow automation), all independently measured by Artificial Analysis — not vendor-reported.</li>
           <li><strong>Cost C and time T:</strong> both AA-measured: C is the full cost per benchmark task (input, cache-write, reasoning and output tokens, in USD); T is the wall-clock seconds per task. Verbose models are charged for their real token use.</li>
-          <li><strong>Composite formula:</strong> score = (I/100)^a × (minC/C)^b × (minT/T)^c with a+b+c=1. The geometric form means a weak axis drags the total down — one extreme strength cannot buy off another axis.</li>
+          <li><strong>Composite formula:</strong> score = intelligenceNorm^a × costNorm^b × timeNorm^c (a+b+c=1). Each axis is min–max normalized to 0.05–1 across the 25 ranked models — intelligence linearly; cost and time log-scaled (floor 0.05) since they span orders of magnitude. The geometric form means a weak axis drags the total down — one extreme strength cannot buy off another axis.</li>
           <li><strong>Presets:</strong> Balanced = ⅓/⅓/⅓; Performance = 75/12.5/12.5; Cost = 20/60/20; Speed = 20/20/60; Custom sliders combine freely (auto-normalized to 100%).</li>
           <li><strong>Currency-independent:</strong> the score is computed from ratios, so it does not depend on currency. The cost column is measured in USD; CNY figures convert at 1 USD = 7.2 CNY for reference.</li>
           <li><strong>Inclusion:</strong> only models with independent measurements are ranked; intelligence, speed and cost are measured values. DeepSeek off-peak shares capability and time with peak at half the cost.</li>
@@ -246,7 +252,7 @@
         <h2 id="faq-title" class="section-title" data-i18n="faqTitle">FAQ</h2>
         <dl class="faq-list">
           <dt data-i18n="llmFaq1q">How is the composite score computed?</dt>
-          <dd data-i18n="llmFaq1a">Score = (intelligence/100)^performance-weight × (min-cost/cost)^cost-weight × (min-time/time)^time-weight — a geometric weighting where any weak axis drags the total down. All three axes are independently measured by Artificial Analysis.</dd>
+          <dd data-i18n="llmFaq1a">Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 25 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis.</dd>
           <dt data-i18n="llmFaq2q">Why does the ranking change completely when I switch emphasis?</dt>
           <dd data-i18n="llmFaq2a">Because different jobs favor different models: cheap models win one-shot tasks, strong models win multi-step critical workflows, fast models win real-time use. That is the point of this tool — find the optimum for your scenario with the weighting, not a single universal answer.</dd>
           <dt data-i18n="llmFaq3q">Where does the data come from?</dt>

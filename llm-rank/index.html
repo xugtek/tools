@@ -11,7 +11,12 @@
   <meta property="og:title" content="大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定">
   <meta property="og:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。">
   <meta property="og:url" content="https://tools.xugtek.com/llm-rank/">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="大模型性价比排行榜：智能、成本、耗时三维加权">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
   <meta name="twitter:title" content="大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定">
   <meta name="twitter:description" content="大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等 25 款大模型。">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -32,6 +37,7 @@
       "name": "大模型性价比排行榜",
       "url": "https://tools.xugtek.com/llm-rank/",
       "inLanguage": "zh-CN",
+      "dateModified": "2026-10-03",
       "description": "基于独立实测的智能指数、每任务成本与耗时，自由调整性能、成本、速度权重，综合排名 25 款大模型。"
     },
     {
@@ -59,7 +65,7 @@
           "name": "综合分是怎么计算的？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "综合分 =（智能指数/100）^性能权重 ×（最低成本/本模型成本）^成本权重 ×（最短耗时/本模型耗时）^耗时权重，几何加权：任何一轴太弱都会拖累总分。三个维度均为 Artificial Analysis 独立实测。"
+            "text": "综合分 = 智能归一^性能权重 × 成本归一^成本权重 × 耗时归一^耗时权重（权重和=1）。三维先在本榜单 25 款模型内各自最小-最大归一化到 0.05–1：智能线性映射，成本与耗时因跨数量级采用对数映射。再做几何加权：任何一轴过弱都会拖累总分。三维均为 Artificial Analysis 独立实测。"
           }
         },
         {
@@ -235,7 +241,7 @@
         <ol class="method-list">
           <li><strong>智能指数 I：</strong>Terminal-Bench 4.0（终端代理编程）、Humanity's Last Exam（综合推理）与 AutomationBench（SaaS 工作流自动化）三项得分的算术平均，全部由 Artificial Analysis 统一口径独立实测，非厂商自报。</li>
           <li><strong>成本 C 与耗时 T：</strong>均为 AA 实测：C 是三项基准每任务的全成本（含输入、缓存写入、推理与输出全部 Token，美元计价）；T 是每任务实际耗时（秒）。话痨模型的 Token 开销被如实计入。</li>
-          <li><strong>综合分公式：</strong>综合分 = (I/100)^a × (Cmin/C)^b × (Tmin/T)^c，权重 a+b+c=1。几何加权意味着任何一轴过弱都会显著拖累总分——单项偏科无法靠另一项极端优势翻盘。</li>
+          <li><strong>综合分公式：</strong>综合分 = 智能归一^a × 成本归一^b × 耗时归一^c（a+b+c=1）。三维各自在本榜单 25 款模型内最小-最大归一化到 0.05–1：智能为线性映射，成本与耗时因跨数量级采用对数映射（下限 0.05 防归零）。几何加权意味着任何一轴过弱都会显著拖累总分——单项偏科无法靠另一项极端优势翻盘。</li>
           <li><strong>预设侧重：</strong>均衡=⅓/⅓/⅓；性能=75/12.5/12.5；成本=20/60/20；速度=20/20/60；自定义可用滑杆任意组合（自动归一化为 100%）。</li>
           <li><strong>币种无关：</strong>综合分由比值计算，与币种无关。成本列美元为实测口径，人民币按 1 USD = 7.2 CNY 换算仅供参照。</li>
           <li><strong>收录口径：</strong>仅收录有独立实测数据的模型，能力、速度与成本均为实测值；DeepSeek 空闲版与高峰版同能力同时长，成本按官方半价。</li>
@@ -246,7 +252,7 @@
         <h2 id="faq-title" class="section-title" data-i18n="faqTitle">常见问题</h2>
         <dl class="faq-list">
           <dt data-i18n="llmFaq1q">综合分是怎么计算的？</dt>
-          <dd data-i18n="llmFaq1a">综合分 =（智能指数/100）^性能权重 ×（最低成本/本模型成本）^成本权重 ×（最短耗时/本模型耗时）^耗时权重，几何加权：任何一轴太弱都会拖累总分。三个维度均为 Artificial Analysis 独立实测。</dd>
+          <dd data-i18n="llmFaq1a">综合分 = 智能归一^性能权重 × 成本归一^成本权重 × 耗时归一^耗时权重（权重和=1）。三维先在本榜单 25 款模型内各自最小-最大归一化到 0.05–1：智能线性映射，成本与耗时因跨数量级采用对数映射。再做几何加权：任何一轴过弱都会拖累总分。三维均为 Artificial Analysis 独立实测。</dd>
           <dt data-i18n="llmFaq2q">为什么切换侧重后排名完全变了？</dt>
           <dd data-i18n="llmFaq2a">因为不同任务的最佳模型不同：单步便宜任务适合便宜模型，多步关键工作流适合强模型，实时场景适合快模型。这正是本工具的价值——用权重天平找到你的场景最优解，而不是给一个唯一答案。</dd>
           <dt data-i18n="llmFaq3q">数据来源是什么，可靠吗？</dt>
