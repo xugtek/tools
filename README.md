@@ -4,8 +4,8 @@
 
 当前包含：
 
-- **Token 费用计算器**（`token/index.html` 中文 · `token/en.html` 英文）——估算每日/每月 Token API 调用费用，内置 26 款主流大模型官方价格（2026-10-01 更新），支持人民币/美元双币种独立计价、缓存命中计费、优惠倍率、用量估算与自定义模型。
-- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench）的智能指数、每任务全成本与耗时，对 25 款大模型做三维归一化几何加权排名；内置均衡/性能/成本/速度预设与自定义权重滑杆，静态表格可按列重排。
+- **Token 费用计算器**（`token/index.html` 中文 · `token/en.html` 英文）——估算每日/每月 Token API 调用费用，内置 28 款主流大模型官方价格（2026-10-14 更新），支持人民币/美元双币种独立计价、缓存命中计费、优惠倍率、用量估算与自定义模型。
+- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench）的智能指数、每任务全成本与耗时，对 28 款大模型做三维归一化几何加权排名；内置均衡/性能/成本/速度预设与自定义权重滑杆，静态表格可按列重排。
 
 ## 特性
 
@@ -13,7 +13,7 @@
 - 中英双语为**六套静态页面**（`/`、`/en/`、`/token/`、`/token/en.html`、`/llm-rank/`、`/llm-rank/en.html`），URL 与语言一一对应；首次访问按浏览器语言做会话级适配，显式切换语言后以所选 URL 为准
 - 模型价格独立于代码，存放于 `token_models.json`，缺失币种按汇率补算，官方双币定价各自独立
 - 结果区支持人民币/美元双币同时展示、明细拆分与"固定到对比"
-- 计算器页含静态价格总表（26 款模型，带行锚点）、底部 FAQ 与 `FAQPage` 结构化数据
+- 计算器页含静态价格总表（28 款模型，带行锚点）、底部 FAQ 与 `FAQPage` 结构化数据
 - 排行榜页含静态排名表（智能指数条形图）、方法论与 `WebPage`/`BreadcrumbList`/`FAQPage` 结构化数据，综合分为三维归一化几何加权（成本/耗时对数映射，下限 0.05）
 - 明暗主题切换，视觉风格与 [xugtek.com](https://xugtek.com) 对齐
 - 核心计算逻辑与 UI 分离，便于单元测试

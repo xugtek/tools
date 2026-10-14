@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-01",
-  "note": "New on 2026-09-23: Grok 4.7, Claude Fable 5.1, GPT-6 Sol/Luna, Claude Opus 5.5, Mimo-V2.6 Pro/Flash (standard rates verified against public pricing pages). Grok 4.7 matches Grok 4.6 at $2/$0.50/$6 for prompts under 200k; at or above 200k the whole request bills at 2x ($4/$1/$12); note only, no separate long-context entry. GPT-6 Sol/Luna use Standard rates for prompts up to 272K (over 272K: 2x input/cache and 1.5x output for the full request; cache writes and long-context surcharges not modeled). Claude Fable 5.1 cache reads are 0.025x input ($0.25), unlike the usual 0.1x; Claude Opus 5.5 cache reads are 0.05x input ($0.20). Mimo cachedInput uses official cache-hit rates (~1% of input, not 10%): Pro $0.0036/¥0.025, Flash $0.0028/¥0.02. GPT-6 Astra and GLM/DeepSeek entries unchanged from 2026-09-12. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Old model entries are retained for comparison. Verify before production use.",
+  "updated": "2026-10-14",
+  "note": "New on 2026-10-14: Gemini 4 Argon and Claude Haiku 5.5. Gemini 4 Argon (model id gemini-4-argon) uses Google's introductory Standard rates valid through 2026-11-30 ($2/$0.10/$10); prices double to $4/$0.20/$20 starting 2026-12-01 — note only, no separate post-intro entry. Implicit caching only (95% discount); no explicit caching. Claude Haiku 5.5 uses the Standard rates for prompts up to 100,000 tokens ($0.10/$0.01/$0.50, cache reads 0.1x input); prompts over 100,000 tokens bill the whole request 5x ($0.50/$0.05/$2.50) — note only, no separate long-context entry. Also updated 2026-10-14: Claude Sonnet 5.5 cache reads halved from $0.20 to $0.10 (official announcement alongside Haiku 5.5). Earlier (2026-09-23): Grok 4.7 matches Grok 4.6 at $2/$0.50/$6 for prompts under 200k; at or above 200k the whole request bills at 2x ($4/$1/$12). GPT-6 Sol/Luna use Standard rates for prompts up to 272K (over 272K: 2x input/cache and 1.5x output for the full request; cache writes and long-context surcharges not modeled). Claude Fable 5.1 cache reads are 0.025x input ($0.25), unlike the usual 0.1x; Claude Opus 5.5 cache reads are 0.05x input ($0.20). Mimo cachedInput uses official cache-hit rates (~1% of input, not 10%): Pro $0.0036/¥0.025, Flash $0.0028/¥0.02. DeepSeek peak/off-peak are separate entries; peak hours are Monday-Friday 09:00-12:00 and 14:00-18:00 Asia/Shanghai, with all other hours off-peak. Prices are per 1M tokens; Chinese model CNY/USD prices are domestic/international list prices. Missing currencies fall back to exchange-rate conversion. Old model entries are retained for comparison. Verify before production use.",
   "sources": {
     "gpt-6-astra": "https://developers.openai.com/api/docs/models/gpt-6-astra",
     "gpt-6-sol": "https://developers.openai.com/api/docs/models/gpt-6-sol",
@@ -14,6 +14,8 @@
     "fable-5.1": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
     "opus-5.5": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
     "mimo-v2.6": "https://routerplex.com/blog/mimo-v2-6-api-pricing-setup",
+    "gemini-4-argon": "https://ai.google.dev/gemini-api/docs/pricing",
+    "haiku-5.5": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
     "gemini-3.8-flash": "https://ai.google.dev/gemini-api/docs/pricing",
     "claude-sonnet-5.5": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
     "gpt-6.1-sol": "https://developers.openai.com/api/docs/pricing"
@@ -337,7 +339,7 @@
       "prices": {
         "USD": {
           "input": 2,
-          "cachedInput": 0.2,
+          "cachedInput": 0.1,
           "output": 10
         }
       }
@@ -350,6 +352,30 @@
         "USD": {
           "input": 2,
           "cachedInput": 0.2,
+          "output": 10
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-5.5",
+      "name": "Claude Haiku 5.5",
+      "provider": "Anthropic",
+      "prices": {
+        "USD": {
+          "input": 0.1,
+          "cachedInput": 0.01,
+          "output": 0.5
+        }
+      }
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "provider": "Google",
+      "prices": {
+        "USD": {
+          "input": 2,
+          "cachedInput": 0.1,
           "output": 10
         }
       }

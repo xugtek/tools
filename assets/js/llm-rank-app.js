@@ -184,8 +184,8 @@ function setDocumentLanguage() {
   const meta = document.querySelector('meta[name="description"]');
   if (meta) {
     meta.setAttribute('content', en
-      ? 'LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 25 models including DeepSeek, GPT-6, Opus 5.5, Mimo, GLM and Kimi.'
-      : '大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，综合计算 25 款大模型的性价比得分。自由调整性能、成本、速度权重，或一键使用均衡、高性能、低成本、快响应预设，实时查看 DeepSeek、GPT-6、Opus 5.5、Mimo、GLM、Kimi 等模型的综合排名、分项指标与性价比变化趋势。');
+      ? 'LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 28 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.'
+      : '大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，综合计算 28 款大模型的性价比得分。自由调整性能、成本、速度权重，或一键使用均衡、高性能、低成本、快响应预设，实时查看 DeepSeek、GPT-6、Opus 5.5、Haiku 5.5、Gemini 4 Argon、Mimo、GLM、Kimi 等模型的综合排名、分项指标与性价比变化趋势。');
   }
 }
 
