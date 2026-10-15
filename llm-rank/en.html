@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way</title>
-  <meta name="description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 28 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
+  <meta name="description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 27 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="xugtek">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
-  <meta property="og:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 28 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
+  <meta property="og:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 27 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
   <meta property="og:url" content="https://tools.xugtek.com/llm-rank/en.html">
   <meta property="og:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
   <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://tools.xugtek.com/assets/icons/og-card.png">
   <meta name="twitter:title" content="LLM Value Ranking – Intelligence, Cost & Speed, Weighted Your Way">
-  <meta name="twitter:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 28 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
+  <meta name="twitter:description" content="LLM value ranking from independently measured intelligence, cost per task and time per task: adjust the weighting among performance, cost and speed to rank 27 models including DeepSeek, GPT-6, Opus 5.5, Haiku 5.5, Gemini 4 Argon, Mimo, GLM and Kimi.">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/icons/favicon-48.png" type="image/png" sizes="48x48">
   <link rel="icon" href="../assets/icons/brand.svg" type="image/svg+xml">
@@ -65,7 +65,7 @@
           "name": "How is the composite score computed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 28 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis."
+            "text": "Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 27 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis."
           }
         },
         {
@@ -105,7 +105,7 @@
       var ALT = {
         "zh-CN": {
                 "title": "大模型性价比排行榜 - 智能、成本、耗时三维加权，权重由你定",
-                "description": "大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，综合计算 28 款大模型的性价比得分。自由调整性能、成本、速度权重，或一键使用均衡、高性能、低成本、快响应预设，实时查看 DeepSeek、GPT-6、Opus 5.5、Haiku 5.5、Gemini 4 Argon、Mimo、GLM、Kimi 等模型的综合排名、分项指标与性价比变化趋势。"
+                "description": "大模型性价比排行榜：基于独立实测的智能指数、每任务成本与耗时，综合计算 27 款大模型的性价比得分。自由调整性能、成本、速度权重，或一键使用均衡、高性能、低成本、快响应预设，实时查看 DeepSeek、GPT-6、Opus 5.5、Haiku 5.5、Gemini 4 Argon、Mimo、GLM、Kimi 等模型的综合排名、分项指标与性价比变化趋势。"
         }
 };
       var pin = document.documentElement.getAttribute('data-static-lang');
@@ -206,9 +206,9 @@
             <tr data-i="44.970" data-s="209.4" data-n="135649" data-t="466" data-cost="0.2285"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash (Off-peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>44.97</td><td class="speed">209.4</td><td class="time">7.8</td><td class="tokens">136k</td><td class="cost">¥1.65 / $0.229</td><td class="score">67.1</td></tr>
             <tr data-i="57.950" data-s="64.2" data-n="43278" data-t="673" data-cost="0.7324"><td class="rank-no"></td><td class="model-name">GPT-6.1 Sol</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:58.0%"></span></span>57.95</td><td class="speed">64.2</td><td class="time">11.2</td><td class="tokens">43k</td><td class="cost">¥5.27 / $0.732</td><td class="score">66.8</td></tr>
             <tr data-i="44.970" data-s="209.4" data-n="135649" data-t="466" data-cost="0.457"><td class="rank-no"></td><td class="model-name">DeepSeek V4.1 Flash (Peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:45.0%"></span></span>44.97</td><td class="speed">209.4</td><td class="time">7.8</td><td class="tokens">136k</td><td class="cost">¥3.29 / $0.457</td><td class="score">62.7</td></tr>
-            <tr data-i="63.900" data-s="99.5" data-n="62000" data-t="623" data-cost="1.99"><td class="rank-no"></td><td class="model-name">Gemini 4 Argon (High)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.9%"></span></span>63.90</td><td class="speed">99.5</td><td class="time">10.4</td><td class="tokens">62k</td><td class="cost">¥14.33 / $1.99</td><td class="score">61.6</td></tr>
+            <tr data-i="63.900" data-s="99.5" data-n="62000" data-t="623" data-cost="1.99"><td class="rank-no"></td><td class="model-name">Gemini 4 Argon</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.9%"></span></span>63.90</td><td class="speed">99.5</td><td class="time">10.4</td><td class="tokens">62k</td><td class="cost">¥14.33 / $1.99</td><td class="score">61.6</td></tr>
             <tr data-i="51.160" data-s="87.1" data-n="40939" data-t="472" data-cost="1.4936"><td class="rank-no"></td><td class="model-name">GPT-6 Sol</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:51.2%"></span></span>51.16</td><td class="speed">87.1</td><td class="time">7.9</td><td class="tokens">41k</td><td class="cost">¥10.75 / $1.494</td><td class="score">59.3</td></tr>
-            <tr data-i="37.533" data-s="236.7" data-n="162000" data-t="421" data-cost="0.21"><td class="rank-no"></td><td class="model-name">Claude Haiku 5.5 (≤100K)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.5%"></span></span>37.53</td><td class="speed">236.7</td><td class="time">7.0</td><td class="tokens">162k</td><td class="cost">¥1.51 / $0.21</td><td class="score">56.0</td></tr>
+            <tr data-i="37.533" data-s="236.7" data-n="162000" data-t="421" data-cost="0.21"><td class="rank-no"></td><td class="model-name">Claude Haiku 5.5</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.5%"></span></span>37.53</td><td class="speed">236.7</td><td class="time">7.0</td><td class="tokens">162k</td><td class="cost">¥1.51 / $0.21</td><td class="score">56.0</td></tr>
             <tr data-i="60.753" data-s="51.6" data-n="32021" data-t="614" data-cost="3.4906"><td class="rank-no"></td><td class="model-name">GPT-6 Astra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:60.8%"></span></span>60.75</td><td class="speed">51.6</td><td class="time">10.2</td><td class="tokens">32k</td><td class="cost">¥25.13 / $3.491</td><td class="score">51.8</td></tr>
             <tr data-i="34.770" data-s="128.3" data-n="66190" data-t="509" data-cost="0.0948"><td class="rank-no"></td><td class="model-name">GPT-6 Luna</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:34.8%"></span></span>34.77</td><td class="speed">128.3</td><td class="time">8.5</td><td class="tokens">66k</td><td class="cost">¥0.68 / $0.095</td><td class="score">50.6</td></tr>
             <tr data-i="42.483" data-s="248.6" data-n="84807" data-t="326" data-cost="2.1192"><td class="rank-no"></td><td class="model-name">Gemini 3.8 Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:42.5%"></span></span>42.48</td><td class="speed">248.6</td><td class="time">5.4</td><td class="tokens">85k</td><td class="cost">¥15.26 / $2.119</td><td class="score">50.2</td></tr>
@@ -216,7 +216,6 @@
             <tr data-i="44.350" data-s="48.9" data-n="81496" data-t="1198" data-cost="0.2807"><td class="rank-no"></td><td class="model-name">GLM-5.3-Flash</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:44.4%"></span></span>44.35</td><td class="speed">48.9</td><td class="time">20.0</td><td class="tokens">81k</td><td class="cost">¥2.02 / $0.281</td><td class="score">50.0</td></tr>
             <tr data-i="47.607" data-s="43.7" data-n="76040" data-t="1647" data-cost="0.1667"><td class="rank-no"></td><td class="model-name">Mimo-V2.6 Pro</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:47.6%"></span></span>47.61</td><td class="speed">43.7</td><td class="time">27.5</td><td class="tokens">76k</td><td class="cost">¥1.2 / $0.167</td><td class="score">46.9</td></tr>
             <tr data-i="45.970" data-s="95.3" data-n="57306" data-t="592" data-cost="2.4483"><td class="rank-no"></td><td class="model-name">GPT-5.6 Terra</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:46.0%"></span></span>45.97</td><td class="speed">95.3</td><td class="time">9.9</td><td class="tokens">57k</td><td class="cost">¥17.63 / $2.448</td><td class="score">46.8</td></tr>
-            <tr data-i="37.533" data-s="236.7" data-n="162000" data-t="421" data-cost="1.05"><td class="rank-no"></td><td class="model-name">Claude Haiku 5.5 (>100K)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.5%"></span></span>37.53</td><td class="speed">236.7</td><td class="time">7.0</td><td class="tokens">162k</td><td class="cost">¥7.56 / $1.05</td><td class="score">46.8</td></tr>
             <tr data-i="37.287" data-s="100.5" data-n="80897" data-t="669" data-cost="0.7053"><td class="rank-no"></td><td class="model-name">DeepSeek V4 Pro (Off-peak)</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:37.3%"></span></span>37.29</td><td class="speed">100.5</td><td class="time">11.2</td><td class="tokens">81k</td><td class="cost">¥5.08 / $0.705</td><td class="score">44.4</td></tr>
             <tr data-i="43.600" data-s="77.2" data-n="42179" data-t="557" data-cost="2.7941"><td class="rank-no"></td><td class="model-name">Grok 4.6</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:43.6%"></span></span>43.60</td><td class="speed">77.2</td><td class="time">9.3</td><td class="tokens">42k</td><td class="cost">¥20.12 / $2.794</td><td class="score">43.7</td></tr>
             <tr data-i="63.497" data-s="92.4" data-n="109962" data-t="760" data-cost="5.0855"><td class="rank-no"></td><td class="model-name">Claude Opus 5.5</td><td class="intel"><span class="rank-bar-wrap"><span class="rank-bar" style="width:63.5%"></span></span>63.50</td><td class="speed">92.4</td><td class="time">12.7</td><td class="tokens">110k</td><td class="cost">¥36.62 / $5.085</td><td class="score">43.5</td></tr>
@@ -234,9 +233,9 @@
             </tbody>
           </table>
         </div>
-        <p class="note">Data updated 2026-10-14: intelligence, cost and time are independently measured by Artificial Analysis; prices come from official provider API pricing pages. New: Gemini 4 Argon (High) and Claude Haiku 5.5 (Max).</p>
+        <p class="note">Data updated 2026-10-14: intelligence, cost and time are independently measured by Artificial Analysis; prices come from official provider API pricing pages. New: Gemini 4 Argon and Claude Haiku 5.5.</p>
         <p class="note">DeepSeek peak/off-peak share intelligence and time; only cost differs (half), so off-peak scores higher.</p>
-        <p class="note">Claude Haiku 5.5 is priced in two official tiers by prompt length (standard rates up to 100K tokens; 5x for longer prompts): the ranking lists both — identical intelligence, speed and token use, different cost. The >100K cost is derived at 5x (derived estimate, not a direct AA measurement).</p>
+        <p class="note">Claude Haiku 5.5 is officially priced in two tiers by prompt length (standard rates up to 100K tokens; 5x for longer prompts): the ranking uses the standard-tier cost — the long-context surcharge is noted only, not listed as a separate entry, consistent with Grok 4.6/4.7 (2x at ≥200K) and GPT-6 Sol/Luna (surcharge above 272K).</p>
         <p class="note">Gemini 4 Argon intelligence/cost/token-use are AA-measured; AA has not yet published output speed or time per task, so speed uses the AA-measured first-party Google AI Studio figure (99.5 tok/s) and time is converted from tokens/speed (derived estimate).</p>
         <p class="note">Prices and costs are for reference; always check official pricing.</p>
       </section>
@@ -246,7 +245,7 @@
         <ol class="method-list">
           <li><strong>Intelligence I:</strong> the arithmetic mean of Terminal-Bench 4.0 (agentic terminal coding), Humanity’s Last Exam (multidisciplinary reasoning) and AutomationBench (SaaS workflow automation), all independently measured by Artificial Analysis — not vendor-reported.</li>
           <li><strong>Cost C and time T:</strong> both AA-measured: C is the full cost per benchmark task (input, cache-write, reasoning and output tokens, in USD); T is the wall-clock seconds per task. Verbose models are charged for their real token use.</li>
-          <li><strong>Composite formula:</strong> score = intelligenceNorm^a × costNorm^b × timeNorm^c (a+b+c=1). Each axis is min–max normalized to 0.05–1 across the 28 ranked models — intelligence linearly; cost and time log-scaled (floor 0.05) since they span orders of magnitude. The geometric form means a weak axis drags the total down — one extreme strength cannot buy off another axis.</li>
+          <li><strong>Composite formula:</strong> score = intelligenceNorm^a × costNorm^b × timeNorm^c (a+b+c=1). Each axis is min–max normalized to 0.05–1 across the 27 ranked models — intelligence linearly; cost and time log-scaled (floor 0.05) since they span orders of magnitude. The geometric form means a weak axis drags the total down — one extreme strength cannot buy off another axis.</li>
           <li><strong>Presets:</strong> Balanced = ⅓/⅓/⅓; Performance = 75/12.5/12.5; Cost = 20/60/20; Speed = 20/20/60; Custom sliders combine freely (auto-normalized to 100%).</li>
           <li><strong>Currency-independent:</strong> the score is computed from ratios, so it does not depend on currency. The cost column is measured in USD; CNY figures convert at 1 USD = 7.2 CNY for reference.</li>
           <li><strong>Inclusion:</strong> only models with independent measurements are ranked; intelligence, speed and cost are measured values. DeepSeek off-peak shares capability and time with peak at half the cost.</li>
@@ -257,7 +256,7 @@
         <h2 id="faq-title" class="section-title" data-i18n="faqTitle">FAQ</h2>
         <dl class="faq-list">
           <dt data-i18n="llmFaq1q">How is the composite score computed?</dt>
-          <dd data-i18n="llmFaq1a">Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 28 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis.</dd>
+          <dd data-i18n="llmFaq1a">Score = intelligenceNorm^performance-weight × costNorm^cost-weight × timeNorm^time-weight (weights sum to 1). Each axis is first min–max normalized to 0.05–1 across the 27 ranked models — intelligence linearly; cost and time log-scaled because they span orders of magnitude — then combined geometrically: any weak axis drags the total down. All three axes are independently measured by Artificial Analysis.</dd>
           <dt data-i18n="llmFaq2q">Why does the ranking change completely when I switch emphasis?</dt>
           <dd data-i18n="llmFaq2a">Because different jobs favor different models: cheap models win one-shot tasks, strong models win multi-step critical workflows, fast models win real-time use. That is the point of this tool — find the optimum for your scenario with the weighting, not a single universal answer.</dd>
           <dt data-i18n="llmFaq3q">Where does the data come from?</dt>

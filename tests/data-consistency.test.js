@@ -11,7 +11,7 @@ const tokenModels = JSON.parse(readFileSync(join(ROOT, 'token_models.json'), 'ut
 const llmMetrics = JSON.parse(readFileSync(join(ROOT, 'llm_metrics.json'), 'utf8'));
 
 const EXPECTED_TOKEN_COUNT = 28;
-const EXPECTED_RANK_COUNT = 28;
+const EXPECTED_RANK_COUNT = 27;
 
 test('token_models.json has unique ids and valid price triples', () => {
   const ids = new Set();
@@ -84,6 +84,7 @@ test('llm_metrics.json new entries match Artificial Analysis measurements', () =
 
   const argon = byId['gemini-4-argon'];
   assert.ok(argon, 'gemini-4-argon missing');
+  assert.equal(argon.name, 'Gemini 4 Argon', 'display name must not carry an effort tier');
   assert.deepEqual(argon.intelligence, { terminalBench: 57.1, hle: 57.1, automationBench: 77.5 });
   assert.equal(argon.speedTokensPerSec, 99.5);
   assert.equal(argon.tokensPerTask, 62000);
@@ -100,16 +101,8 @@ test('llm_metrics.json new entries match Artificial Analysis measurements', () =
   assert.equal(haiku.costPerTaskUsd, 0.21);
   assert.equal(haiku.timePerTaskSec, 421);
   assert.equal(haiku.estimated, false);
-
-  const haikuLong = byId['claude-haiku-5.5-long'];
-  assert.ok(haikuLong, 'claude-haiku-5.5-long missing');
-  assert.deepEqual(haikuLong.intelligence, haiku.intelligence);
-  assert.equal(haikuLong.speedTokensPerSec, haiku.speedTokensPerSec);
-  assert.equal(haikuLong.tokensPerTask, haiku.tokensPerTask);
-  assert.equal(haikuLong.timePerTaskSec, haiku.timePerTaskSec);
-  // official >100K tier is 5x every token price -> cost derived at 5x
-  assert.ok(Math.abs(haikuLong.costPerTaskUsd - haiku.costPerTaskUsd * 5) < 1e-9);
-  assert.equal(haikuLong.estimated, true);
+  // long-context tier is a note only, never a separate ranked entry
+  assert.ok(!byId['claude-haiku-5.5-long'], 'long-context Haiku entry must not be ranked separately');
 });
 
 function parseRankRows(file) {

@@ -8,7 +8,7 @@
   ],
   "source": "Artificial Analysis",
   "sourceUrl": "https://artificialanalysis.ai/models",
-  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测。新收录 2026-10-14：Gemini 4 Argon (High)（官方模型名，速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5 (Max)（官方按 prompt 长度分两档计费，榜单拆为 ≤100K / >100K 两条：能力、速度与 Token 消耗相同，>100K 档全部价格 5 倍、成本按 5 倍推导并标 estimated）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。",
+  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测。新收录 2026-10-14：Gemini 4 Argon（不标注 effort 档位；速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5（榜单按标准档成本计；官方按 prompt 长度分两档计费，>100K 全单 5 倍，仅作提示不单列入榜，口径与 Grok 4.6/4.7 ≥200K 2 倍、GPT-6 Sol/Luna >272K 加价一致）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。",
   "models": [
     {
       "id": "kimi-k3",
@@ -408,8 +408,8 @@
     },
     {
       "id": "claude-haiku-5.5",
-      "name": "Claude Haiku 5.5 (≤100K)",
-      "nameZh": "Claude Haiku 5.5（≤100K）",
+      "name": "Claude Haiku 5.5",
+      "nameZh": null,
       "provider": "Anthropic",
       "aaSlug": "claude-haiku-5-5",
       "estimated": false,
@@ -425,26 +425,8 @@
       "timePerTaskSec": 421
     },
     {
-      "id": "claude-haiku-5.5-long",
-      "name": "Claude Haiku 5.5 (>100K)",
-      "nameZh": "Claude Haiku 5.5（>100K）",
-      "provider": "Anthropic",
-      "aaSlug": "claude-haiku-5-5",
-      "estimated": true,
-      "intelligence": {
-        "terminalBench": 32.8,
-        "hle": 44.4,
-        "automationBench": 35.4
-      },
-      "speedTokensPerSec": 236.7,
-      "tokensPerTask": 162000,
-      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
-      "costPerTaskUsd": 1.05,
-      "timePerTaskSec": 421
-    },
-    {
       "id": "gemini-4-argon",
-      "name": "Gemini 4 Argon (High)",
+      "name": "Gemini 4 Argon",
       "nameZh": null,
       "provider": "Google",
       "aaSlug": "gemini-4-argon",
