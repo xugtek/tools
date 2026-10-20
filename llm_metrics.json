@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14",
+  "updated": "2026-10-17",
   "exchangeRate": 7.2,
   "evaluations": [
     "Terminal-Bench 4.0",
@@ -8,7 +8,7 @@
   ],
   "source": "Artificial Analysis",
   "sourceUrl": "https://artificialanalysis.ai/models",
-  "note": "基准得分、速度与每任务 Token 消耗均为 Artificial Analysis 独立实测。新收录 2026-10-14：Gemini 4 Argon（不标注 effort 档位；速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5（榜单按标准档成本计；官方按 prompt 长度分两档计费，>100K 全单 5 倍，仅作提示不单列入榜，口径与 Grok 4.6/4.7 ≥200K 2 倍、GPT-6 Sol/Luna >272K 加价一致）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。",
+  "note": "基准得分、速度与每任务 Token 消耗均来自 Artificial Analysis 独立实测（例外：DeepSeek V4.1 Flash 1017 的三项基准为官方发布值，AA 独立评测尚未发布）。新收录 2026-10-14：Gemini 4 Argon（不标注 effort 档位；速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5（榜单按标准档成本计；官方按 prompt 长度分两档计费，>100K 全单 5 倍，仅作提示不单列入榜，口径与 Grok 4.6/4.7 ≥200K 2 倍、GPT-6 Sol/Luna >272K 加价一致）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。2026-10-17 升级：DeepSeek V4.1 Flash 更新为 1017 版（接口 deepseek-flash 与价格不变）——三项基准取官方发布值（Terminal-Bench 4.0 42.3、HLE 42.6、Automation-Bench v1.0.6 60.5），速度、每任务 Token、耗时与成本取 AA 实测（230.4 tok/s、89000、282s、$0.26，空闲减半 $0.13）。",
   "models": [
     {
       "id": "kimi-k3",
@@ -84,39 +84,39 @@
     },
     {
       "id": "deepseek-v4.1-flash-peak",
-      "name": "DeepSeek V4.1 Flash (Peak)",
-      "nameZh": "DeepSeek V4.1 Flash（高峰）",
+      "name": "DeepSeek V4.1 Flash 1017 (Peak)",
+      "nameZh": "DeepSeek V4.1 Flash 1017（高峰）",
       "provider": "DeepSeek",
-      "aaSlug": "deepseek-v4-1-flash",
-      "estimated": false,
+      "aaSlug": "deepseek-v4-1-flash-1017",
+      "estimated": true,
       "intelligence": {
-        "terminalBench": 26.77,
-        "hle": 39.25,
-        "automationBench": 68.89
+        "terminalBench": 42.3,
+        "hle": 42.6,
+        "automationBench": 60.5
       },
-      "speedTokensPerSec": 209.4,
-      "tokensPerTask": 135649,
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash",
-      "costPerTaskUsd": 0.457,
-      "timePerTaskSec": 466
+      "speedTokensPerSec": 230.4,
+      "tokensPerTask": 89000,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "costPerTaskUsd": 0.26,
+      "timePerTaskSec": 282
     },
     {
       "id": "deepseek-v4.1-flash-offpeak",
-      "name": "DeepSeek V4.1 Flash (Off-peak)",
-      "nameZh": "DeepSeek V4.1 Flash（空闲）",
+      "name": "DeepSeek V4.1 Flash 1017 (Off-peak)",
+      "nameZh": "DeepSeek V4.1 Flash 1017（空闲）",
       "provider": "DeepSeek",
-      "aaSlug": "deepseek-v4-1-flash",
-      "estimated": false,
+      "aaSlug": "deepseek-v4-1-flash-1017",
+      "estimated": true,
       "intelligence": {
-        "terminalBench": 26.77,
-        "hle": 39.25,
-        "automationBench": 68.89
+        "terminalBench": 42.3,
+        "hle": 42.6,
+        "automationBench": 60.5
       },
-      "speedTokensPerSec": 209.4,
-      "tokensPerTask": 135649,
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash",
-      "costPerTaskUsd": 0.2285,
-      "timePerTaskSec": 466
+      "speedTokensPerSec": 230.4,
+      "tokensPerTask": 89000,
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "costPerTaskUsd": 0.13,
+      "timePerTaskSec": 282
     },
     {
       "id": "deepseek-v4-pro-peak",

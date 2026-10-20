@@ -105,6 +105,39 @@ test('llm_metrics.json new entries match Artificial Analysis measurements', () =
   assert.ok(!byId['claude-haiku-5.5-long'], 'long-context Haiku entry must not be ranked separately');
 });
 
+test('llm_metrics.json DeepSeek V4.1 Flash upgraded to the 1017 release', () => {
+  const byId = Object.fromEntries(llmMetrics.models.map((m) => [m.id, m]));
+
+  const peak = byId['deepseek-v4.1-flash-peak'];
+  const offpeak = byId['deepseek-v4.1-flash-offpeak'];
+  assert.ok(peak && offpeak, 'deepseek flash entries missing');
+
+  for (const m of [peak, offpeak]) {
+    assert.ok(m.name.includes('1017'), `${m.id}: display name must carry the 1017 release`);
+    assert.ok(m.nameZh.includes('1017'), `${m.id}: zh display name must carry the 1017 release`);
+    // 2026-10-17 official release: same deepseek-flash endpoint and pricing as before
+    assert.deepEqual(
+      m.intelligence,
+      { terminalBench: 42.3, hle: 42.6, automationBench: 60.5 },
+      `${m.id}: official benchmark scores`
+    );
+    assert.equal(m.speedTokensPerSec, 230.4, `${m.id}: AA speed`);
+    assert.equal(m.tokensPerTask, 89000, `${m.id}: AA tokens per task`);
+    assert.equal(m.timePerTaskSec, 282, `${m.id}: AA time per task`);
+    // intelligence is vendor-published, so the entry is flagged as estimated
+    assert.equal(m.estimated, true, `${m.id}: official scores are not AA measurements`);
+    assert.equal(m.aaSlug, 'deepseek-v4-1-flash-1017', `${m.id}: aaSlug`);
+    assert.equal(
+      m.aaUrl,
+      'https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017',
+      `${m.id}: aaUrl`
+    );
+  }
+
+  assert.equal(peak.costPerTaskUsd, 0.26);
+  assert.equal(offpeak.costPerTaskUsd, 0.13, 'off-peak must be exactly half the peak cost');
+});
+
 function parseRankRows(file) {
   const html = readFileSync(join(ROOT, file), 'utf8');
   const rows = [];

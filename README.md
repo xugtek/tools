@@ -5,7 +5,7 @@
 当前包含：
 
 - **Token 费用计算器**（`token/index.html` 中文 · `token/en.html` 英文）——估算每日/每月 Token API 调用费用，内置 28 款主流大模型官方价格（2026-10-14 更新），支持人民币/美元双币种独立计价、缓存命中计费、优惠倍率、用量估算与自定义模型。
-- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench）的智能指数、每任务全成本与耗时，对 27 款大模型做三维归一化几何加权排名；内置均衡/性能/成本/速度预设与自定义权重滑杆，静态表格可按列重排。
+- **大模型性价比排行榜**（`llm-rank/index.html` 中文 · `llm-rank/en.html` 英文）——基于 Artificial Analysis 独立实测三基准（Terminal-Bench 4.0 / HLE / AutomationBench；DeepSeek V4.1 Flash 1017 三项基准取官方发布值）的智能指数、每任务全成本与耗时，对 27 款大模型做三维归一化几何加权排名；内置均衡/性能/成本/速度预设与自定义权重滑杆，静态表格可按列重排（2026-10-17 更新）。
 
 ## 特性
 
