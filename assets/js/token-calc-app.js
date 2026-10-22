@@ -56,7 +56,8 @@ const elements = {
   btnPinCompare: document.getElementById('btn-pin-compare'),
   btnClearCompare: document.getElementById('btn-clear-compare'),
   compareSection: document.getElementById('compare-section'),
-  compareGrid: document.getElementById('compare-grid')
+  compareGrid: document.getElementById('compare-grid'),
+  proxyBanner: document.getElementById('proxy-banner')
 };
 
 let models = [];
@@ -498,6 +499,19 @@ function createValueLine(label, cny, usd) {
   return line;
 }
 
+const FOREIGN_PROVIDERS = new Set(['Anthropic', 'OpenAI', 'Google', 'xAI']);
+
+function updateProxyBanner() {
+  const model = models.find((item) => item.id === elements.modelSelect.value);
+  const isForeign = model && FOREIGN_PROVIDERS.has(model.provider);
+  if (!elements.proxyBanner) return;
+  if (isForeign) {
+    elements.proxyBanner.hidden = false;
+  } else {
+    elements.proxyBanner.hidden = true;
+  }
+}
+
 function bindEvents() {
   elements.modelSelect.addEventListener('change', () => {
     const model = models.find((item) => item.id === elements.modelSelect.value);
@@ -509,6 +523,7 @@ function bindEvents() {
       elements.modelName.value = '';
     }
     renderCosts();
+    updateProxyBanner();
   });
 
   elements.currencySelect.addEventListener('change', () => {
@@ -560,6 +575,12 @@ function bindEvents() {
 
   elements.btnPinCompare.addEventListener('click', pinCurrentResult);
   elements.btnClearCompare.addEventListener('click', clearAllComparisons);
+
+  if (elements.proxyBanner) {
+    elements.proxyBanner.querySelector('.proxy-close').addEventListener('click', () => {
+      elements.proxyBanner.hidden = true;
+    });
+  }
   elements.compareGrid.addEventListener('click', (event) => {
     const removeBtn = event.target.closest('.compare-remove');
     if (removeBtn) {
@@ -653,6 +674,7 @@ function init() {
   });
 
   loadModels();
+  updateProxyBanner();
 }
 
 init();
