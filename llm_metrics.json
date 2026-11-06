@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17",
+  "updated": "2026-11-06",
   "exchangeRate": 7.2,
   "evaluations": [
     "Terminal-Bench 4.0",
@@ -8,7 +8,7 @@
   ],
   "source": "Artificial Analysis",
   "sourceUrl": "https://artificialanalysis.ai/models",
-  "note": "基准得分、速度与每任务 Token 消耗均来自 Artificial Analysis 独立实测（例外：DeepSeek V4.1 Flash 1017 的三项基准为官方发布值，AA 独立评测尚未发布）。新收录 2026-10-14：Gemini 4 Argon（不标注 effort 档位；速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5（榜单按标准档成本计；官方按 prompt 长度分两档计费，>100K 全单 5 倍，仅作提示不单列入榜，口径与 Grok 4.6/4.7 ≥200K 2 倍、GPT-6 Sol/Luna >272K 加价一致）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。2026-10-17 升级：DeepSeek V4.1 Flash 更新为 1017 版（接口 deepseek-flash 与价格不变）——三项基准取官方发布值（Terminal-Bench 4.0 42.3、HLE 42.6、Automation-Bench v1.0.6 60.5），速度、每任务 Token、耗时与成本取 AA 实测（230.4 tok/s、89000、282s、$0.26，空闲减半 $0.13）。",
+  "note": "基准得分、速度与每任务 Token 消耗均来自 Artificial Analysis 独立实测（例外：DeepSeek V4.1 Flash 1017 的三项基准为官方发布值，AA 独立评测尚未发布；Tencent Hy4 的 HLE 为厂商发布值——AA 尚未公布其完整版 HLE，厂商口径为带工具 HLE-Full 59.1，故该条目标 estimated，其 Terminal-Bench 4.0 与 AutomationBench-AA 仍为 AA 实测）。新收录 2026-11-06：GPT-6.1 Terra（max 档 AA 实测）、Kimi K3.1 Pro（AA 默认档实测）与 Tencent Hy4（AA 实测 TB/AB/速度/耗时/成本；HLE 取厂商值）。Gemini 4 Carbon 未收录（API 仅 Fairwind 白名单可用，尚无公开定价页条目）。此前 2026-10-14：Gemini 4 Argon（不标注 effort 档位；速度取 AA 实测 Google AI Studio 第一方 99.5 tok/s；AA 尚未公布 Time per Task，耗时按 Token/速度换算并标 estimated）与 Claude Haiku 5.5（榜单按标准档成本计；官方按 prompt 长度分两档计费，>100K 全单 5 倍，仅作提示不单列入榜，口径与 Grok 4.6/4.7 ≥200K 2 倍、GPT-6 Sol/Luna >272K 加价一致）。GLM-5.3-FlashX 无独立实测，未入榜（价格见 Token 计算器）。2026-10-17 升级：DeepSeek V4.1 Flash 更新为 1017 版（接口 deepseek-flash 与价格不变）——三项基准取官方发布值（Terminal-Bench 4.0 42.3、HLE 42.6、Automation-Bench v1.0.6 60.5），速度、每任务 Token、耗时与成本取 AA 实测（230.4 tok/s、89000、282s、$0.26，空闲减半 $0.13）。",
   "models": [
     {
       "id": "kimi-k3",
@@ -27,6 +27,24 @@
       "aaUrl": "https://artificialanalysis.ai/models/kimi-k3",
       "costPerTaskUsd": 2.0383,
       "timePerTaskSec": 1480
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi K3.1 Pro",
+      "nameZh": null,
+      "provider": "Moonshot",
+      "aaSlug": "kimi-k3-1-pro",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 67.2,
+        "hle": 52.5,
+        "automationBench": 73.3
+      },
+      "speedTokensPerSec": 33,
+      "tokensPerTask": 72200,
+      "aaUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "costPerTaskUsd": 3.68,
+      "timePerTaskSec": 2166
     },
     {
       "id": "qwen3.8-max",
@@ -191,6 +209,24 @@
       "timePerTaskSec": 1840
     },
     {
+      "id": "tencent-hy4",
+      "name": "Tencent Hy4",
+      "nameZh": null,
+      "provider": "Tencent",
+      "aaSlug": "tencent-hy4",
+      "estimated": true,
+      "intelligence": {
+        "terminalBench": 37,
+        "hle": 59.1,
+        "automationBench": 65.6
+      },
+      "speedTokensPerSec": 94,
+      "tokensPerTask": 78400,
+      "aaUrl": "https://artificialanalysis.ai/models/tencent-hy4",
+      "costPerTaskUsd": 1.03,
+      "timePerTaskSec": 834
+    },
+    {
       "id": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "nameZh": null,
@@ -225,6 +261,24 @@
       "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
       "costPerTaskUsd": 0.7324,
       "timePerTaskSec": 673
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "name": "GPT-6.1 Terra",
+      "nameZh": null,
+      "provider": "OpenAI",
+      "aaSlug": "gpt-6-1-terra",
+      "estimated": false,
+      "intelligence": {
+        "terminalBench": 55.6,
+        "hle": 46.2,
+        "automationBench": 60.2
+      },
+      "speedTokensPerSec": 73,
+      "tokensPerTask": 60000,
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-terra",
+      "costPerTaskUsd": 0.96,
+      "timePerTaskSec": 822
     },
     {
       "id": "gpt-6-sol",

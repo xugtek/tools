@@ -10,8 +10,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const tokenModels = JSON.parse(readFileSync(join(ROOT, 'token_models.json'), 'utf8'));
 const llmMetrics = JSON.parse(readFileSync(join(ROOT, 'llm_metrics.json'), 'utf8'));
 
-const EXPECTED_TOKEN_COUNT = 28;
-const EXPECTED_RANK_COUNT = 27;
+const EXPECTED_TOKEN_COUNT = 31;
+const EXPECTED_RANK_COUNT = 30;
 
 test('token_models.json has unique ids and valid price triples', () => {
   const ids = new Set();
@@ -57,6 +57,25 @@ test('token_models.json sources cover the new models', () => {
     tokenModels.sources['haiku-5.5'],
     'https://platform.claude.com/docs/en/models/haiku-5-5/overview'
   );
+});
+
+test('token_models.json 2026-11-06 additions: Terra, K3.1 Pro, Hy4', () => {
+  const byId = Object.fromEntries(tokenModels.models.map((m) => [m.id, m]));
+
+  const terra = byId['gpt-6.1-terra'];
+  assert.ok(terra, 'gpt-6.1-terra missing');
+  assert.deepEqual(terra.prices.USD, { input: 1, cachedInput: 0.05, output: 5 });
+
+  const k31 = byId['kimi-k3.1-pro'];
+  assert.ok(k31, 'kimi-k3.1-pro missing');
+  assert.deepEqual(k31.prices.CNY, { input: 13, cachedInput: 1.3, output: 68 });
+  assert.deepEqual(k31.prices.USD, { input: 2, cachedInput: 0.2, output: 10 });
+
+  const hy4 = byId['tencent-hy4'];
+  assert.ok(hy4, 'tencent-hy4 missing');
+  // current effective price: 50% promo through 2026-12-31
+  assert.deepEqual(hy4.prices.CNY, { input: 3, cachedInput: 0.15, output: 9 });
+  assert.deepEqual(hy4.prices.USD, { input: 0.417, cachedInput: 0.021, output: 1.2505 });
 });
 
 test('llm_metrics.json has unique ids and complete benchmark fields', () => {
@@ -136,6 +155,48 @@ test('llm_metrics.json DeepSeek V4.1 Flash upgraded to the 1017 release', () => 
 
   assert.equal(peak.costPerTaskUsd, 0.26);
   assert.equal(offpeak.costPerTaskUsd, 0.13, 'off-peak must be exactly half the peak cost');
+});
+
+test('llm_metrics.json 2026-11-06 additions: Terra, K3.1 Pro, Hy4', () => {
+  const byId = Object.fromEntries(llmMetrics.models.map((m) => [m.id, m]));
+
+  const terra = byId['gpt-6.1-terra'];
+  assert.ok(terra, 'gpt-6.1-terra missing');
+  assert.deepEqual(terra.intelligence, { terminalBench: 55.6, hle: 46.2, automationBench: 60.2 });
+  assert.equal(terra.speedTokensPerSec, 73);
+  assert.equal(terra.tokensPerTask, 60000);
+  assert.equal(terra.timePerTaskSec, 822);
+  assert.equal(terra.costPerTaskUsd, 0.96);
+  assert.equal(terra.estimated, false);
+  assert.equal(terra.aaSlug, 'gpt-6-1-terra');
+
+  const k31 = byId['kimi-k3.1-pro'];
+  assert.ok(k31, 'kimi-k3.1-pro missing');
+  assert.deepEqual(k31.intelligence, { terminalBench: 67.2, hle: 52.5, automationBench: 73.3 });
+  assert.equal(k31.speedTokensPerSec, 33);
+  assert.equal(k31.tokensPerTask, 72200);
+  assert.equal(k31.timePerTaskSec, 2166);
+  assert.equal(k31.costPerTaskUsd, 3.68);
+  assert.equal(k31.estimated, false);
+  assert.equal(k31.aaSlug, 'kimi-k3-1-pro');
+
+  const hy4 = byId['tencent-hy4'];
+  assert.ok(hy4, 'tencent-hy4 missing');
+  // HLE is vendor-reported with-tools (AA full-set HLE not yet published)
+  assert.deepEqual(hy4.intelligence, { terminalBench: 37, hle: 59.1, automationBench: 65.6 });
+  assert.equal(hy4.estimated, true, 'Hy4 HLE is vendor-reported, so flagged estimated');
+  assert.equal(hy4.speedTokensPerSec, 94);
+  assert.equal(hy4.tokensPerTask, 78400);
+  assert.equal(hy4.timePerTaskSec, 834);
+  assert.equal(hy4.costPerTaskUsd, 1.03);
+  assert.equal(hy4.aaSlug, 'tencent-hy4');
+
+  // Carbon must stay out of both tools (API restricted to Fairwind Program)
+  assert.ok(!byId['gemini-4-carbon'], 'gemini-4-carbon must not be ranked');
+  assert.ok(
+    !tokenModels.models.find((m) => m.id === 'gemini-4-carbon'),
+    'gemini-4-carbon must not be in the calculator'
+  );
 });
 
 function parseRankRows(file) {
